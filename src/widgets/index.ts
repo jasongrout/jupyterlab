@@ -8,7 +8,7 @@ import {
 } from 'jupyter-js-services';
 
 import {
-    ManagerBase, shims
+    ManagerBase, shims, DOMWidgetView
 } from 'jupyter-js-widgets';
 
 import {
@@ -35,40 +35,14 @@ import 'jquery-ui/themes/smoothness/jquery-ui.min.css';
 
 import 'jupyter-js-widgets/css/widgets.min.css';
 
-
-/**
- * The class name added to an BackboneViewWrapper widget.
- */
-const BACKBONEVIEWWRAPPER_CLASS = 'jp-BackboneViewWrapper';
-
-
-/**
- * A phosphor widget which wraps a `Backbone` view instance.
- */
-export
-class BackboneViewWrapper extends Widget {
-  /**
-   * Construct a new `Backbone` wrapper widget.
-   *
-   * @param view - The `Backbone.View` instance being wrapped.
-   */
-  constructor(view: Backbone.View<any>) {
-    super();
-    view.on('remove', () => {
-      this.dispose();
-      console.log('View removed', view);
-    });
-    this.addClass(BACKBONEVIEWWRAPPER_CLASS);
-    this.node.appendChild(view.el);
-  }
-}
-
+// TODO: when upgrading to phosphor monorepo, return the monorepo widget from display_view
+// TODO: and add it to the WidgetRenderer.render's panel directly.
 
 /**
  * A widget manager that returns phosphor widgets.
  */
 export
-class WidgetManager extends ManagerBase<Widget> implements IDisposable {
+class WidgetManager extends ManagerBase<HTMLElement> implements IDisposable {
   constructor(context: IDocumentContext<IDocumentModel>) {
     super();
     this._context = context;
@@ -81,7 +55,10 @@ class WidgetManager extends ManagerBase<Widget> implements IDisposable {
           return;
         }
         this._commRegistration = kernel.registerCommTarget(this.comm_target_name,
-        (comm, msg) => {this.handle_comm_open(comm, msg)});
+        (comm, msg) => {
+          let oldComm = new shims.services.Comm(comm);
+          this.handle_comm_open(oldComm, msg);
+        });
     };
 
     context.kernelChanged.connect((sender, kernel) => {
@@ -99,20 +76,10 @@ class WidgetManager extends ManagerBase<Widget> implements IDisposable {
   /**
    * Return a phosphor widget representing the view
    */
-  display_view(msg: any, view: Backbone.View<Backbone.Model>, options: any): Widget {
-    return new BackboneViewWrapper(view);
+  display_view(msg: any, view: DOMWidgetView, options: any): Promise<HTMLElement> {
+    // TODO: if view.pWidget exists, use it instead of BackboneViewWrapper.
+    return Promise.resolve(view.el);
   }
-
-  /**
-   * Handle when a comm is opened.
-   */
-  handle_comm_open(comm: IKernel.IComm, msg: KernelMessage.ICommOpenMsg) {
-    // Convert jupyter-js-services comm to old comm
-    // so that widget models use it compatibly
-    let oldComm = new shims.services.Comm(comm);
-    return super.handle_comm_open(oldComm, msg);
-  }
-
   /**
    * Create a comm.
    */
@@ -177,8 +144,10 @@ class WidgetRenderer implements IRenderer<Widget>, IDisposable {
     let w = new Panel();
     this._manager.get_model(data).then((model: any) => {
       return this._manager.display_model(void 0, model, void 0);
-    }).then((view: Widget) => {
-        w.addChild(view);
+    }).then((view: HTMLElement) => {
+      let child = new Widget();
+      child.node.appendChild(view);
+      w.addChild(child);
     });
     return w;
   }
