@@ -341,6 +341,11 @@ class OutputAreaWidget extends Widget {
       break;
     case ListChangeType.Replace:
       // Only "clear" is supported by the model.
+      let rect = this.node.getBoundingClientRect()
+      let oldHeight = this.node.style.minHeight;
+      this.node.style.minHeight = `${rect.height}px`;
+      setTimeout(() => {this.node.style.minHeight = oldHeight}, 50);
+
       let oldValues = args.oldValue as nbformat.IOutput[];
       for (let i = args.oldIndex; i < oldValues.length; i++) {
         this._removeChild(args.oldIndex);
@@ -482,6 +487,7 @@ class OutputWidget extends Widget {
    * Clear the widget contents.
    */
   clear(): void {
+    // set the min height for some small delay to cut down on flickering
     this.setOutput(this._placeholder);
     this.prompt.node.textContent = '';
   }
@@ -558,6 +564,11 @@ class OutputWidget extends Widget {
       return;
     }
     if (old) {
+  /*      let rect = this.node.getBoundingClientRect()
+      let oldHeight = this.node.style.minHeight;
+      this.node.style.minHeight = `${rect.height}px`;
+      setTimeout(() => {this.node.style.minHeight = oldHeight}, 1200);
+*/
       if (old !== this._placeholder) {
         old.dispose();
       } else {
