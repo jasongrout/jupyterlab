@@ -1,3 +1,6 @@
+/*
+ * TODO: switch the below typings to @types packages when they are available.
+ */
 /// <reference path="../typings/ansi_up/ansi_up.d.ts"/>
 /// <reference path="../typings/codemirror/codemirror.d.ts"/>
 /// <reference path="../typings/xterm/xterm.d.ts"/>
@@ -9,8 +12,11 @@
  * "lib": ["dom", "es5", "es2015.promise", "es2015.collection"],
  */
 /// <reference path="../node_modules/@types/mathjax/index.d.ts"/>
-/// <reference path="../node_modules/@types/node/index.d.ts"/>
-/// <reference path="../node_modules/typescript/lib/lib.es2015.promise.d.ts"/>
+/// <reference path="../node_modules/@types/requirejs/index.d.ts"/>
 /// <reference path="../node_modules/typescript/lib/lib.dom.d.ts"/>
 /// <reference path="../node_modules/typescript/lib/lib.es5.d.ts"/>
+/// <reference path="../node_modules/typescript/lib/lib.es2015.promise.d.ts"/>
 /// <reference path="../node_modules/typescript/lib/lib.es2015.collection.d.ts"/>
+
+
+
