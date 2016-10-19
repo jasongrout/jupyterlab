@@ -2,7 +2,7 @@
 // Distributed under the terms of the Modified BSD License.
 
 import {
-  ISession
+  Session
 } from '@jupyterlab/services';
 
 import {
@@ -190,6 +190,6 @@ namespace ConsolePanel {
     /**
      * The session for the console panel.
      */
-    session: ISession;
+    session: Session.ISession;
   }
 }

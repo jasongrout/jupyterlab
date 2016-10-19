@@ -2,7 +2,7 @@
 // Distributed under the terms of the Modified BSD License.
 
 import {
-  ISession, KernelMessage
+  Session, KernelMessage
 } from '@jupyterlab/services';
 
 import {
@@ -210,7 +210,7 @@ class ConsoleContent extends Widget {
    * #### Notes
    * This is a read-only property.
    */
-  get session(): ISession {
+  get session(): Session.ISession {
     return this._session;
   }
 
@@ -565,7 +565,7 @@ class ConsoleContent extends Widget {
   private _rendermime: IRenderMime = null;
   private _renderer: ConsoleContent.IRenderer = null;
   private _history: IConsoleHistory = null;
-  private _session: ISession = null;
+  private _session: Session.ISession = null;
   private _setByHistory = false;
   private _foreignCells: { [key: string]: CodeCellWidget; } = {};
 }
@@ -603,7 +603,7 @@ namespace ConsoleContent {
     /**
      * The session for the console content widget.
      */
-    session: ISession;
+    session: Session.ISession;
   }
 
   /**
