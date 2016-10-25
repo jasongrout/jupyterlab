@@ -61,7 +61,8 @@ class CodeMirrorWidget extends Widget {
     this._static = new StaticCodeMirror(this._live.editor);
     layout.addWidget(this._static);
     layout.addWidget(this._live);
-    this._live.hide();
+    //this._live.hide();
+    this._static.hide();
   }
 
   /**
@@ -124,7 +125,7 @@ class CodeMirrorWidget extends Widget {
    * Handle `'activate-request'` messages.
    */
   protected onActivateRequest(msg: Message): void {
-    this._activate();
+    //this._activate();
   }
 
   /**
@@ -160,7 +161,7 @@ class CodeMirrorWidget extends Widget {
    * Handle `focus` events for the widget.
    */
   private _evtFocus(event: FocusEvent): void {
-    this._activate();
+    //this._activate();
   }
 
   /**
@@ -171,8 +172,8 @@ class CodeMirrorWidget extends Widget {
     if (this.node.contains(event.relatedTarget as HTMLElement)) {
       return;
     }
-    this._live.hide();
-    this._static.show();
+    //this._live.hide();
+    //this._static.show();
   }
 
   /**
@@ -258,13 +259,23 @@ class LiveCodeMirror extends Widget {
    */
   protected onResize(msg: ResizeMessage): void {
     if (msg.width < 0 || msg.height < 0) {
-      this._editor.refresh();
+      //this._editor.refresh();
+      if (!this._resizing) {
+        this._resizing = setTimeout(() => {
+          //this._editor.setSize(null, null);
+          //this._editor.refresh();
+          this._resizing = false;
+          console.log('refresh');
+        }, 100);
+      }
     } else {
       this._editor.setSize(msg.width, msg.height);
+      console.log('set size');
     }
   }
 
   private _editor: CodeMirror.Editor = null;
+  private _resizing: any;
 }
 
 
