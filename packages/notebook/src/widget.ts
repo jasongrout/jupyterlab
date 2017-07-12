@@ -30,7 +30,7 @@ import {
 } from '@phosphor/dragdrop';
 
 import {
-  PanelLayout, Widget
+  Panel, PanelLayout, Widget
 } from '@phosphor/widgets';
 
 import {
@@ -1163,7 +1163,7 @@ class Notebook extends StaticNotebook {
       return;
     }
 
-    this._startDrag(data.index, event.clientX, event.clientY);
+    this._startDrag(data.index, event.clientX, event.clientY, event.metaKey);
   }
 
   /**
@@ -1320,7 +1320,7 @@ class Notebook extends StaticNotebook {
   /**
    * Start a drag event.
    */
-  private _startDrag(index: number, clientX: number, clientY: number): void {
+  private _startDrag(index: number, clientX: number, clientY: number, dock: boolean): void {
     let cells = this.model.cells;
     let selected: nbformat.ICell[] = [];
     let toMove: Cell[] = [];
@@ -1358,12 +1358,44 @@ class Notebook extends StaticNotebook {
       proposedAction: 'copy',
       source: this
     });
-    this._drag.mimeData.setData(JUPYTER_CELL_MIME, selected);
-    // Add mimeData for the fully reified cell widgets, for the
-    // case where the target is in the same notebook and we
-    // can just move the cells.
-    this._drag.mimeData.setData('internal:cells', toMove);
+    if (dock) {
+      this._drag.mimeData.setData('application/vnd.phosphor.widget-factory', () => {
+        console.log('dropped!');
+        let p = new Panel();
+        let cell = toMove[0].model;
 
+        let widget: Widget;
+        switch (cell.type) {
+        case 'code':
+          let modelc: ICodeCellModel = cell as ICodeCellModel;
+          let rendermime = this.rendermime;
+          let contentFactory = this.contentFactory;
+          widget = this.contentFactory.createCodeCell({ model:modelc, rendermime, contentFactory }, this);
+          //widget.model.mimeType = this._mimetype;
+          break;
+        case 'markdown':
+          let modelm: IMarkdownCellModel = cell as IMarkdownCellModel;
+          rendermime = this.rendermime;
+          contentFactory = this.contentFactory;
+          widget = this.contentFactory.createMarkdownCell({ model: modelm, rendermime, contentFactory }, this);
+          break;
+        default:
+          widget = new Widget();
+          widget.node.textContent = 'Raw Cell'
+        }
+        widget.addClass(NB_CELL_CLASS);
+        p.addWidget(widget);
+        p.title.closable = true;
+        p.title.label = 'Cell';
+        return p;
+      });
+    } else {
+      this._drag.mimeData.setData(JUPYTER_CELL_MIME, selected);
+      // Add mimeData for the fully reified cell widgets, for the
+      // case where the target is in the same notebook and we
+      // can just move the cells.
+      this._drag.mimeData.setData('internal:cells', toMove);
+    }
     // Remove mousemove and mouseup listeners and start the drag.
     document.removeEventListener('mousemove', this, true);
     document.removeEventListener('mouseup', this, true);
