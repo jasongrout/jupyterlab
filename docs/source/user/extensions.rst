@@ -168,7 +168,7 @@ The ``settings`` directory contains ``page_config.json`` and
 .. _page_configjson:
 
 page_config.json
-                
+****************
 
 The ``page_config.json`` data is used to provide config data to the
 application environment.
@@ -204,7 +204,7 @@ and ``deferredExtensions``.
 .. _build_configjson:
 
 build_config.json
-                 
+*****************
 
 The ``build_config.json`` file is used to track the local directories
 that have been installed using
