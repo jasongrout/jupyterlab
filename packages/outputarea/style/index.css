@@ -20,8 +20,6 @@
 
 .jp-OutputArea {
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
 }
 
 
@@ -64,6 +62,10 @@
   -ms-user-select: text;
 }
 
+.jp-OutputArea-child .jp-OutputArea-output {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
 
 /**
  * Isolated output.
