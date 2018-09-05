@@ -42,6 +42,21 @@ window.addEventListener('load', function() {
     namespace: 'lab-example',
     version: require('./package.json').version
   });
-  lab.registerPluginModules(mods);
+
+  mods.forEach(function (extension) {
+    extension = module.default;
+
+    // Handle CommonJS exports.
+    if (!module.hasOwnProperty('__esModule')) {
+      extension = module;
+    }
+
+    if (Array.isArray(extension)) {
+      lab.registerPluginModules(extension);
+    } else {
+      lab.registerPluginModule(extension);
+    }
+  });
+
   lab.start();
 });
