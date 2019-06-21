@@ -764,17 +764,6 @@ export namespace Kernel {
       | KernelMessage.IControlMessage = KernelMessage.IShellMessage
   > extends IDisposable {
     /**
-     * The stdin handler for the kernel future.
-     * @deprecated - This handler properly belongs in `IShellFuture` and will be
-     * removed in a future version of `@jupyterlab/services`.
-     *
-     * #### Notes
-     * If the handler returns a promise, all kernel message processing pauses
-     * until the promise is resolved.
-     */
-    onStdin: (msg: KernelMessage.IStdinMessage) => void | PromiseLike<void>;
-
-    /**
      * The original outgoing message.
      */
     readonly msg: REQUEST;
