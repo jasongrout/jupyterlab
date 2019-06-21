@@ -20,8 +20,8 @@ declare var setImmediate: any;
  *
  */
 export abstract class KernelFutureHandler<
-  REQUEST extends KernelMessage.IShellControlMessage = KernelMessage.IShellControlMessage,
-  REPLY extends KernelMessage.IShellControlMessage = KernelMessage.IShellControlMessage
+  REQUEST extends KernelMessage.IShellControlMessage,
+  REPLY extends KernelMessage.IShellControlMessage
 > extends DisposableDelegate implements Kernel.IFuture<REQUEST, REPLY> {
   abstract async handleMsg(msg: KernelMessage.IMessage): Promise<void>;
   /**
