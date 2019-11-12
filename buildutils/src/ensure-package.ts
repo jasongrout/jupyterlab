@@ -168,7 +168,7 @@ export async function ensurePackage(
   await Promise.all(promises);
 
   // Template the CSS index file.
-  if (cssImports && fs.existsSync(path.join(pkgPath, 'style/base.css'))) {
+  if (cssImports) {
     const funcName = 'ensurePackage';
     let cssIndexContents = utils.fromTemplate(
       HEADER_TEMPLATE,
@@ -178,7 +178,9 @@ export async function ensurePackage(
     cssImports.forEach(cssImport => {
       cssIndexContents += `\n@import url('~${cssImport}');`;
     });
-    cssIndexContents += "\n\n@import url('./base.css');\n";
+    if (fs.existsSync(path.join(pkgPath, 'style/base.css'))) {
+      cssIndexContents += "\n\n@import url('./base.css');\n";
+    }
 
     // write out cssIndexContents, if needed
     const cssIndexPath = path.join(pkgPath, 'style/index.css');
