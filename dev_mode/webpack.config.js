@@ -189,6 +189,7 @@ module.exports = [
       }
     },
     output: {
+      libraryTarget: 'system',
       path: plib.resolve(buildDir),
       publicPath: '{{page_config.fullStaticUrl}}/',
       filename: '[name].[chunkhash].js'
