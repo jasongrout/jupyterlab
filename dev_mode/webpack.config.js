@@ -189,7 +189,7 @@ module.exports = [
       }
     },
     output: {
-      libraryTarget: 'system',
+      libraryTarget: 'jsonp',
       path: plib.resolve(buildDir),
       publicPath: '{{page_config.fullStaticUrl}}/',
       filename: '[name].[chunkhash].js'
@@ -257,7 +257,7 @@ module.exports = [
       fs: 'empty'
     },
     bail: true,
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     externals: ['node-fetch', 'ws'],
     plugins
   }
