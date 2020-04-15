@@ -5,6 +5,10 @@
 
 require('es6-promise/auto');  // polyfill Promise on IE
 
+
+// Works around blueprint accessing the process global
+window.process = {env: {}};
+
 import {
   PageConfig
 } from '@jupyterlab/coreutils';
