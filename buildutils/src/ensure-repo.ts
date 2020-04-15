@@ -151,7 +151,11 @@ function ensureJupyterlab(): string[] {
   corePackage.jupyterlab.extensions = {};
   corePackage.jupyterlab.mimeExtensions = {};
   corePackage.jupyterlab.linkedPackages = {};
-  corePackage.dependencies = {};
+  corePackage.dependencies = {
+    'crypto-browserify': '^3.12.0',
+    'stream-browserify': '^2.0.2',
+    'vm-browserify': '^1.1.2'
+  };
   corePackage.resolutions = {};
 
   let singletonPackages: string[] = corePackage.jupyterlab.singletonPackages;
