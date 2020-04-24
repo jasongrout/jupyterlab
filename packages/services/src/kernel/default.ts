@@ -982,10 +982,15 @@ export class KernelConnection implements Kernel.IKernelConnection {
     this._clearKernelState();
     this._updateStatus('restarting');
 
-    // Kick off an async kernel request to eventually reset the kernel status.
-    // We do this with a setTimeout so that it comes after the microtask
-    // logic in _handleMessage for restarting/autostarting status updates.
+    // Reconnect to a new websocket and kick off an async kernel request to
+    // eventually reset the kernel status. We do this with a setTimeout so
+    // that it comes after the microtask logic in _handleMessage for
+    // restarting/autostarting status updates.
     setTimeout(() => {
+      // We must reconnect since the kernel connection information may have
+      // changed, and the server only refreshes its zmq connection when a new
+      // websocket is opened.
+      void this.reconnect();
       void this.requestKernelInfo();
     }, 0);
   }
@@ -1173,6 +1178,10 @@ export class KernelConnection implements Kernel.IKernelConnection {
 
   /**
    * Create the kernel websocket connection and add socket status handlers.
+   *
+   * #### Notes
+   * This function is an arrow function (binding this) so it can easily be
+   * used in callbacks.
    */
   private _createSocket = () => {
     this._errorIfDisposed();
@@ -1231,6 +1240,10 @@ export class KernelConnection implements Kernel.IKernelConnection {
     if (connectionStatus !== 'connecting') {
       this._reconnectAttempt = 0;
       clearTimeout(this._reconnectTimeout);
+      if (this._reconnectOnline) {
+        window.removeEventListener('online', this._createSocket);
+        this._reconnectOnline = false;
+      }
     }
 
     if (this.status !== 'dead') {
@@ -1347,8 +1360,14 @@ export class KernelConnection implements Kernel.IKernelConnection {
     // Clear any existing reconnection attempt
     clearTimeout(this._reconnectTimeout);
 
+    if (navigator.onLine === false && !this._reconnectOnline) {
+      // If the browser is offline, we'll try to reconnect when we go back online
+      window.addEventListener('online', this._createSocket);
+      this._reconnectOnline = true;
+    }
+
     // Update the connection status and schedule a possible reconnection.
-    if (this._reconnectAttempt < this._reconnectLimit) {
+    if (false && this._reconnectAttempt < this._reconnectLimit) {
       this._updateConnectionStatus('connecting');
 
       // The first reconnect attempt should happen immediately, and subsequent
@@ -1366,7 +1385,7 @@ export class KernelConnection implements Kernel.IKernelConnection {
       );
       this._reconnectTimeout = setTimeout(this._createSocket, timeout);
       this._reconnectAttempt += 1;
-    } else {
+    } else if (!this._reconnectOnline) {
       this._updateConnectionStatus('disconnected');
     }
 
@@ -1451,6 +1470,7 @@ export class KernelConnection implements Kernel.IKernelConnection {
   private _reconnectLimit = 7;
   private _reconnectAttempt = 0;
   private _reconnectTimeout: any = null;
+  private _reconnectOnline = false;
 
   private _futures = new Map<
     string,
