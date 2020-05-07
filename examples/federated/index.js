@@ -23,7 +23,6 @@ window.addEventListener('load', async function() {
     require('@jupyterlab/help-extension'),
     require('@jupyterlab/imageviewer-extension'),
     require('@jupyterlab/mainmenu-extension'),
-    require('@jupyterlab/markdownviewer-extension'),
     require('@jupyterlab/rendermime-extension'),
     require('@jupyterlab/shortcuts-extension'),
     require('@jupyterlab/theme-dark-extension'),

@@ -3,7 +3,7 @@
   "version": "2.1.0",
   "private": true,
   "scripts": {
-    "build": "rimraf build && webpack --json > stats.json",
+    "build": "npm run clean && webpack --json > stats.json",
     "clean": "rimraf build",
     "prepublishOnly": "npm run build"
   },
