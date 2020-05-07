@@ -44,5 +44,8 @@ module.exports = {
       }
     ]
   },
-  bail: true
+  bail: true,
+  resolve: {
+    alias: { crypto: false }
+  }
 };

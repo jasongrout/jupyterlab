@@ -131,7 +131,7 @@ const plugins = [
     template: plib.join('templates', 'template.html'),
     title: jlab.name || 'JupyterLab'
   }),
-  new webpack.HashedModuleIdsPlugin(),
+  new webpack.ids.HashedModuleIdsPlugin(),
   // custom plugin for ignoring files during a `--watch` build
   new WPPlugin.FilterWatchIgnorePlugin(ignored),
   // custom plugin that copies the assets to the static directory
@@ -151,6 +151,7 @@ module.exports = [
     // Map Phosphor files to Lumino files.
     resolve: {
       alias: {
+        crypto: false,
         '@phosphor/algorithm$': plib.resolve(
           __dirname,
           'node_modules/@lumino/algorithm/lib/index.js'
@@ -252,7 +253,7 @@ module.exports = [
         {
           // In .css files, svg is loaded as a data URI.
           test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-          issuer: { test: /\.css$/ },
+          issuer: /\.css$/,
           use: {
             loader: 'svg-url-loader',
             options: { encoding: 'none', limit: 10000 }
@@ -262,7 +263,7 @@ module.exports = [
           // In .ts and .tsx files (both of which compile to .js), svg files
           // must be loaded as a raw string instead of data URIs.
           test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-          issuer: { test: /\.js$/ },
+          issuer: /\.js$/,
           use: {
             loader: 'raw-loader'
           }
@@ -273,9 +274,9 @@ module.exports = [
       poll: 500,
       aggregateTimeout: 1000
     },
-    node: {
-      fs: 'empty'
-    },
+    // node: {
+    //   fs: 'empty'
+    // },
     bail: true,
     devtool: 'inline-source-map',
     externals: ['node-fetch', 'ws'],

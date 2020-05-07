@@ -5,6 +5,9 @@ module.exports = {
     filename: 'bundle.js'
   },
   bail: true,
+  resolve: {
+    alias: { crypto: false }
+  },
   devtool: 'cheap-source-map',
   mode: 'production',
   module: {
@@ -15,7 +18,7 @@ module.exports = {
       {
         // In .css files, svg is loaded as a data URI.
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        issuer: { test: /\.css$/ },
+        issuer: /\.css$/,
         use: {
           loader: 'svg-url-loader',
           options: { encoding: 'none', limit: 10000 }
@@ -25,7 +28,7 @@ module.exports = {
         // In .ts and .tsx files (both of which compile to .js), svg files
         // must be loaded as a raw string instead of data URIs.
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        issuer: { test: /\.js$/ },
+        issuer: /\.js$/,
         use: {
           loader: 'raw-loader'
         }
