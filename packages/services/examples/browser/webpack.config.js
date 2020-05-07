@@ -5,8 +5,5 @@ module.exports = {
     path: require('path').join(__dirname, 'build'),
     filename: 'bundle.js'
   },
-  bail: true,
-  resolve: {
-    alias: { crypto: false }
-  }
+  bail: true
 };

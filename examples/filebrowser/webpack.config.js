@@ -5,9 +5,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   bail: true,
-  resolve: {
-    alias: { crypto: false }
-  },
   devtool: 'source-map',
   mode: 'production',
   module: {

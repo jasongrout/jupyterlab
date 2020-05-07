@@ -151,7 +151,6 @@ module.exports = [
     // Map Phosphor files to Lumino files.
     resolve: {
       alias: {
-        crypto: false,
         '@phosphor/algorithm$': plib.resolve(
           __dirname,
           'node_modules/@lumino/algorithm/lib/index.js'

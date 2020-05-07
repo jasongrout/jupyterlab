@@ -23,9 +23,6 @@ module.exports = [
     // node: {
     //   fs: 'empty'
     // },
-    resolve: {
-      alias: { crypto: false }
-    },
     bail: true,
     devtool: 'source-map',
     mode: 'development',
