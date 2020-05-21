@@ -2,7 +2,7 @@
 // Distributed under the terms of the Modified BSD License.
 const data = require('./package.json');
 const Build = require('@jupyterlab/buildutils').Build;
-const ContainerPlugin = require('webpack/lib/container/ContainerPlugin');
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const path = require('path');
 
 const names = Object.keys(data.dependencies).filter(function(name) {
@@ -65,32 +65,41 @@ module.exports = [
     entry: ['whatwg-fetch', './index.js'],
     output: {
       path: path.resolve(__dirname, 'build'),
-      filename: 'bundle.js'
+      filename: 'bundle.js',
+      publicPath: '/foo/static/example/'
     },
     stats: 'verbose',
     ...options,
-    module: { rules }
+    module: { rules },
+    plugins: [
+      new ModuleFederationPlugin({
+        name: 'main',
+        library: { type: 'var', name: 'main' },
+        remotes: {
+          markdownviewer_extension: 'markdownviewer_extension'
+        },
+        shared: ['@jupyterlab/application']
+      })
+    ]
   },
   {
     entry: './index-md.js',
     output: {
       filename: 'extension.js',
       path: path.resolve(__dirname, 'build', 'mdext'),
-      libraryTarget: 'window',
-      library: '@jupyterlab/markdownviewer-extension',
-      pathinfo: false
+      publicPath: '/foo/static/example/mdext/'
     },
     ...options,
     module: { rules },
     plugins: [
-      new ContainerPlugin({
-        name: 'markdownviewer-extension',
-        library: { type: 'window' },
+      new ModuleFederationPlugin({
+        name: 'markdownviewer_extension',
+        library: { type: 'var', name: 'markdownviewer_extension' },
         filename: 'remoteEntry.js',
         exposes: {
-          'markdownviewer-extension': './index-md.js'
+          index: './index-md.js'
         },
-        overridables: ['@jupyterlab/application']
+        shared: ['@jupyterlab/application']
       })
     ]
   }
