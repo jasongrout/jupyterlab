@@ -5,10 +5,7 @@ import { PageConfig } from '@jupyterlab/coreutils';
 // eslint-disable-next-line
 __webpack_public_path__ = PageConfig.getOption('fullStaticUrl') + '/';
 
-import * as bar from 'markdownviewer_extension/index';
-
-// For blueprint
-window.process = { env: {} };
+import * as markdown_ext from 'markdownviewer_extension/index';
 
 // This must be after the public path is set.
 // This cannot be extracted because the public path is dynamic.
@@ -32,7 +29,7 @@ window.addEventListener('load', async function() {
     require('@jupyterlab/theme-dark-extension'),
     require('@jupyterlab/theme-light-extension'),
     require('@jupyterlab/ui-components-extension'),
-    bar
+    markdown_ext
   ];
   const lab = new JupyterLab();
   lab.registerPluginModules(mods);

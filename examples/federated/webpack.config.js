@@ -2,6 +2,7 @@
 // Distributed under the terms of the Modified BSD License.
 const data = require('./package.json');
 const Build = require('@jupyterlab/buildutils').Build;
+const webpack = require('webpack');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const path = require('path');
 
@@ -78,7 +79,15 @@ module.exports = [
         remotes: {
           markdownviewer_extension: 'markdownviewer_extension'
         },
-        shared: ['@jupyterlab/application']
+        shared: [
+          '@jupyterlab/application',
+          '@jupyterlab/rendermime',
+          '@jupyterlab/settingregistry'
+        ]
+      }),
+      new webpack.DefinePlugin({
+        'process.env': '{}',
+        process: {}
       })
     ]
   },
@@ -99,7 +108,15 @@ module.exports = [
         exposes: {
           index: './index-md.js'
         },
-        shared: ['@jupyterlab/application']
+        shared: [
+          '@jupyterlab/application',
+          '@jupyterlab/rendermime',
+          '@jupyterlab/settingregistry'
+        ]
+      }),
+      new webpack.DefinePlugin({
+        'process.env': '{}',
+        process: {}
       })
     ]
   }
