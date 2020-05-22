@@ -27,9 +27,11 @@
     "@jupyterlab/ui-components-extension": "^2.1.0",
     "es6-promise": "~4.2.8",
     "react": "~16.9.0",
-    "react-dom": "~16.9.0"
+    "react-dom": "~16.9.0",
+    "requirejs": "^2.3.6"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^6.0.1",
     "css-loader": "~3.2.0",
     "file-loader": "~5.0.2",
     "fs-extra": "^8.1.0",

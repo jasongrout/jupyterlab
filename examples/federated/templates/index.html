@@ -13,8 +13,14 @@
       <script id="jupyter-config-data" type="application/json">
         {{ page_config_full | tojson }}
       </script>
+  <script src="{{page_config['fullStaticUrl'] | e}}/require.js"></script>
   <script src="{{page_config['fullStaticUrl'] | e}}/mdext/remoteEntry.js"></script>
-  <script src="{{page_config['fullStaticUrl'] | e}}/bundle.js" main="index"></script>
+  <script src="{{page_config['fullStaticUrl'] | e}}/bundle.js"></script>
+  <script>
+    requirejs(["jupyterlab"], function (jupyterlab) {
+      window.jupyterlab = jupyterlab;
+    })
+  </script>
 
   <script type="text/javascript">
     /* Remove token from URL. */

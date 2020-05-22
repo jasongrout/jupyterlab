@@ -4,6 +4,7 @@ const data = require('./package.json');
 const Build = require('@jupyterlab/buildutils').Build;
 const webpack = require('webpack');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const ContainerPlugin = require('webpack/lib/container/ContainerPlugin');
 const path = require('path');
 
 const names = Object.keys(data.dependencies).filter(function(name) {
@@ -63,9 +64,11 @@ const options = {
 
 module.exports = [
   {
-    entry: ['whatwg-fetch', './index.js'],
+    entry: './index.js',
     output: {
       path: path.resolve(__dirname, 'build'),
+      library: 'jupyterlab',
+      libraryTarget: 'amd',
       filename: 'bundle.js',
       publicPath: '/foo/static/example/'
     },
@@ -75,15 +78,15 @@ module.exports = [
     plugins: [
       new ModuleFederationPlugin({
         name: 'main',
-        library: { type: 'var', name: 'main' },
+        library: { type: 'amd', name: 'main' },
         remotes: {
           markdownviewer_extension: 'markdownviewer_extension'
         },
-        shared: [
-          '@jupyterlab/application',
-          '@jupyterlab/rendermime',
-          '@jupyterlab/settingregistry'
-        ]
+        shared: {
+          [`@jupyterlab/application-2`]: '@jupyterlab/application',
+          [`@jupyterlab/rendermime-2`]: '@jupyterlab/rendermime',
+          ['@jupyterlab/settingregistry-2']: '@jupyterlab/settingregistry'
+        }
       }),
       new webpack.DefinePlugin({
         'process.env': '{}',
@@ -101,18 +104,18 @@ module.exports = [
     ...options,
     module: { rules },
     plugins: [
-      new ModuleFederationPlugin({
+      new ContainerPlugin({
         name: 'markdownviewer_extension',
-        library: { type: 'var', name: 'markdownviewer_extension' },
+        library: { type: 'amd', name: 'markdownviewer_extension' },
         filename: 'remoteEntry.js',
         exposes: {
           index: './index-md.js'
         },
-        shared: [
-          '@jupyterlab/application',
-          '@jupyterlab/rendermime',
-          '@jupyterlab/settingregistry'
-        ]
+        overridables: {
+          [`@jupyterlab/application-2`]: '@jupyterlab/application',
+          [`@jupyterlab/rendermime-2`]: '@jupyterlab/rendermime',
+          ['@jupyterlab/settingregistry-2']: '@jupyterlab/settingregistry'
+        }
       }),
       new webpack.DefinePlugin({
         'process.env': '{}',

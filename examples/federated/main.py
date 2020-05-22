@@ -16,13 +16,13 @@ os.environ["JUPYTER_NO_CONFIG"]="1"
 with open(os.path.join(HERE, 'package.json')) as fid:
     version = json.load(fid)['version']
 
-class ExampleApp(LabServerApp):
+class ExampleFederatedApp(LabServerApp):
     base_url = '/foo'
     default_url = Unicode('/example',
                           help='The default URL to redirect to from `/`')
 
     lab_config = LabConfig(
-        app_name = 'JupyterLab Example App',
+        app_name = 'JupyterLab Example Federated App',
         app_settings_dir = os.path.join(HERE, 'build', 'application_settings'),
         app_version = version,
         app_url = '/example',
@@ -43,4 +43,4 @@ class ExampleApp(LabServerApp):
         super().start()
 
 if __name__ == '__main__':
-    ExampleApp.launch_instance()
+    ExampleFederatedApp.launch_instance()
