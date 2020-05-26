@@ -5,8 +5,6 @@
 
 import MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// TODO: Change mini-css-extract-plugin types to import Compiler from webpack and the plugin to not inherit from Plugin, but instead declare an apply(compiler: Compiler): void; method.
-
 import * as webpack from 'webpack';
 import * as fs from 'fs-extra';
 import * as glob from 'glob';

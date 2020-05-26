@@ -7,8 +7,6 @@ import DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpac
 import * as fs from 'fs-extra';
 import * as webpack from 'webpack';
 
-// TODO: Change duplicate-package-checker-webpack-plugin types to import Compiler from webpack and the plugin to not inherit from Plugin, but instead declare an apply(compiler: Compiler): void; method.
-
 export namespace WPPlugin {
   /**
    * A WebPack Plugin that copies the assets to the static directory
