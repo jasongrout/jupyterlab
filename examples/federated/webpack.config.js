@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const ContainerPlugin = require('webpack/lib/container/ContainerPlugin');
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const names = Object.keys(data.dependencies).filter(function(name) {
   const packageData = require(name + '/package.json');
@@ -91,6 +92,14 @@ module.exports = [
       new webpack.DefinePlugin({
         'process.env': '{}',
         process: {}
+      }),
+      new CopyPlugin({
+        patterns: [
+          {
+            from: require.resolve('requirejs/require.js'),
+            to: path.resolve(__dirname, 'build')
+          }
+        ]
       })
     ]
   },
