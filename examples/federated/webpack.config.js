@@ -4,7 +4,6 @@ const data = require('./package.json');
 const Build = require('@jupyterlab/buildutils').Build;
 const webpack = require('webpack');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const ContainerPlugin = require('webpack/lib/container/ContainerPlugin');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -84,9 +83,15 @@ module.exports = [
           markdownviewer_extension: 'markdownviewer_extension'
         },
         shared: {
-          [`@jupyterlab/application-2`]: '@jupyterlab/application',
-          [`@jupyterlab/rendermime-2`]: '@jupyterlab/rendermime',
-          ['@jupyterlab/settingregistry-2']: '@jupyterlab/settingregistry'
+          '@jupyterlab/application': {
+            singleton: true
+          },
+          '@jupyterlab/rendermime': {
+            singleton: true
+          },
+          '@jupyterlab/settingregistry': {
+            singleton: true
+          }
         }
       }),
       new webpack.DefinePlugin({
@@ -113,17 +118,26 @@ module.exports = [
     ...options,
     module: { rules },
     plugins: [
-      new ContainerPlugin({
+      new ModuleFederationPlugin({
         name: 'markdownviewer_extension',
         library: { type: 'amd', name: 'markdownviewer_extension' },
         filename: 'remoteEntry.js',
         exposes: {
           index: './index-md.js'
         },
-        overridables: {
-          [`@jupyterlab/application-2`]: '@jupyterlab/application',
-          [`@jupyterlab/rendermime-2`]: '@jupyterlab/rendermime',
-          ['@jupyterlab/settingregistry-2']: '@jupyterlab/settingregistry'
+        shared: {
+          '@jupyterlab/application': {
+            singleton: true,
+            import: false
+          },
+          '@jupyterlab/rendermime': {
+            singleton: true,
+            import: false
+          },
+          '@jupyterlab/settingregistry': {
+            singleton: true,
+            import: false
+          }
         }
       }),
       new webpack.DefinePlugin({
