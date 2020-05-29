@@ -26,7 +26,7 @@
     "rimraf": "~3.0.0",
     "style-loader": "~1.0.1",
     "typescript": "~3.7.3",
-    "webpack": "^5.0.0-beta.16",
+    "webpack": "webpack/webpack#255ae13f59ce36e93b6d8c4301e9cd3366140bda",
     "webpack-cli": "^3.3.10"
   }
 }
