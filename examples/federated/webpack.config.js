@@ -5,7 +5,6 @@ const Build = require('@jupyterlab/buildutils').Build;
 const webpack = require('webpack');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
 
 const names = Object.keys(data.dependencies).filter(function(name) {
   const packageData = require(name + '/package.json');
@@ -16,6 +15,20 @@ const extras = Build.ensureAssets({
   packageNames: names,
   output: './build'
 });
+
+const libraryOptions = {
+  libraryTarget: 'window'
+
+  // For better namespacing, put packages in a jlab-specific global once
+  // federation supports setting the globalObject:
+  /*
+  libraryTarget: 'global'
+  globalObject: 'JUPYTERLAB_PACKAGES'
+  */
+};
+const federationOptions = {
+  type: libraryOptions.libraryTarget
+};
 
 const rules = [
   { test: /\.css$/, use: ['style-loader', 'css-loader'] },
@@ -68,7 +81,7 @@ module.exports = [
     output: {
       path: path.resolve(__dirname, 'build'),
       library: 'jupyterlab',
-      libraryTarget: 'amd',
+      ...libraryOptions,
       filename: 'bundle.js',
       publicPath: '/foo/static/example/'
     },
@@ -78,7 +91,7 @@ module.exports = [
     plugins: [
       new ModuleFederationPlugin({
         name: 'main',
-        library: { type: 'amd', name: 'main' },
+        library: { ...federationOptions, name: 'main' },
         remotes: {
           markdownviewer_extension: 'markdownviewer_extension'
         },
@@ -97,14 +110,6 @@ module.exports = [
       new webpack.DefinePlugin({
         'process.env': '{}',
         process: {}
-      }),
-      new CopyPlugin({
-        patterns: [
-          {
-            from: require.resolve('requirejs/require.js'),
-            to: path.resolve(__dirname, 'build')
-          }
-        ]
       })
     ]
   },
@@ -120,7 +125,7 @@ module.exports = [
     plugins: [
       new ModuleFederationPlugin({
         name: 'markdownviewer_extension',
-        library: { type: 'amd', name: 'markdownviewer_extension' },
+        library: { ...federationOptions, name: 'markdownviewer_extension' },
         filename: 'remoteEntry.js',
         exposes: {
           './index': './index-md.js'
