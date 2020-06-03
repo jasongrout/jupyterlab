@@ -123,7 +123,7 @@ module.exports = [
         library: { type: 'amd', name: 'markdownviewer_extension' },
         filename: 'remoteEntry.js',
         exposes: {
-          index: './index-md.js'
+          './index': './index-md.js'
         },
         shared: {
           '@jupyterlab/application': {
