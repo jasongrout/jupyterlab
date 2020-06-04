@@ -92,9 +92,9 @@ module.exports = [
       new ModuleFederationPlugin({
         name: 'main',
         library: { ...federationOptions, name: 'main' },
-        remotes: {
-          markdownviewer_extension: 'markdownviewer_extension'
-        },
+        // exposes: {
+        //   './index': './index-md.js'
+        // },
         shared: {
           '@jupyterlab/application': {
             singleton: true
