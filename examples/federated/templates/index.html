@@ -13,8 +13,40 @@
       <script id="jupyter-config-data" type="application/json">
         {{ page_config_full | tojson }}
       </script>
-  <script src="{{page_config['fullStaticUrl'] | e}}/mdext/remoteEntry.js"></script>
-  <script src="{{page_config['fullStaticUrl'] | e}}/bundle.js"></script>
+
+
+
+
+
+
+
+    <!-- <script src="{{page_config['fullStaticUrl'] | e}}/mdext/remoteEntry.js" async=true></script> -->
+    <script>
+
+// function prefixScript(url) {
+//   return new Promise((resolve, reject) => {
+//     const newScript = document.createElement("script");
+//     newScript.onerror = reject;
+//     newScript.onload = resolve
+//     newScript.async = true;
+//     document.currentScript.parentNode.insertBefore(newScript, document.currentScript);
+//     newScript.src = url;
+//   });
+// }
+
+// async function loadComponent(url, scope, module) {
+//   await prefixScript(url);
+//   const factory = await window[scope].get(module);
+//   const Module = factory();
+//   return Module;
+// }
+
+// const plugins = window.JLAB_PLUGINS = window.JLAB_PLUGINS || [];
+// plugins.push(loadComponent("{{page_config['fullStaticUrl'] | e}}/mdext/remoteEntry.js", '@jupyterlab/markdownviewer_extension', './index'));
+</script>
+
+<script src="{{page_config['fullStaticUrl'] | e}}/bundle.js"></script>
+
 
   <script type="text/javascript">
     /* Remove token from URL. */

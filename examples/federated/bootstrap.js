@@ -9,8 +9,36 @@ __webpack_public_path__ = PageConfig.getOption('fullStaticUrl') + '/';
 // This cannot be extracted because the public path is dynamic.
 require('./build/imports.css');
 
+function loadScript(url) {
+  return new Promise((resolve, reject) => {
+    const newScript = document.createElement('script');
+    newScript.onerror = reject;
+    newScript.onload = resolve;
+    newScript.async = true;
+    document.head.appendChild(newScript);
+    newScript.src = url;
+  });
+}
+
+async function loadComponent(url, scope, module) {
+  await loadScript(url);
+  const factory = await window[scope].get(module);
+  const Module = factory();
+  return Module;
+}
+
 window.addEventListener('load', async function() {
   const JupyterLab = require('@jupyterlab/application').JupyterLab;
+
+  const pluginPromises = [];
+  pluginPromises.push(
+    loadComponent(
+      `${PageConfig.getOption('fullStaticUrl')}/mdext/remoteEntry.js`,
+      '@jupyterlab/markdownviewer_extension',
+      './index'
+    )
+  );
+  const plugins = await Promise.all(pluginPromises);
 
   const mods = [
     require('@jupyterlab/application-extension'),
@@ -27,7 +55,7 @@ window.addEventListener('load', async function() {
     require('@jupyterlab/theme-dark-extension'),
     require('@jupyterlab/theme-light-extension'),
     require('@jupyterlab/ui-components-extension'),
-    ...(window.JLAB_PLUGINS || [])
+    ...plugins
   ];
   const lab = new JupyterLab();
   lab.registerPluginModules(mods);

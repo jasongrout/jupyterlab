@@ -17,17 +17,7 @@ const extras = Build.ensureAssets({
 });
 
 const libraryOptions = {
-  libraryTarget: 'window'
-
-  // For better namespacing, put packages in a jlab-specific global once
-  // federation supports setting the globalObject:
-  /*
-  libraryTarget: 'global'
-  globalObject: 'JUPYTERLAB_PACKAGES'
-  */
-};
-const federationOptions = {
-  type: libraryOptions.libraryTarget
+  type: 'global'
 };
 
 const rules = [
@@ -80,8 +70,10 @@ module.exports = [
     entry: './index.js',
     output: {
       path: path.resolve(__dirname, 'build'),
-      library: 'jupyterlab',
-      ...libraryOptions,
+      library: {
+        ...libraryOptions,
+        name: 'jupyterlab'
+      },
       filename: 'bundle.js',
       publicPath: '/foo/static/example/'
     },
@@ -91,10 +83,7 @@ module.exports = [
     plugins: [
       new ModuleFederationPlugin({
         name: 'main',
-        library: { ...federationOptions, name: 'main' },
-        // exposes: {
-        //   './index': './index-md.js'
-        // },
+        library: { ...libraryOptions, name: 'main' },
         shared: {
           '@jupyterlab/application': {
             singleton: true
@@ -125,7 +114,10 @@ module.exports = [
     plugins: [
       new ModuleFederationPlugin({
         name: 'markdownviewer_extension',
-        library: { ...federationOptions, name: 'markdownviewer_extension' },
+        library: {
+          ...libraryOptions,
+          name: '@jupyterlab/markdownviewer_extension'
+        },
         filename: 'remoteEntry.js',
         exposes: {
           './index': './index-md.js'
