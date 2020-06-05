@@ -13,7 +13,7 @@ const names = Object.keys(data.dependencies).filter(function(name) {
 
 const extras = Build.ensureAssets({
   packageNames: names,
-  output: './build'
+  output: './build/app'
 });
 
 const libraryOptions = {
@@ -69,13 +69,13 @@ module.exports = [
   {
     entry: './index.js',
     output: {
-      path: path.resolve(__dirname, 'build'),
+      path: path.resolve(__dirname, 'build', 'app'),
       library: {
         ...libraryOptions,
         name: 'jupyterlab'
       },
       filename: 'bundle.js',
-      publicPath: '/foo/static/example/'
+      publicPath: '/foo/static/example/app'
     },
     stats: 'verbose',
     ...options,
