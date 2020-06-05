@@ -22,7 +22,7 @@ function loadScript(url) {
 
 async function loadComponent(url, scope, module) {
   await loadScript(url);
-  const factory = await window[scope].get(module);
+  const factory = await window.MYNAMESPACE[scope].get(module);
   const Module = factory();
   return Module;
 }

@@ -16,10 +16,6 @@ const extras = Build.ensureAssets({
   output: './build/app'
 });
 
-const libraryOptions = {
-  type: 'global'
-};
-
 const rules = [
   { test: /\.css$/, use: ['style-loader', 'css-loader'] },
   { test: /\.html$/, use: 'file-loader' },
@@ -71,8 +67,8 @@ module.exports = [
     output: {
       path: path.resolve(__dirname, 'build', 'app'),
       library: {
-        ...libraryOptions,
-        name: 'jupyterlab'
+        type: 'var',
+        name: ['MYNAMESPACE', 'main']
       },
       filename: 'bundle.js',
       publicPath: '/foo/static/example/app'
@@ -83,7 +79,7 @@ module.exports = [
     plugins: [
       new ModuleFederationPlugin({
         name: 'main',
-        library: { ...libraryOptions, name: 'main' },
+        library: { type: 'var', name: ['MYNAMESPACE', 'main'] },
         shared: {
           '@jupyterlab/application': {
             singleton: true
@@ -115,8 +111,8 @@ module.exports = [
       new ModuleFederationPlugin({
         name: 'markdownviewer_extension',
         library: {
-          ...libraryOptions,
-          name: '@jupyterlab/markdownviewer_extension'
+          type: 'var',
+          name: ['MYNAMESPACE', '@jupyterlab/markdownviewer_extension']
         },
         filename: 'remoteEntry.js',
         exposes: {
