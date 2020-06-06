@@ -61,6 +61,12 @@ const options = {
   mode: 'development'
 };
 
+let dependencies = data.dependencies;
+let shared = Object.fromEntries(
+  Object.entries(dependencies).filter(
+    ([pkg]) => pkg.startsWith('@lumino') || pkg.startsWith('@jupyterlab')
+  )
+);
 module.exports = [
   {
     entry: './index.js',
@@ -83,17 +89,12 @@ module.exports = [
           name: ['MYNAMESPACE', 'NAME_LIBRARY_FEDERATION']
         },
         name: 'NAME_FEDERATION',
-        shared: {
-          '@jupyterlab/application': {
-            singleton: true
-          },
-          '@jupyterlab/rendermime': {
-            singleton: true
-          },
-          '@jupyterlab/settingregistry': {
-            singleton: true
-          }
-        }
+        shared: Object.fromEntries(
+          Object.entries(shared).map(([pkg, version]) => [
+            pkg,
+            { singleton: true, requiredVersion: version }
+          ])
+        )
       }),
       new webpack.DefinePlugin({
         'process.env': '{}',
@@ -123,20 +124,12 @@ module.exports = [
         exposes: {
           './index': './index-md.js'
         },
-        shared: {
-          '@jupyterlab/application': {
-            singleton: true,
-            import: false
-          },
-          '@jupyterlab/rendermime': {
-            singleton: true,
-            import: false
-          },
-          '@jupyterlab/settingregistry': {
-            singleton: true,
-            import: false
-          }
-        }
+        shared: Object.fromEntries(
+          Object.entries(shared).map(([pkg, version]) => [
+            pkg,
+            { singleton: true, import: false, requiredVersion: version }
+          ])
+        )
       }),
       new webpack.DefinePlugin({
         'process.env': '{}',
