@@ -65,7 +65,21 @@ let dependencies = {
   ...data.dependencies,
   '@jupyterlab/rendermime': '^2.1.0',
   '@jupyterlab/coreutils': '^4.1.0',
-  '@jupyterlab/settingregistry': '^2.1.0'
+  '@jupyterlab/settingregistry': '^2.1.0',
+  '@lumino/algorithm': '^1.2.3',
+  '@lumino/application': '^1.8.4',
+  '@lumino/commands': '^1.10.1',
+  '@lumino/coreutils': '^1.4.3',
+  '@lumino/disposable': '^1.3.5',
+  '@lumino/domutils': '^1.1.7',
+  '@lumino/dragdrop': '^1.5.1',
+  '@lumino/messaging': '^1.3.3',
+  '@lumino/properties': '^1.1.6',
+  '@lumino/signaling': '^1.3.5',
+  '@lumino/virtualdom': '^1.6.1',
+  '@lumino/widgets': '^1.11.1',
+  react: '~16.9.0',
+  'react-dom': '~16.9.0'
 };
 delete dependencies['@jupyterlab/markdownviewer-extension'];
 
