@@ -3,7 +3,7 @@
   "version": "2.1.0",
   "private": true,
   "scripts": {
-    "build": "npm run clean && webpack --json > stats.json",
+    "build": "npm run clean && webpack",
     "clean": "rimraf build",
     "prepublishOnly": "npm run build",
     "watch": "npm run clean && webpack --watch"
@@ -12,7 +12,6 @@
     "@jupyterlab/application": "^2.1.0",
     "@jupyterlab/application-extension": "^2.1.0",
     "@jupyterlab/apputils-extension": "^2.1.0",
-    "@jupyterlab/buildutils": "^2.1.0",
     "@jupyterlab/codemirror-extension": "^2.1.0",
     "@jupyterlab/docmanager-extension": "^2.1.0",
     "@jupyterlab/filebrowser-extension": "^2.1.0",
@@ -32,6 +31,7 @@
     "react-dom": "~16.9.0"
   },
   "devDependencies": {
+    "@jupyterlab/buildutils": "^2.1.0",
     "copy-webpack-plugin": "^6.0.1",
     "css-loader": "~3.2.0",
     "file-loader": "~5.0.2",
