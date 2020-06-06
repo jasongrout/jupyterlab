@@ -26,10 +26,10 @@ class ExampleFederatedApp(LabServerApp):
         app_settings_dir = os.path.join(HERE, 'build', 'application_settings'),
         app_version = version,
         app_url = '/example',
-        schemas_dir = os.path.join(HERE, 'build', 'schemas'),
+        schemas_dir = os.path.join(HERE, 'build', 'app', 'schemas'),
         static_dir = os.path.join(HERE, 'build'),
         templates_dir = os.path.join(HERE, 'templates'),
-        themes_dir = os.path.join(HERE, 'build', 'themes'),
+        themes_dir = os.path.join(HERE, 'build', 'app', 'themes'),
         user_settings_dir = os.path.join(HERE, 'build', 'user_settings'),
         workspaces_dir = os.path.join(HERE, 'build', 'workspaces'),
     )

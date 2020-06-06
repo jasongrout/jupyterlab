@@ -22,6 +22,13 @@ function loadScript(url) {
 
 async function loadComponent(url, scope, module) {
   await loadScript(url);
+
+  // From MIT-licensed https://github.com/module-federation/module-federation-examples/blob/af043acd6be1718ee195b2511adf6011fba4233c/advanced-api/dynamic-remotes/app1/src/App.js#L6-L12
+  await __webpack_init_sharing__('default');
+  const container = window.MYNAMESPACE[scope];
+  // Initialize the container, it may provide shared modules and may need ours
+  await container.init(__webpack_share_scopes__.default);
+
   const factory = await window.MYNAMESPACE[scope].get(module);
   const Module = factory();
   return Module;

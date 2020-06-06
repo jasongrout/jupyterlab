@@ -3,7 +3,7 @@
 const data = require('./package.json');
 const Build = require('@jupyterlab/buildutils').Build;
 const webpack = require('webpack');
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const { ModuleFederationPlugin } = webpack.container;
 const path = require('path');
 
 const names = Object.keys(data.dependencies).filter(function(name) {
@@ -68,18 +68,21 @@ module.exports = [
       path: path.resolve(__dirname, 'build', 'app'),
       library: {
         type: 'var',
-        name: ['MYNAMESPACE', 'main']
+        name: ['MYNAMESPACE', 'NAME_OUTPUT']
       },
       filename: 'bundle.js',
-      publicPath: '/foo/static/example/app'
+      publicPath: '/foo/static/example/app/'
     },
     stats: 'verbose',
     ...options,
     module: { rules },
     plugins: [
       new ModuleFederationPlugin({
-        name: 'main',
-        library: { type: 'var', name: ['MYNAMESPACE', 'main'] },
+        library: {
+          type: 'var',
+          name: ['MYNAMESPACE', 'NAME_LIBRARY_FEDERATION']
+        },
+        name: 'NAME_FEDERATION',
         shared: {
           '@jupyterlab/application': {
             singleton: true
@@ -98,6 +101,8 @@ module.exports = [
       })
     ]
   },
+
+  /* Markdown Extension */
   {
     entry: './index-md.js',
     output: {
