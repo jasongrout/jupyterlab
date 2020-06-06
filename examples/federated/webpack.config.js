@@ -61,7 +61,14 @@ const options = {
   mode: 'development'
 };
 
-let dependencies = data.dependencies;
+let dependencies = {
+  ...data.dependencies,
+  '@jupyterlab/rendermime': '^2.1.0',
+  '@jupyterlab/coreutils': '^4.1.0',
+  '@jupyterlab/settingregistry': '^2.1.0'
+};
+delete dependencies['@jupyterlab/markdownviewer-extension'];
+
 let shared = Object.fromEntries(
   Object.entries(dependencies).filter(
     ([pkg]) => pkg.startsWith('@lumino') || pkg.startsWith('@jupyterlab')
