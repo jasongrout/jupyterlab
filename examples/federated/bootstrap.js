@@ -1,6 +1,10 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
+// This is all the data needed to load and activate plugins. This should be
+// gathered by the server and put onto the initial page template.
+const PLUGIN_DATA = JSON.parse(document.getElementById('jupyterlab-plugin-data').textContent);
+
 import { PageConfig } from '@jupyterlab/coreutils';
 // eslint-disable-next-line
 __webpack_public_path__ = PageConfig.getOption('fullStaticUrl') + '/';
@@ -37,12 +41,11 @@ async function loadComponent(url, scope, module) {
 window.addEventListener('load', async function() {
   const JupyterLab = require('@jupyterlab/application').JupyterLab;
 
-  const pluginPromises = [];
-  pluginPromises.push(
+  const pluginPromises = PLUGIN_DATA.map(data =>
     loadComponent(
-      `${PageConfig.getOption('fullStaticUrl')}/mdext/remoteEntry.js`,
-      '@jupyterlab/markdownviewer_extension',
-      './index'
+      `${PageConfig.getOption('fullStaticUrl')}/${data.path}`,
+      data.name,
+      data.module
     )
   );
   const plugins = await Promise.all(pluginPromises);
