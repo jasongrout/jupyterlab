@@ -3,7 +3,9 @@
 
 // This is all the data needed to load and activate plugins. This should be
 // gathered by the server and put onto the initial page template.
-const PLUGIN_DATA = JSON.parse(document.getElementById('jupyterlab-plugin-data').textContent);
+const PLUGIN_DATA = JSON.parse(
+  document.getElementById('jupyterlab-plugin-data').textContent
+);
 
 import { PageConfig } from '@jupyterlab/coreutils';
 // eslint-disable-next-line
