@@ -3,11 +3,7 @@
 
 import { JupyterFrontEnd } from '@jupyterlab/application';
 
-import {
-  ISessionContext,
-  SessionContext,
-  ToolbarButton
-} from '@jupyterlab/apputils';
+import { ISessionContext, SessionContext } from '@jupyterlab/apputils';
 
 import { ConsolePanel } from '@jupyterlab/console';
 
@@ -23,7 +19,7 @@ import { Kernel, Session } from '@jupyterlab/services';
 
 import { nullTranslator, ITranslator } from '@jupyterlab/translation';
 
-import { bugIcon } from '@jupyterlab/ui-components';
+import { Switch } from '@jupyterlab/ui-components';
 
 import { DisposableSet } from '@lumino/disposable';
 
@@ -50,23 +46,13 @@ function updateToolbar(
 ): DisposableSet {
   translator = translator || nullTranslator;
   const trans = translator.load('jupyterlab');
-  const icon = new ToolbarButton({
-    className: 'jp-DebuggerBugButton',
-    icon: bugIcon,
-    tooltip: trans.__('Enable / Disable Debugger'),
-    onClick
-  });
-  widget.toolbar.addItem('debugger-icon', icon);
 
-  const button = new ToolbarButton({
-    iconClass: 'jp-ToggleSwitch',
-    tooltip: trans.__('Enable / Disable Debugger'),
-    onClick
-  });
+  const button = new Switch();
+  button.caption = trans.__('Toggle Debugger');
+  button.label = 'Debug';
+  button.valueChanged.connect(onClick);
   widget.toolbar.addItem('debugger-button', button);
-
   const elements = new DisposableSet();
-  elements.add(icon);
   elements.add(button);
   return elements;
 }
