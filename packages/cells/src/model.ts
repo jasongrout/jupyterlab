@@ -179,6 +179,7 @@ export class CellModel extends CodeEditor.Model implements ICellModel {
     trusted.changed.connect(this.onTrustedChanged, this);
 
     if (!cell) {
+      // TODO: new cells are not trusted?
       trusted.set(false);
       return;
     }

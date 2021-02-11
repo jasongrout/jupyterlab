@@ -1025,6 +1025,7 @@ export namespace CodeCell {
     const model = cell.model;
     const code = model.value.text;
     if (!code.trim() || !sessionContext.session?.kernel) {
+      // model.trusted = true;
       model.clearExecution();
       return;
     }
@@ -1038,7 +1039,29 @@ export namespace CodeCell {
     model.clearExecution();
     cell.outputHidden = false;
     cell.setPrompt('*');
-    model.trusted = true;
+    // TODO: I don't think we should automatically set a cell to be trusted, at least not in a way that is recorded in metadata. The default behavior is to compare hmacs on the server, *not* to explicitly trust it when executing. This explicit trust is only for a user explicitly trusting a notebook (marking all cells as trusted explicitly).
+    // model.trusted = true;
+
+    // Classic notebook logic:
+
+    // Notebook trust changes on save, load, and explicit trust (see trigger("trust_changed.Notebook"))
+    // On load: check each output area of each code cell. If one is trusted falsy, then the notebook is not trusted. Otherwise the notebook is trusted.
+    // On save: trusted unless any code cell output area has trusted falsy - so I guess this preserves the falsy load from above...
+    // On explicit trust: Set each code output area to be trusted: true.
+
+    // Output area trust:
+    // on load: A cell's output area trusted attribute defaults to the cell.metadata.trusted ?? false;
+    // on save: cell.metadata.trusted is set to the output_area trusted status.
+    // explicit trusting: sets the cell.output_area.trusted to true.
+
+    // Notably missing: any notion that execution changes the trusted status
+    // In classic notebook, loading a notebook that is not trusted and running all cells will not show that the notebook is now trusted, until there is a save/reload to give the server a chance to check the cells.
+
+    // I think it is important for us to distinguish between an explicit trust, compared to an implicit trust that happens when the notebook is checked? Right now we explicitly set a trust when we execute a cell, circumventing the signature check on the server side because it assumes we had an explicit ask.
+
+    // Right now running the trust command on an untrusted notebook does not trust it.
+
+
     let future:
       | Kernel.IFuture<
           KernelMessage.IExecuteRequestMsg,
