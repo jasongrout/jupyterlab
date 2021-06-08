@@ -18,7 +18,8 @@ import { IEditMenu, IMainMenu } from '@jupyterlab/mainmenu';
 import { IEditorServices } from '@jupyterlab/codeeditor';
 
 import {
-  editorServices,
+  CodeMirrorEditorFactory,
+  CodeMirrorMimeTypeService,
   EditorSyntaxStatus,
   CodeMirrorEditor,
   Mode,
@@ -143,6 +144,12 @@ function activateEditorServices(app: JupyterFrontEnd): IEditorServices {
   CodeMirror.prototype.save = () => {
     void app.commands.execute('docmanager:save');
   };
+
+  const editorServices: IEditorServices = {
+    factoryService: new CodeMirrorEditorFactory(),
+    mimeTypeService: new CodeMirrorMimeTypeService()
+  };
+  
   return editorServices;
 }
 
