@@ -4,7 +4,6 @@
 // / <reference types="codemirror"/>
 // / <reference types="codemirror/searchcursor"/>
 
-import { showDialog } from '@jupyterlab/apputils';
 import { CodeEditor } from '@jupyterlab/codeeditor';
 import {
   ICollaborator,
@@ -20,7 +19,6 @@ import {
 import { ArrayExt } from '@lumino/algorithm';
 import { JSONExt, UUID } from '@lumino/coreutils';
 import { DisposableDelegate, IDisposable } from '@lumino/disposable';
-import { Poll } from '@lumino/polling';
 import { Signal } from '@lumino/signaling';
 import CodeMirror from 'codemirror';
 import 'codemirror/addon/comment/comment.js';
@@ -135,16 +133,6 @@ export class CodeMirrorEditor implements CodeEditor.IEditor {
     }
     this._onMimeTypeChanged();
     this._onCursorActivity();
-    this._poll = new Poll({
-      factory: async () => {
-        this._checkSync();
-      },
-      frequency: { interval: 3000, backoff: false },
-      standby: () => {
-        // If changed, only stand by when hidden, otherwise always stand by.
-        return this._lastChange ? 'when-hidden' : true;
-      }
-    });
 
     // Connect to changes.
     if (!USE_YCODEMIRROR_BINDING) {
@@ -176,7 +164,6 @@ export class CodeMirrorEditor implements CodeEditor.IEditor {
       if (change.origin === 'setValue' && this.hasFocus()) {
         this.refresh();
       }
-      this._lastChange = change;
     });
 
     // Turn off paste handling in codemirror since sometimes we want to
@@ -311,7 +298,6 @@ export class CodeMirrorEditor implements CodeEditor.IEditor {
       this._yeditorBinding.destroy();
     }
     this._keydownHandlers.length = 0;
-    this._poll.dispose();
     Signal.clearData(this);
   }
 
@@ -1122,42 +1108,6 @@ export class CodeMirrorEditor implements CodeEditor.IEditor {
     return caret;
   }
 
-  /**
-   * Check for an out of sync editor.
-   */
-  private _checkSync(): void {
-    const change = this._lastChange;
-    if (!change) {
-      return;
-    }
-    this._lastChange = null;
-    const editor = this._editor;
-    const doc = editor.getDoc();
-    if (doc.getValue() === this._model.value.text) {
-      return;
-    }
-
-    void showDialog({
-      title: this._trans.__('Code Editor out of Sync'),
-      body: this._trans.__(
-        'Please open your browser JavaScript console for bug report instructions'
-      )
-    });
-    console.warn(
-      'Please paste the following to https://github.com/jupyterlab/jupyterlab/issues/2951'
-    );
-    console.warn(
-      JSON.stringify({
-        model: this._model.value.text,
-        view: doc.getValue(),
-        selections: this.getSelections(),
-        cursor: this.getCursorPosition(),
-        lineSep: editor.getOption('lineSeparator'),
-        mode: editor.getOption('mode'),
-        change
-      })
-    );
-  }
 
   protected translator: ITranslator;
   private _trans: TranslationBundle;
@@ -1176,8 +1126,6 @@ export class CodeMirrorEditor implements CodeEditor.IEditor {
   private _uuid = '';
   private _needsRefresh = false;
   private _isDisposed = false;
-  private _lastChange: CodeMirror.EditorChange | null = null;
-  private _poll: Poll;
   private _yeditorBinding: CodemirrorBinding | null;
 }
 
