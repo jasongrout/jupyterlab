@@ -7,8 +7,8 @@
  * @module statedb
  */
 
-export * from './dataconnector';
-export * from './interfaces';
-export * from './restorablepool';
-export * from './statedb';
-export * from './tokens';
+export * from './dataconnector.js';
+export * from './interfaces.js';
+export * from './restorablepool.js';
+export * from './statedb.js';
+export * from './tokens.js';

@@ -1,10 +1,11 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ReadonlyPartialJSONValue } from '@lumino/coreutils';
-import { ISignal, Signal } from '@lumino/signaling';
-import { IDataConnector } from './interfaces';
-import { IStateDB } from './tokens';
+import type { ReadonlyPartialJSONValue } from '@lumino/coreutils';
+import { Signal } from '@lumino/signaling';
+import type { ISignal } from '@lumino/signaling';
+import type { IDataConnector } from './interfaces.js';
+import { IStateDB } from './tokens.js';
 
 /**
  * The default concrete implementation of a state database.

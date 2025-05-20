@@ -2,12 +2,12 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { CommandRegistry } from '@lumino/commands';
-import {
+import type {
   ReadonlyPartialJSONObject,
   ReadonlyPartialJSONValue
 } from '@lumino/coreutils';
-import { IDisposable, IObservableDisposable } from '@lumino/disposable';
-import { ISignal } from '@lumino/signaling';
+import type { IDisposable, IObservableDisposable } from '@lumino/disposable';
+import type { ISignal } from '@lumino/signaling';
 
 /**
  * The description of a general purpose data connector.
