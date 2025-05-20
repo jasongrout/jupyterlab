@@ -3,9 +3,12 @@
 
 import { CommandRegistry } from '@lumino/commands';
 import { PathExt } from '@jupyterlab/coreutils';
-import { IRunningSessionManagers, IRunningSessions } from '@jupyterlab/running';
+import {
+  IRunningSessionManagers,
+  type IRunningSessions
+} from '@jupyterlab/running';
 import { ITranslator } from '@jupyterlab/translation';
-import { IRecentsManager, RecentDocument } from '@jupyterlab/docmanager';
+import { IRecentsManager, type RecentDocument } from '@jupyterlab/docmanager';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
 import { fileIcon, LabIcon } from '@jupyterlab/ui-components';
 

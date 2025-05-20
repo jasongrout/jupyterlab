@@ -4,7 +4,7 @@
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   caretDownEmptyThinIcon,
@@ -20,14 +20,18 @@ import {
   VDomRenderer,
   wordIcon
 } from '@jupyterlab/ui-components';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { CommandRegistry } from '@lumino/commands';
 import { UseSignal } from '@jupyterlab/apputils';
 import { Message } from '@lumino/messaging';
 import * as React from 'react';
 import { useCallback, useEffect, useState } from 'react';
-import { SearchDocumentModel } from './searchmodel';
-import { IFilter, IFilters, IReplaceOptionsSupport } from './tokens';
+import { SearchDocumentModel } from './searchmodel.js';
+import {
+  type IFilter,
+  type IFilters,
+  type IReplaceOptionsSupport
+} from './tokens.js';
 
 const OVERLAY_CLASS = 'jp-DocumentSearch-overlay';
 const OVERLAY_ROW_CLASS = 'jp-DocumentSearch-overlay-row';

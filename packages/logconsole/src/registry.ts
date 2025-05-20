@@ -2,14 +2,14 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
-import { ISignal, Signal } from '@lumino/signaling';
-import { Logger } from './logger';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { Logger } from './logger.js';
 import {
-  ILogger,
+  type ILogger,
   ILoggerRegistry,
-  ILoggerRegistryChange,
-  LogLevel
-} from './tokens';
+  type ILoggerRegistryChange,
+  type LogLevel
+} from './tokens.js';
 
 /**
  * A concrete implementation of ILoggerRegistry.

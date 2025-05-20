@@ -5,19 +5,22 @@ import { CodeEditor, CodeEditorWrapper } from '@jupyterlab/codeeditor';
 
 import { KernelMessage, Session } from '@jupyterlab/services';
 
-import { ISharedText } from '@jupyter/ydoc';
+import { type ISharedText } from '@jupyter/ydoc';
 
-import { ReadonlyJSONObject, Token } from '@lumino/coreutils';
+import { type ReadonlyJSONObject, Token } from '@lumino/coreutils';
 
-import { IDisposable, IObservableDisposable } from '@lumino/disposable';
+import {
+  type IDisposable,
+  type IObservableDisposable
+} from '@lumino/disposable';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 import { Panel } from '@lumino/widgets';
 
-import { DebugProtocol } from '@vscode/debugprotocol';
+import { type DebugProtocol } from '@vscode/debugprotocol';
 
-import { DebuggerHandler } from './handler';
+import { DebuggerHandler } from './handler.js';
 
 /**
  * An interface describing an application's visual debugger.

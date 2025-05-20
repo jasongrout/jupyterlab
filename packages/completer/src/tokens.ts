@@ -2,17 +2,17 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { CodeEditor } from '@jupyterlab/codeeditor';
-import { IRenderMime } from '@jupyterlab/rendermime';
+import { type IRenderMime } from '@jupyterlab/rendermime';
 import { Session } from '@jupyterlab/services';
 import { LabIcon } from '@jupyterlab/ui-components';
-import { SourceChange } from '@jupyter/ydoc';
-import { JSONValue, Token } from '@lumino/coreutils';
+import { type SourceChange } from '@jupyter/ydoc';
+import { type JSONValue, Token } from '@lumino/coreutils';
 import type { ISettingRegistry } from '@jupyterlab/settingregistry';
-import { ISignal } from '@lumino/signaling';
+import { type ISignal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
-import { CompletionHandler } from './handler';
-import { Completer } from './widget';
-import { InlineCompleter } from './inline';
+import { CompletionHandler } from './handler.js';
+import { Completer } from './widget.js';
+import { InlineCompleter } from './inline.js';
 
 /**
  * The type of completion request.

@@ -7,8 +7,8 @@ import { PageConfig } from '@jupyterlab/coreutils';
 import { Contents, ServerConnection } from '@jupyterlab/services';
 import { IStateDB } from '@jupyterlab/statedb';
 import { Debouncer } from '@lumino/polling';
-import { ISignal, Signal } from '@lumino/signaling';
-import { IRecentsManager, RecentDocument } from './tokens';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { IRecentsManager, type RecentDocument } from './tokens.js';
 
 /**
  * Manager for recently opened and closed documents.

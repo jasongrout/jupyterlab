@@ -5,9 +5,9 @@ import { CommandLinker } from '@jupyterlab/apputils';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
 import { ServiceManager } from '@jupyterlab/services';
 import { ContextMenuSvg } from '@jupyterlab/ui-components';
-import { Application, IPlugin } from '@lumino/application';
+import { Application, type IPlugin } from '@lumino/application';
 import { Token } from '@lumino/coreutils';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { FocusTracker, Widget } from '@lumino/widgets';
 
 /**

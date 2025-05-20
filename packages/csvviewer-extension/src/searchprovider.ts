@@ -2,7 +2,10 @@
 // Distributed under the terms of the Modified BSD License.
 import { CSVViewer } from '@jupyterlab/csvviewer';
 import { DocumentWidget } from '@jupyterlab/docregistry';
-import { ISearchProvider, SearchProvider } from '@jupyterlab/documentsearch';
+import {
+  type ISearchProvider,
+  SearchProvider
+} from '@jupyterlab/documentsearch';
 import { ITranslator } from '@jupyterlab/translation';
 import { Widget } from '@lumino/widgets';
 

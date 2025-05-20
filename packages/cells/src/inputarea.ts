@@ -9,7 +9,7 @@ import { Widget } from '@lumino/widgets';
 
 import { CodeEditor, CodeEditorWrapper } from '@jupyterlab/codeeditor';
 
-import { ICellModel } from './model';
+import { type ICellModel } from './model.js';
 
 /**
  * The class name added to input area widgets.

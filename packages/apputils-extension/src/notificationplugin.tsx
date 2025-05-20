@@ -5,7 +5,7 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   Notification,
@@ -23,7 +23,7 @@ import {
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   bellIcon,
@@ -37,8 +37,8 @@ import {
 } from '@jupyterlab/ui-components';
 import {
   PromiseDelegate,
-  ReadonlyJSONObject,
-  ReadonlyJSONValue
+  type ReadonlyJSONObject,
+  type ReadonlyJSONValue
 } from '@lumino/coreutils';
 import { Widget } from '@lumino/widgets';
 import * as React from 'react';

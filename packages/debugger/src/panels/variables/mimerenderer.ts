@@ -8,12 +8,12 @@ import { IRenderMimeRegistry, MimeModel } from '@jupyterlab/rendermime';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { PromiseDelegate } from '@lumino/coreutils';
 import { Panel } from '@lumino/widgets';
-import { murmur2 } from '../../hash';
-import { IDebugger } from '../../tokens';
+import { murmur2 } from '../../hash.js';
+import { IDebugger } from '../../tokens.js';
 
 const RENDERER_PANEL_CLASS = 'jp-VariableRendererPanel';
 const RENDERER_PANEL_RENDERER_CLASS = 'jp-VariableRendererPanel-renderer';

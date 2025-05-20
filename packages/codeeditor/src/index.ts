@@ -5,11 +5,11 @@
  * @module codeeditor
  */
 
-export * from './editor';
-export * from './factory';
-export * from './jsoneditor';
-export * from './lineCol';
-export * from './mimetype';
-export * from './tokens';
-export * from './viewer';
-export * from './widget';
+export * from './editor.js';
+export * from './factory.js';
+export * from './jsoneditor.js';
+export * from './lineCol.js';
+export * from './mimetype.js';
+export * from './tokens.js';
+export * from './viewer.js';
+export * from './widget.js';

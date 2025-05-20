@@ -4,16 +4,16 @@
 import {
   IRouter,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { URLExt } from '@jupyterlab/coreutils';
 import {
   ABCWidgetFactory,
   DocumentRegistry,
   DocumentWidget,
-  IDocumentWidget
+  type IDocumentWidget
 } from '@jupyterlab/docregistry';
-import { Workspace, WorkspaceManager } from '@jupyterlab/services';
+import { type Workspace, WorkspaceManager } from '@jupyterlab/services';
 import { IStateDB } from '@jupyterlab/statedb';
 import { IWorkspaceCommands } from '@jupyterlab/workspaces';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';

@@ -6,9 +6,9 @@ import { DocumentRegistry } from '@jupyterlab/docregistry';
 import { PathExt } from '@jupyterlab/coreutils';
 import { Contents } from '@jupyterlab/services';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
-import { JSONObject } from '@lumino/coreutils';
+import { type JSONObject } from '@lumino/coreutils';
 import { Widget } from '@lumino/widgets';
-import { IDocumentManager } from './';
+import { IDocumentManager } from './index.js';
 
 /**
  * The class name added to file dialogs.

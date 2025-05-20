@@ -4,12 +4,12 @@
 import { CodeEditor } from '@jupyterlab/codeeditor';
 import { Text } from '@jupyterlab/coreutils';
 import { IRenderMimeRegistry, MimeModel } from '@jupyterlab/rendermime';
-import { IDataConnector } from '@jupyterlab/statedb';
-import { JSONExt, ReadonlyJSONObject } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
+import { type IDataConnector } from '@jupyterlab/statedb';
+import { JSONExt, type ReadonlyJSONObject } from '@lumino/coreutils';
+import { type IDisposable } from '@lumino/disposable';
 import { Debouncer } from '@lumino/polling';
-import { ISignal, Signal } from '@lumino/signaling';
-import { IInspector } from './tokens';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { IInspector } from './tokens.js';
 
 /**
  * An object that handles code inspection.

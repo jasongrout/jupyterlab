@@ -10,7 +10,7 @@
 import {
   Annotation,
   EditorSelection,
-  Extension,
+  type Extension,
   Facet,
   SelectionRange
 } from '@codemirror/state';
@@ -19,7 +19,7 @@ import {
   yUndoManager,
   YUndoManagerConfig,
   yUndoManagerFacet
-} from './yundomanager';
+} from './yundomanager.js';
 import type {
   RelativePosition,
   Text,

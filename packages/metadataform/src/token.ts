@@ -5,16 +5,16 @@
  * @module metadataform
  */
 
-import { CellType } from '@jupyterlab/nbformat';
+import { type CellType } from '@jupyterlab/nbformat';
 import { NotebookTools } from '@jupyterlab/notebook';
 import { BaseSettings, ISettingRegistry } from '@jupyterlab/settingregistry';
 import { ITranslator } from '@jupyterlab/translation';
 import {
-  PartialJSONObject,
-  ReadonlyJSONObject,
+  type PartialJSONObject,
+  type ReadonlyJSONObject,
   Token
 } from '@lumino/coreutils';
-import { MetadataFormWidget } from './metadataform';
+import { MetadataFormWidget } from './metadataform.js';
 
 export namespace MetadataForm {
   /**

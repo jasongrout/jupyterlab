@@ -10,9 +10,9 @@
 // Introduced modifications are BSD licenced, copyright JupyterLab development team.
 
 import {
-  Registration,
-  ServerCapabilities,
-  Unregistration
+  type Registration,
+  type ServerCapabilities,
+  type Unregistration
 } from 'vscode-languageserver-protocol';
 
 interface IFlexibleServerCapabilities extends ServerCapabilities {

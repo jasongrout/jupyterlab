@@ -4,10 +4,10 @@
 |----------------------------------------------------------------------------*/
 
 import { URLExt } from '@jupyterlab/coreutils';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import escape from 'lodash.escape';
-import { removeMath, replaceMath } from './latex';
+import { removeMath, replaceMath } from './latex.js';
 
 /**
  * Render HTML into a host node.

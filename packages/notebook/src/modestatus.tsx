@@ -7,7 +7,7 @@ import { TextItem } from '@jupyterlab/statusbar';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { VDomModel, VDomRenderer } from '@jupyterlab/ui-components';
 import * as React from 'react';

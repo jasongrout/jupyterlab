@@ -2,8 +2,8 @@
 // Distributed under the terms of the Modified BSD License.
 
 import type { IOutput } from '@jupyterlab/nbformat';
-import { standardRendererFactories } from './factories';
-import { RenderMimeRegistry } from './registry';
+import { standardRendererFactories } from './factories.js';
+import { RenderMimeRegistry } from './registry.js';
 
 /**
  * The default outputs used for testing.

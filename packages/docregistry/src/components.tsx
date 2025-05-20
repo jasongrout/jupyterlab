@@ -8,7 +8,7 @@ import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { Widget } from '@lumino/widgets';
 import * as React from 'react';
 
-import { IDocumentWidget } from './index';
+import { type IDocumentWidget } from './index.js';
 
 /**
  * create readonly label toolbar item

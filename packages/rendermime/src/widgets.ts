@@ -2,15 +2,15 @@
 | Copyright (c) Jupyter Development Team.
 | Distributed under the terms of the Modified BSD License.
 |----------------------------------------------------------------------------*/
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import {
-  ReadonlyJSONObject,
-  ReadonlyPartialJSONObject
+  type ReadonlyJSONObject,
+  type ReadonlyPartialJSONObject
 } from '@lumino/coreutils';
 import { Message } from '@lumino/messaging';
 import { Widget } from '@lumino/widgets';
-import * as renderers from './renderers';
+import * as renderers from './renderers.js';
 
 /**
  * A common base class for mime renderers.

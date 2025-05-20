@@ -2,26 +2,26 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { PageConfig, URLExt } from '@jupyterlab/coreutils';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 import { WidgetLSPAdapter } from './adapters';
-import { LSPConnection } from './connection';
-import { ClientCapabilities } from './lsp';
-import { AskServersToSendTraceNotifications } from './plugin';
+import { LSPConnection } from './connection.js';
+import { type ClientCapabilities } from './lsp.js';
+import { type AskServersToSendTraceNotifications } from './plugin.js';
 import {
-  Document,
-  IDocumentConnectionData,
+  type Document,
+  type IDocumentConnectionData,
   ILanguageServerManager,
-  ILSPConnection,
+  type ILSPConnection,
   ILSPDocumentConnectionManager,
-  ISocketConnectionOptions,
+  type ISocketConnectionOptions,
   IWidgetLSPAdapterTracker,
-  TLanguageServerConfigurations,
-  TLanguageServerId,
-  TServerKeys
-} from './tokens';
-import { expandDottedPaths, sleep, untilReady } from './utils';
-import { VirtualDocument } from './virtual/document';
+  type TLanguageServerConfigurations,
+  type TLanguageServerId,
+  type TServerKeys
+} from './tokens.js';
+import { expandDottedPaths, sleep, untilReady } from './utils.js';
+import { VirtualDocument } from './virtual/document.js';
 
 import type * as protocol from 'vscode-languageserver-protocol';
 

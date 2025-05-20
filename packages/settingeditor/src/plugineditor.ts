@@ -10,15 +10,15 @@ import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { CommandRegistry } from '@lumino/commands';
 import { JSONExt } from '@lumino/coreutils';
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { StackedLayout, Widget } from '@lumino/widgets';
-import { RawEditor } from './raweditor';
-import { JsonSettingEditor } from './jsonsettingeditor';
+import { RawEditor } from './raweditor.js';
+import { JsonSettingEditor } from './jsonsettingeditor.js';
 
 /**
  * The class name added to all plugin editors.

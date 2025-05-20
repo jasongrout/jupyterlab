@@ -4,14 +4,14 @@
 import { Cell, CodeCell, ICellModel } from '@jupyterlab/cells';
 import { NotebookPanel } from '@jupyterlab/notebook';
 import {
-  IObservableList,
-  IObservableMap,
+  type IObservableList,
+  type IObservableMap,
   ObservableMap
 } from '@jupyterlab/observables';
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 import { Signal } from '@lumino/signaling';
-import { IDebugger } from '../tokens';
-import { EditorHandler } from './editor';
+import { IDebugger } from '../tokens.js';
+import { EditorHandler } from './editor.js';
 
 /**
  * A handler for notebooks.

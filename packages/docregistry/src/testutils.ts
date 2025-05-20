@@ -6,7 +6,7 @@
 
 /// <reference types="jest" preserve="true"/>
 
-import { ISessionContext, SessionContext } from '@jupyterlab/apputils';
+import { type ISessionContext, SessionContext } from '@jupyterlab/apputils';
 import {
   Kernel,
   KernelMessage,
@@ -19,13 +19,13 @@ import {
   KernelMock,
   ServiceManagerMock,
   SessionConnectionMock
-} from '@jupyterlab/services/lib/testutils';
+} from '@jupyterlab/services/lib/testutils.js';
 import { UUID } from '@lumino/coreutils';
 import { AttachedProperty } from '@lumino/properties';
-import { ISignal, Signal } from '@lumino/signaling';
-import { Context } from './context';
-import { TextModelFactory } from './default';
-import { DocumentRegistry, IDocumentWidget } from './registry';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { Context } from './context.js';
+import { TextModelFactory } from './default.js';
+import { DocumentRegistry, type IDocumentWidget } from './registry.js';
 
 /**
  * Create a context for a file.

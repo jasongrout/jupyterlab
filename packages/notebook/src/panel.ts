@@ -3,7 +3,7 @@
 
 import {
   Dialog,
-  ISessionContext,
+  type ISessionContext,
   Printing,
   showDialog
 } from '@jupyterlab/apputils';
@@ -13,8 +13,8 @@ import { DocumentRegistry, DocumentWidget } from '@jupyterlab/docregistry';
 import { Kernel, KernelMessage, Session } from '@jupyterlab/services';
 import { ITranslator } from '@jupyterlab/translation';
 import { Token } from '@lumino/coreutils';
-import { INotebookModel } from './model';
-import { Notebook, StaticNotebook } from './widget';
+import { type INotebookModel } from './model.js';
+import { Notebook, StaticNotebook } from './widget.js';
 import { Message } from '@lumino/messaging';
 
 /**

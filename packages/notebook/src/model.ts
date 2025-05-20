@@ -3,24 +3,24 @@
 
 import { Dialog, showDialog } from '@jupyterlab/apputils';
 import { ICellModel } from '@jupyterlab/cells';
-import { IChangedArgs } from '@jupyterlab/coreutils';
+import { type IChangedArgs } from '@jupyterlab/coreutils';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
 import * as nbformat from '@jupyterlab/nbformat';
-import { IObservableList } from '@jupyterlab/observables';
+import { type IObservableList } from '@jupyterlab/observables';
 import {
-  IMapChange,
-  ISharedNotebook,
-  NotebookChange,
+  type IMapChange,
+  type ISharedNotebook,
+  type NotebookChange,
   YNotebook
 } from '@jupyter/ydoc';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { JSONExt } from '@lumino/coreutils';
-import { ISignal, Signal } from '@lumino/signaling';
-import { CellList } from './celllist';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { CellList } from './celllist.js';
 
 /**
  * The definition of a model object for a notebook widget.

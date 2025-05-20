@@ -2,17 +2,20 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { Dialog, showDialog } from '@jupyterlab/apputils';
-import { IChangedArgs, Time } from '@jupyterlab/coreutils';
-import { DocumentRegistry, IDocumentWidget } from '@jupyterlab/docregistry';
+import { type IChangedArgs, Time } from '@jupyterlab/coreutils';
+import {
+  DocumentRegistry,
+  type IDocumentWidget
+} from '@jupyterlab/docregistry';
 import { Contents } from '@jupyterlab/services';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { ArrayExt, find } from '@lumino/algorithm';
-import { DisposableSet, IDisposable } from '@lumino/disposable';
-import { IMessageHandler, Message, MessageLoop } from '@lumino/messaging';
+import { DisposableSet, type IDisposable } from '@lumino/disposable';
+import { type IMessageHandler, Message, MessageLoop } from '@lumino/messaging';
 import { AttachedProperty } from '@lumino/properties';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
-import { IRecentsManager } from './tokens';
+import { IRecentsManager } from './tokens.js';
 
 /**
  * The class name added to document widgets.

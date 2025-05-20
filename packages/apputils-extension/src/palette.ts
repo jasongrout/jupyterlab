@@ -6,7 +6,7 @@
 import { ILayoutRestorer, JupyterFrontEnd } from '@jupyterlab/application';
 import {
   ICommandPalette,
-  IPaletteItem,
+  type IPaletteItem,
   ModalCommandPalette
 } from '@jupyterlab/apputils';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
@@ -14,7 +14,7 @@ import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { CommandPaletteSvg, paletteIcon } from '@jupyterlab/ui-components';
 import { find } from '@lumino/algorithm';
 import { CommandRegistry } from '@lumino/commands';
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
 import { CommandPalette } from '@lumino/widgets';
 
 /**

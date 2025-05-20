@@ -5,7 +5,12 @@ import { jupyterHighlightStyle } from '@jupyterlab/codemirror';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { InputGroup } from '@jupyterlab/ui-components';
 import { Tag, tags } from '@lezer/highlight';
-import { JSONArray, JSONExt, JSONObject, JSONValue } from '@lumino/coreutils';
+import {
+  type JSONArray,
+  JSONExt,
+  type JSONObject,
+  JSONValue
+} from '@lumino/coreutils';
 import * as React from 'react';
 import Highlighter from 'react-highlight-words';
 import { JSONTree } from 'react-json-tree';

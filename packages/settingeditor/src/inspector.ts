@@ -9,15 +9,15 @@ import {
   RenderMimeRegistry,
   standardRendererFactories
 } from '@jupyterlab/rendermime';
-import { ISchemaValidator } from '@jupyterlab/settingregistry';
+import { type ISchemaValidator } from '@jupyterlab/settingregistry';
 import { DataConnector } from '@jupyterlab/statedb';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
-import { ReadonlyJSONObject } from '@lumino/coreutils';
-import { RawEditor } from './raweditor';
+import { type ReadonlyJSONObject } from '@lumino/coreutils';
+import { RawEditor } from './raweditor.js';
 
 /**
  * Create a raw editor inspector.

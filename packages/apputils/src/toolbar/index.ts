@@ -3,6 +3,6 @@
  * Distributed under the terms of the Modified BSD License.
  */
 
-export * from './factory';
-export * from './registry';
-export * from './widget';
+export * from './factory.js';
+export * from './registry.js';
+export * from './widget.js';

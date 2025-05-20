@@ -4,7 +4,7 @@
 import {
   Toolbar as AppToolbar,
   Dialog,
-  ISessionContext,
+  type ISessionContext,
   ISessionContextDialogs,
   SessionContextDialogs,
   showDialog
@@ -14,7 +14,7 @@ import * as nbformat from '@jupyterlab/nbformat';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   addIcon,
@@ -33,9 +33,9 @@ import {
   UseSignal
 } from '@jupyterlab/ui-components';
 import * as React from 'react';
-import { NotebookActions } from './actions';
-import { NotebookPanel } from './panel';
-import { Notebook } from './widget';
+import { NotebookActions } from './actions.js';
+import { NotebookPanel } from './panel.js';
+import { Notebook } from './widget.js';
 
 /**
  * The class name added to toolbar cell type dropdown wrapper.

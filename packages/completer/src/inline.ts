@@ -2,22 +2,22 @@
 // Distributed under the terms of the Modified BSD License.
 
 import type { TransactionSpec } from '@codemirror/state';
-import { SourceChange } from '@jupyter/ydoc';
+import { type SourceChange } from '@jupyter/ydoc';
 import { CodeEditor } from '@jupyterlab/codeeditor';
 import { CodeMirrorEditor } from '@jupyterlab/codemirror';
-import { TranslationBundle } from '@jupyterlab/translation';
+import { type TranslationBundle } from '@jupyterlab/translation';
 import { HoverBox, kernelIcon, Toolbar } from '@jupyterlab/ui-components';
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { PanelLayout, Widget } from '@lumino/widgets';
-import { GhostTextManager } from './ghost';
-import { CompletionHandler } from './handler';
+import { GhostTextManager } from './ghost.js';
+import { CompletionHandler } from './handler.js';
 import {
   IInlineCompleterFactory,
-  IInlineCompleterSettings,
-  IInlineCompletionList
-} from './tokens';
+  type IInlineCompleterSettings,
+  type IInlineCompletionList
+} from './tokens.js';
 
 const INLINE_COMPLETER_CLASS = 'jp-InlineCompleter';
 const INLINE_COMPLETER_ACTIVE_CLASS = 'jp-mod-inline-completer-active';

@@ -1,10 +1,10 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ISessionContext } from '@jupyterlab/apputils';
+import { type ISessionContext } from '@jupyterlab/apputils';
 import { KernelMessage } from '@jupyterlab/services';
 import { DataConnector } from '@jupyterlab/statedb';
-import { InspectionHandler } from './handler';
+import { InspectionHandler } from './handler.js';
 
 /**
  * The default connector for making inspection requests from the Jupyter API.

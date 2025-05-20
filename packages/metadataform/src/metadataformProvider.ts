@@ -3,7 +3,7 @@
  * Distributed under the terms of the Modified BSD License.
  */
 
-import { IMetadataFormProvider, MetadataForm } from './token';
+import { IMetadataFormProvider, type MetadataForm } from './token.js';
 
 export class MetadataFormProvider implements IMetadataFormProvider {
   add(id: string, widget: MetadataForm.IMetadataForm) {

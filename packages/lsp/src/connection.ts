@@ -1,30 +1,30 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 import {
-  ClientNotifications,
-  ClientRequests,
-  IClientRequestHandler,
-  IClientRequestParams,
-  IClientResult,
-  IDocumentInfo,
-  ILSPConnection,
-  ILSPOptions,
-  IServerRequestHandler,
-  IServerRequestParams,
-  IServerResult,
+  type ClientNotifications,
+  type ClientRequests,
+  type IClientRequestHandler,
+  type IClientRequestParams,
+  type IClientResult,
+  type IDocumentInfo,
+  type ILSPConnection,
+  type ILSPOptions,
+  type IServerRequestHandler,
+  type IServerRequestParams,
+  type IServerResult,
   Method,
-  ServerNotifications,
-  ServerRequests
-} from './tokens';
-import { untilReady } from './utils';
+  type ServerNotifications,
+  type ServerRequests
+} from './tokens.js';
+import { untilReady } from './utils.js';
 import {
   registerServerCapability,
   unregisterServerCapability
-} from './ws-connection/server-capability-registration';
-import { LspWsConnection } from './ws-connection/ws-connection';
+} from './ws-connection/server-capability-registration.js';
+import { LspWsConnection } from './ws-connection/ws-connection.js';
 
 import type * as lsp from 'vscode-languageserver-protocol';
 

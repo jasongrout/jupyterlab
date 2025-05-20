@@ -4,7 +4,7 @@
 import type { WidgetTracker } from '@jupyterlab/apputils';
 import type { IStateDB } from '@jupyterlab/statedb';
 import { Token } from '@lumino/coreutils';
-import type { FileBrowser } from './browser';
+import type { FileBrowser } from './browser.js';
 
 /**
  * The file browser factory token.

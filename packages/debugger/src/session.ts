@@ -7,11 +7,11 @@ import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 
 import { PromiseDelegate } from '@lumino/coreutils';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { DebugProtocol } from '@vscode/debugprotocol';
+import { type DebugProtocol } from '@vscode/debugprotocol';
 
-import { IDebugger } from './tokens';
+import { IDebugger } from './tokens.js';
 
 /**
  * A concrete implementation of IDebugger.ISession.

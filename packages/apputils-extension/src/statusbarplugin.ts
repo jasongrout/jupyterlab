@@ -6,11 +6,11 @@
 import {
   ILabShell,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   IKernelStatusModel,
-  ISessionContext,
+  type ISessionContext,
   ISessionContextDialogs,
   KernelStatus,
   RunningSessions,
@@ -19,9 +19,9 @@ import {
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { IStatusBar } from '@jupyterlab/statusbar';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 import { Title, Widget } from '@lumino/widgets';
-import { KeyboardEvent } from 'react';
+import { type KeyboardEvent } from 'react';
 
 /**
  * A plugin that provides a kernel status item to the status bar.

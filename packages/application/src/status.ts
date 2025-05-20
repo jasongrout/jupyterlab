@@ -1,10 +1,10 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
-import { JupyterFrontEnd } from './frontend';
-import { ILabStatus } from './tokens';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { JupyterFrontEnd } from './frontend.js';
+import { ILabStatus } from './tokens.js';
 
 /**
  * The application status signals and flags class.

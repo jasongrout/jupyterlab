@@ -7,8 +7,8 @@ import { ITranslator } from '@jupyterlab/translation';
 import { FilterBox } from '@jupyterlab/ui-components';
 import * as React from 'react';
 
-import { ShortcutTitleItem } from './ShortcutTitleItem';
-import { IShortcutUI } from '../types';
+import { ShortcutTitleItem } from './ShortcutTitleItem.js';
+import { type IShortcutUI } from '../types.js';
 
 export interface IAdvancedOptionsProps {
   toggleSelectors: IShortcutUI['toggleSelectors'];

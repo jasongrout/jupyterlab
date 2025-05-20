@@ -8,11 +8,11 @@
 import {
   ILabShell,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { ICommandPalette, MainAreaWidget } from '@jupyterlab/apputils';
 import {
-  ISearchKeyBindings,
+  type ISearchKeyBindings,
   ISearchProviderRegistry,
   SearchDocumentModel,
   SearchDocumentView,

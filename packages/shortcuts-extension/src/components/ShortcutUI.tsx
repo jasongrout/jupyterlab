@@ -6,16 +6,16 @@
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { ArrayExt, StringExt } from '@lumino/algorithm';
 import { JSONExt } from '@lumino/coreutils';
-import { ShortcutList } from './ShortcutList';
-import { TopNav } from './TopNav';
-import { ShortcutRegistry } from '../registry';
+import { ShortcutList } from './ShortcutList.js';
+import { TopNav } from './TopNav.js';
+import { ShortcutRegistry } from '../registry.js';
 import {
-  IKeybinding,
-  IShortcutRegistry,
-  IShortcutsSettingsLayout,
-  IShortcutTarget,
-  IShortcutUI
-} from '../types';
+  type IKeybinding,
+  type IShortcutRegistry,
+  type IShortcutsSettingsLayout,
+  type IShortcutTarget,
+  type IShortcutUI
+} from '../types.js';
 import * as React from 'react';
 
 const enum MatchType {

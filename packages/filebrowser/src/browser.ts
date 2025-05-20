@@ -9,15 +9,15 @@ import { IStateDB } from '@jupyterlab/statedb';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import {
   FilenameSearcher,
-  IScore,
+  type IScore,
   SidePanel,
   Toolbar
 } from '@jupyterlab/ui-components';
 import { Panel } from '@lumino/widgets';
 import { createRef } from 'react';
-import { BreadCrumbs } from './crumbs';
-import { DirListing } from './listing';
-import { FilterFileBrowserModel } from './model';
+import { BreadCrumbs } from './crumbs.js';
+import { DirListing } from './listing.js';
+import { FilterFileBrowserModel } from './model.js';
 
 /**
  * The class name added to file browsers.

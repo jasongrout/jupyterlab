@@ -5,20 +5,24 @@ import { Printing, showErrorMessage } from '@jupyterlab/apputils';
 import { IEditorMimeTypeService } from '@jupyterlab/codeeditor';
 import { ActivityMonitor } from '@jupyterlab/coreutils';
 import {
-  IRenderMime,
+  type IRenderMime,
   IRenderMimeRegistry,
   MimeModel
 } from '@jupyterlab/rendermime';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
-import { JSONExt, PartialJSONObject, PromiseDelegate } from '@lumino/coreutils';
+import {
+  JSONExt,
+  type PartialJSONObject,
+  PromiseDelegate
+} from '@lumino/coreutils';
 import { Message, MessageLoop } from '@lumino/messaging';
 import { StackedLayout, Widget } from '@lumino/widgets';
-import { ABCWidgetFactory, DocumentWidget } from './default';
-import { DocumentRegistry } from './registry';
+import { ABCWidgetFactory, DocumentWidget } from './default.js';
+import { DocumentRegistry } from './registry.js';
 
 /**
  * A content widget for a rendered mimetype document.

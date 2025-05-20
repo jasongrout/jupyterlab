@@ -4,7 +4,7 @@
 import type { ISharedNotebook } from '@jupyter/ydoc';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
 import { Contents } from '@jupyterlab/services';
-import { INotebookModel, NotebookModel } from './model';
+import { type INotebookModel, NotebookModel } from './model.js';
 
 /**
  * A model factory for notebooks.

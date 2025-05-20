@@ -5,7 +5,7 @@
  * @module debugger
  */
 
-export { Debugger } from './debugger';
+export { Debugger } from './debugger.js';
 
 export {
   IDebugger,
@@ -14,4 +14,4 @@ export {
   IDebuggerSidebar,
   IDebuggerHandler,
   IDebuggerSourceViewer
-} from './tokens';
+} from './tokens.js';

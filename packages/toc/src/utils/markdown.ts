@@ -3,8 +3,8 @@
 
 import { Sanitizer } from '@jupyterlab/apputils';
 import { IMarkdownParser, renderMarkdown } from '@jupyterlab/rendermime';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
-import { TableOfContents } from '../tokens';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { TableOfContents } from '../tokens.js';
 
 /**
  * Markdown heading

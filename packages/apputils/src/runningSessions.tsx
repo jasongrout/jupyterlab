@@ -11,7 +11,7 @@ import {
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   kernelIcon,
@@ -19,7 +19,7 @@ import {
   VDomModel,
   VDomRenderer
 } from '@jupyterlab/ui-components';
-import React, { KeyboardEvent } from 'react';
+import React, { type KeyboardEvent } from 'react';
 import { GroupItem, TextItem } from '@jupyterlab/statusbar';
 
 /**

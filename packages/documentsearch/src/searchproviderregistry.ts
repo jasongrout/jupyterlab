@@ -2,14 +2,14 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
 import {
-  ISearchProvider,
-  ISearchProviderFactory,
+  type ISearchProvider,
+  type ISearchProviderFactory,
   ISearchProviderRegistry
-} from './tokens';
+} from './tokens.js';
 
 /**
  * Search provider registry

@@ -4,20 +4,20 @@
 |----------------------------------------------------------------------------*/
 
 import { WidgetTracker } from '@jupyterlab/apputils';
-import { IDataConnector, IRestorer } from '@jupyterlab/statedb';
+import { type IDataConnector, type IRestorer } from '@jupyterlab/statedb';
 import { CommandRegistry } from '@lumino/commands';
 import {
   JSONExt,
-  JSONObject,
-  PartialJSONObject,
+  type JSONObject,
+  type PartialJSONObject,
   PromiseDelegate,
-  ReadonlyPartialJSONObject,
-  ReadonlyPartialJSONValue,
+  type ReadonlyPartialJSONObject,
+  type ReadonlyPartialJSONValue,
   Token
 } from '@lumino/coreutils';
 import { AttachedProperty } from '@lumino/properties';
 import { DockPanel, Widget } from '@lumino/widgets';
-import { ILabShell } from './shell';
+import { ILabShell } from './shell.js';
 
 /**
  * The layout restorer token.

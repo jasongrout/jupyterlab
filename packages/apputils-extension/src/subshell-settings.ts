@@ -5,7 +5,7 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { CommsOverSubshells } from '@jupyterlab/services';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';

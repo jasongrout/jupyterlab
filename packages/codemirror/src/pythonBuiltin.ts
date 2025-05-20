@@ -7,12 +7,12 @@ import { Language, syntaxTree } from '@codemirror/language';
 import { RangeSetBuilder } from '@codemirror/state';
 import {
   Decoration,
-  DecorationSet,
+  type DecorationSet,
   EditorView,
   ViewPlugin,
   ViewUpdate
 } from '@codemirror/view';
-import { NodeProp, SyntaxNodeRef, Tree } from '@lezer/common';
+import { NodeProp, type SyntaxNodeRef, Tree } from '@lezer/common';
 
 export class PythonBuiltin {
   decorations: DecorationSet;

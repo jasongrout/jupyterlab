@@ -11,24 +11,27 @@ import {
 } from '@jupyterlab/cells';
 import { IHighlightAdjacentMatchOptions } from '@jupyterlab/codemirror';
 import { CodeEditor } from '@jupyterlab/codeeditor';
-import { IChangedArgs } from '@jupyterlab/coreutils';
+import { type IChangedArgs } from '@jupyterlab/coreutils';
 import {
-  IFilter,
-  IFilters,
-  IReplaceOptions,
-  IReplaceOptionsSupport,
-  ISearchMatch,
-  ISearchProvider,
+  type IFilter,
+  type IFilters,
+  type IReplaceOptions,
+  type IReplaceOptionsSupport,
+  type ISearchMatch,
+  type ISearchProvider,
   SearchProvider,
-  SelectionState
+  type SelectionState
 } from '@jupyterlab/documentsearch';
-import { IObservableList, IObservableMap } from '@jupyterlab/observables';
+import {
+  type IObservableList,
+  type IObservableMap
+} from '@jupyterlab/observables';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { ArrayExt } from '@lumino/algorithm';
 import { Widget } from '@lumino/widgets';
-import { CellList } from './celllist';
-import { NotebookPanel } from './panel';
-import { Notebook } from './widget';
+import { CellList } from './celllist.js';
+import { NotebookPanel } from './panel.js';
+import { Notebook } from './widget.js';
 
 /**
  * Notebook document search provider

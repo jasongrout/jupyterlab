@@ -3,17 +3,17 @@
 //
 
 import { WidgetTracker } from '@jupyterlab/apputils';
-import { IChangedArgs } from '@jupyterlab/coreutils';
+import { type IChangedArgs } from '@jupyterlab/coreutils';
 import { GroupItem, ProgressBar, TextItem } from '@jupyterlab/statusbar';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { VDomModel, VDomRenderer } from '@jupyterlab/ui-components';
 import { ArrayExt } from '@lumino/algorithm';
 import React from 'react';
-import { FileBrowser, FileBrowserModel, IUploadModel } from '.';
+import { FileBrowser, FileBrowserModel, type IUploadModel } from './index.js';
 
 /**
  * Half-spacing between items in the overall status item.

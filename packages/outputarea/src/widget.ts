@@ -1,29 +1,29 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ISessionContext, WidgetTracker } from '@jupyterlab/apputils';
+import { type ISessionContext, WidgetTracker } from '@jupyterlab/apputils';
 import * as nbformat from '@jupyterlab/nbformat';
-import { IObservableString } from '@jupyterlab/observables';
-import { IOutputModel, IRenderMimeRegistry } from '@jupyterlab/rendermime';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { type IObservableString } from '@jupyterlab/observables';
+import { type IOutputModel, IRenderMimeRegistry } from '@jupyterlab/rendermime';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { Kernel, KernelMessage } from '@jupyterlab/services';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
-  JSONObject,
+  type JSONObject,
   PromiseDelegate,
-  ReadonlyJSONObject,
-  ReadonlyPartialJSONObject,
+  type ReadonlyJSONObject,
+  type ReadonlyPartialJSONObject,
   UUID
 } from '@lumino/coreutils';
 import { Message } from '@lumino/messaging';
 import { AttachedProperty } from '@lumino/properties';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Panel, PanelLayout, Widget } from '@lumino/widgets';
-import { IOutputAreaModel } from './model';
+import { type IOutputAreaModel } from './model.js';
 
 /**
  * The class name added to an output area widget.

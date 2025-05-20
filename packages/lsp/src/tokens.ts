@@ -6,25 +6,28 @@ import { CodeEditor } from '@jupyterlab/codeeditor';
 
 import { FocusTracker, Widget } from '@lumino/widgets';
 import { Token } from '@lumino/coreutils';
-import { IDisposable, IObservableDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
+import {
+  type IDisposable,
+  type IObservableDisposable
+} from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 import { EditorAdapter, WidgetLSPAdapter } from './adapters';
-import { IForeignCodeExtractor } from './extractors/types';
+import { type IForeignCodeExtractor } from './extractors/types.js';
 import {
-  AnyCompletion,
-  AnyLocation,
-  ClientCapabilities,
-  LanguageIdentifier
-} from './lsp';
-import { LanguageServer1 as LSPLanguageServerSettings } from './plugin';
-import * as SCHEMA from './schema';
-import { VirtualDocument } from './virtual/document';
+  type AnyCompletion,
+  type AnyLocation,
+  type ClientCapabilities,
+  type LanguageIdentifier
+} from './lsp.js';
+import { LanguageServer1 as LSPLanguageServerSettings } from './plugin.js';
+import * as SCHEMA from './schema.js';
+import { VirtualDocument } from './virtual/document.js';
 import {
-  IDocumentInfo,
-  ILspConnection,
-  ILspOptions
-} from './ws-connection/types';
+  type IDocumentInfo,
+  type ILspConnection,
+  type ILspOptions
+} from './ws-connection/types.js';
 
 import type * as rpc from 'vscode-jsonrpc';
 import type * as lsp from 'vscode-languageserver-protocol';

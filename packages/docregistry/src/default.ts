@@ -3,16 +3,20 @@
 
 import { MainAreaWidget, setToolbar } from '@jupyterlab/apputils';
 import { CodeEditor } from '@jupyterlab/codeeditor';
-import { IChangedArgs, PathExt } from '@jupyterlab/coreutils';
-import { IObservableList } from '@jupyterlab/observables';
+import { type IChangedArgs, PathExt } from '@jupyterlab/coreutils';
+import { type IObservableList } from '@jupyterlab/observables';
 import { Contents } from '@jupyterlab/services';
-import { DocumentChange, FileChange, ISharedFile } from '@jupyter/ydoc';
+import {
+  type DocumentChange,
+  type FileChange,
+  type ISharedFile
+} from '@jupyter/ydoc';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
-import { PartialJSONValue } from '@lumino/coreutils';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type PartialJSONValue } from '@lumino/coreutils';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Title, Widget } from '@lumino/widgets';
-import { DocumentRegistry, IDocumentWidget } from './index';
-import { createReadonlyLabel } from './components';
+import { DocumentRegistry, type IDocumentWidget } from './index.js';
+import { createReadonlyLabel } from './components.js';
 
 /**
  * The default implementation of a document model.

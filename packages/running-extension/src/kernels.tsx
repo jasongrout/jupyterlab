@@ -4,8 +4,11 @@
 import { JupyterFrontEnd } from '@jupyterlab/application';
 import { Dialog, showDialog } from '@jupyterlab/apputils';
 import { PathExt } from '@jupyterlab/coreutils';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
-import { IRunningSessionManagers, IRunningSessions } from '@jupyterlab/running';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import {
+  IRunningSessionManagers,
+  type IRunningSessions
+} from '@jupyterlab/running';
 import { Kernel, KernelAPI, KernelSpec, Session } from '@jupyterlab/services';
 import { ITranslator } from '@jupyterlab/translation';
 import {
@@ -13,7 +16,7 @@ import {
   closeIcon,
   CommandToolbarButton,
   consoleIcon,
-  IDisposableMenuItem,
+  type IDisposableMenuItem,
   jupyterIcon,
   kernelIcon,
   LabIcon,
@@ -23,8 +26,8 @@ import {
 import { CommandRegistry } from '@lumino/commands';
 import { Throttler } from '@lumino/polling';
 import { Signal } from '@lumino/signaling';
-import React, { ReactNode } from 'react';
-import { CommandIDs } from '.';
+import React, { type ReactNode } from 'react';
+import { CommandIDs } from './index.js';
 
 const KERNEL_ITEM_CLASS = 'jp-mod-kernel';
 const KERNELSPEC_ITEM_CLASS = 'jp-mod-kernelspec';

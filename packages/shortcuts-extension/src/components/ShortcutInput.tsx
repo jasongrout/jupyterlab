@@ -9,11 +9,11 @@ import { JSONExt } from '@lumino/coreutils';
 import { EN_US } from '@lumino/keyboard';
 import { checkIcon, errorIcon } from '@jupyterlab/ui-components';
 import {
-  IKeybinding,
-  IShortcutRegistry,
-  IShortcutTarget,
-  IShortcutUI
-} from '../types';
+  type IKeybinding,
+  type IShortcutRegistry,
+  type IShortcutTarget,
+  type IShortcutUI
+} from '../types.js';
 
 export const CONFLICT_CONTAINER_CLASS = 'jp-Shortcuts-ConflictContainer';
 

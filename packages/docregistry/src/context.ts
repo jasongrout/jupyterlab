@@ -3,7 +3,7 @@
 
 import {
   Dialog,
-  ISessionContext,
+  type ISessionContext,
   SessionContext,
   SessionContextDialogs,
   showDialog,
@@ -11,7 +11,7 @@ import {
 } from '@jupyterlab/apputils';
 import { PathExt } from '@jupyterlab/coreutils';
 import { RenderMimeRegistry } from '@jupyterlab/rendermime';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import {
   Contents,
   ServerConnection,
@@ -20,15 +20,15 @@ import {
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 
-import { PartialJSONValue, PromiseDelegate } from '@lumino/coreutils';
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type PartialJSONValue, PromiseDelegate } from '@lumino/coreutils';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
 
-import { DocumentRegistry } from './registry';
+import { DocumentRegistry } from './registry.js';
 
 /**
  * An implementation of a document context.

@@ -1,16 +1,19 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ISessionContext, ToolbarRegistry } from '@jupyterlab/apputils';
+import {
+  type ISessionContext,
+  type ToolbarRegistry
+} from '@jupyterlab/apputils';
 import { CodeEditor } from '@jupyterlab/codeeditor';
 import {
-  IChangedArgs as IChangedArgsGeneric,
+  type IChangedArgs as IChangedArgsGeneric,
   PathExt
 } from '@jupyterlab/coreutils';
-import { IObservableList } from '@jupyterlab/observables';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { type IObservableList } from '@jupyterlab/observables';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { Contents, Kernel } from '@jupyterlab/services';
-import { ISharedDocument, ISharedFile } from '@jupyter/ydoc';
+import { type ISharedDocument, type ISharedFile } from '@jupyter/ydoc';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import {
   fileIcon,
@@ -29,11 +32,14 @@ import {
   yamlIcon
 } from '@jupyterlab/ui-components';
 import { ArrayExt, find } from '@lumino/algorithm';
-import { PartialJSONValue, ReadonlyPartialJSONValue } from '@lumino/coreutils';
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
+import {
+  type PartialJSONValue,
+  type ReadonlyPartialJSONValue
+} from '@lumino/coreutils';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { DockLayout, Widget } from '@lumino/widgets';
-import { TextModelFactory } from './default';
+import { TextModelFactory } from './default.js';
 
 /**
  * The document registry.

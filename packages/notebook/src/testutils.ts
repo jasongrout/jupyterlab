@@ -3,7 +3,7 @@
 
 import {
   Clipboard,
-  ISessionContext,
+  type ISessionContext,
   SessionContextDialogs,
   SystemClipboard
 } from '@jupyterlab/apputils';
@@ -17,7 +17,7 @@ import {
   ybinding
 } from '@jupyterlab/codemirror';
 import { Context, DocumentRegistry } from '@jupyterlab/docregistry';
-import { INotebookContent } from '@jupyterlab/nbformat';
+import { type INotebookContent } from '@jupyterlab/nbformat';
 import { RenderMimeRegistry } from '@jupyterlab/rendermime';
 import {
   DEFAULT_OUTPUTS as TEST_OUTPUTS,
@@ -27,12 +27,12 @@ import { ServiceManager } from '@jupyterlab/services';
 import { ServiceManagerMock } from '@jupyterlab/services/lib/testutils';
 import { UUID } from '@lumino/coreutils';
 import * as defaultContent from './default.json';
-import { INotebookModel, NotebookModel } from './model';
-import { NotebookModelFactory } from './modelfactory';
-import { NotebookPanel } from './panel';
-import { Notebook, StaticNotebook } from './widget';
-import { NotebookHistory } from './history';
-import { NotebookWidgetFactory } from './widgetfactory';
+import { type INotebookModel, NotebookModel } from './model.js';
+import { NotebookModelFactory } from './modelfactory.js';
+import { NotebookPanel } from './panel.js';
+import { Notebook, StaticNotebook } from './widget.js';
+import { NotebookHistory } from './history.js';
+import { NotebookWidgetFactory } from './widgetfactory.js';
 
 export const DEFAULT_CONTENT: INotebookContent = defaultContent;
 

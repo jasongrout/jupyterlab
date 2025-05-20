@@ -14,11 +14,11 @@ import { showErrorMessage } from '@jupyterlab/apputils';
 
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 
-import { KernelSourcesFilter } from './filter';
+import { KernelSourcesFilter } from './filter.js';
 
-import { IDebugger } from '../../tokens';
+import { IDebugger } from '../../tokens.js';
 import { UseSignal } from '@jupyterlab/ui-components';
-import { IRenderMime } from '@jupyterlab/rendermime';
+import { type IRenderMime } from '@jupyterlab/rendermime';
 
 /**
  * The class name added to the filterbox node.

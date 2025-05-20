@@ -4,10 +4,10 @@
 import { ServerConnection, ServiceManager } from '@jupyterlab/services';
 import { ITranslator } from '@jupyterlab/translation';
 import { CommandRegistry } from '@lumino/commands';
-import { ReadonlyPartialJSONObject, Token } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
-import { ISignal } from '@lumino/signaling';
-import { JupyterFrontEnd } from './frontend';
+import { type ReadonlyPartialJSONObject, Token } from '@lumino/coreutils';
+import { type IDisposable } from '@lumino/disposable';
+import { type ISignal } from '@lumino/signaling';
+import { JupyterFrontEnd } from './frontend.js';
 
 /**
  * A token for which a plugin can provide to respond to connection failures

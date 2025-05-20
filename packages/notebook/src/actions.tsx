@@ -4,7 +4,7 @@
 import {
   Clipboard,
   Dialog,
-  ISessionContext,
+  type ISessionContext,
   ISessionContextDialogs,
   showDialog,
   SystemClipboard
@@ -22,16 +22,16 @@ import { Notification } from '@jupyterlab/apputils';
 import { signalToPromise } from '@jupyterlab/coreutils';
 import * as nbformat from '@jupyterlab/nbformat';
 import { KernelMessage } from '@jupyterlab/services';
-import { ISharedAttachmentsCell } from '@jupyter/ydoc';
+import { type ISharedAttachmentsCell } from '@jupyter/ydoc';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { every, findIndex } from '@lumino/algorithm';
-import { JSONExt, JSONObject } from '@lumino/coreutils';
-import { ISignal, Signal } from '@lumino/signaling';
+import { JSONExt, type JSONObject } from '@lumino/coreutils';
+import { type ISignal, Signal } from '@lumino/signaling';
 import * as React from 'react';
-import { runCell as defaultRunCell } from './cellexecutor';
-import { Notebook, StaticNotebook } from './widget';
-import { NotebookWindowedLayout } from './windowing';
-import { INotebookCellExecutor } from './tokens';
+import { runCell as defaultRunCell } from './cellexecutor.js';
+import { Notebook, StaticNotebook } from './widget.js';
+import { NotebookWindowedLayout } from './windowing.js';
+import { INotebookCellExecutor } from './tokens.js';
 
 /**
  * The mimetype used for Jupyter cell data.

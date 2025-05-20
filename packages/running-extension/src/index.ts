@@ -9,7 +9,7 @@ import {
   ILabShell,
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { Dialog, ICommandPalette } from '@jupyterlab/apputils';
 import {
@@ -27,9 +27,9 @@ import {
   launcherIcon,
   runningIcon
 } from '@jupyterlab/ui-components';
-import { addKernelRunningSessionManager } from './kernels';
-import { addOpenTabsSessionManager } from './opentabs';
-import { addRecentlyClosedSessionManager } from './recents';
+import { addKernelRunningSessionManager } from './kernels.js';
+import { addOpenTabsSessionManager } from './opentabs.js';
+import { addRecentlyClosedSessionManager } from './recents.js';
 
 /**
  * The command IDs used by the running plugin.

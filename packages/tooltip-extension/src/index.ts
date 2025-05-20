@@ -7,7 +7,7 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { CodeEditor } from '@jupyterlab/codeeditor';
 import { IConsoleTracker } from '@jupyterlab/console';
@@ -19,7 +19,7 @@ import { Kernel, KernelMessage, Session } from '@jupyterlab/services';
 import { ITooltipManager, Tooltip } from '@jupyterlab/tooltip';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { find } from '@lumino/algorithm';
-import { JSONObject } from '@lumino/coreutils';
+import { type JSONObject } from '@lumino/coreutils';
 import { Widget } from '@lumino/widgets';
 
 /**

@@ -8,16 +8,16 @@
  */
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   IWorkspaceCommands,
   IWorkspacesModel,
   WorkspacesModel
 } from '@jupyterlab/workspaces';
-import { commandsPlugin } from './commands';
-import { workspacesSidebar } from './sidebar';
-import { WorkspaceSelectorWidget } from './top_indicator';
+import { commandsPlugin } from './commands.js';
+import { workspacesSidebar } from './sidebar.js';
+import { WorkspaceSelectorWidget } from './top_indicator.js';
 import { IToolbarWidgetRegistry, IWindowResolver } from '@jupyterlab/apputils';
 import { ITranslator } from '@jupyterlab/translation';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';

@@ -8,15 +8,15 @@ import { Dialog, showDialog } from '@jupyterlab/apputils';
 import { URLExt } from '@jupyterlab/coreutils';
 import { ServerConnection } from '@jupyterlab/services';
 import { VDomModel } from '@jupyterlab/ui-components';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { PromiseDelegate } from '@lumino/coreutils';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 
-import { PluginInUseMessage, PluginRequiredMessage } from './dialogs';
+import { PluginInUseMessage, PluginRequiredMessage } from './dialogs.js';
 
 /**
  * The server API path for querying/modifying available plugins.

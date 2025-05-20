@@ -3,20 +3,20 @@
  * Distributed under the terms of the Modified BSD License.
  */
 
-import { TranslationBundle } from '@jupyterlab/translation';
+import { type TranslationBundle } from '@jupyterlab/translation';
 import { Platform } from '@lumino/domutils';
 import * as React from 'react';
 import {
   CONFLICT_CONTAINER_CLASS,
-  IConflicts,
+  type IConflicts,
   ShortcutInput
-} from './ShortcutInput';
+} from './ShortcutInput.js';
 import {
-  IKeybinding,
-  IShortcutRegistry,
-  IShortcutTarget,
-  IShortcutUI
-} from '../types';
+  type IKeybinding,
+  type IShortcutRegistry,
+  type IShortcutTarget,
+  type IShortcutUI
+} from '../types.js';
 
 /** Props for ShortcutItem component */
 export interface IShortcutItemProps {

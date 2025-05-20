@@ -11,7 +11,7 @@ import {
   IRouter,
   ITreePathUpdater,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin,
+  type JupyterFrontEndPlugin,
   JupyterLab
 } from '@jupyterlab/application';
 import {
@@ -51,7 +51,7 @@ import {
   fileIcon,
   filterIcon,
   folderIcon,
-  IDisposableMenuItem,
+  type IDisposableMenuItem,
   linkIcon,
   markdownIcon,
   newFolderIcon,

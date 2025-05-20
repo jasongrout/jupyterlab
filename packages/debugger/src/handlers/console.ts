@@ -5,15 +5,15 @@ import { CodeConsole, ConsolePanel } from '@jupyterlab/console';
 
 import { Cell, CodeCell } from '@jupyterlab/cells';
 
-import { IObservableMap, ObservableMap } from '@jupyterlab/observables';
+import { type IObservableMap, ObservableMap } from '@jupyterlab/observables';
 
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 
 import { Signal } from '@lumino/signaling';
 
-import { EditorHandler } from '../handlers/editor';
+import { EditorHandler } from '../handlers/editor.js';
 
-import { IDebugger } from '../tokens';
+import { IDebugger } from '../tokens.js';
 
 /**
  * A handler for consoles.

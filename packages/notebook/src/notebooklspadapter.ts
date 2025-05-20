@@ -13,14 +13,14 @@ import {
   WidgetLSPAdapter
 } from '@jupyterlab/lsp';
 import * as nbformat from '@jupyterlab/nbformat';
-import { IObservableList } from '@jupyterlab/observables';
+import { type IObservableList } from '@jupyterlab/observables';
 import { Session } from '@jupyterlab/services';
 import { PromiseDelegate } from '@lumino/coreutils';
 import { Signal } from '@lumino/signaling';
 
-import { NotebookPanel } from './panel';
-import { Notebook } from './widget';
-import { CellList } from './celllist';
+import { NotebookPanel } from './panel.js';
+import { Notebook } from './widget.js';
+import { CellList } from './celllist.js';
 
 type ILanguageInfoMetadata = nbformat.ILanguageInfoMetadata;
 

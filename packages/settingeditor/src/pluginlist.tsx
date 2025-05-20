@@ -11,17 +11,17 @@ import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import {
   classes,
   FilterBox,
-  IScore,
+  type IScore,
   LabIcon,
   settingsIcon,
   updateFilterFunction
 } from '@jupyterlab/ui-components';
 import { StringExt } from '@lumino/algorithm';
-import { PartialJSONObject, PromiseDelegate } from '@lumino/coreutils';
+import { type PartialJSONObject, PromiseDelegate } from '@lumino/coreutils';
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import type { SettingsEditor } from './settingseditor';
+import type { SettingsEditor } from './settingseditor.js';
 
 /**
  * The JupyterLab plugin schema key for the setting editor

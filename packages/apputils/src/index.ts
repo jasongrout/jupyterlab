@@ -6,7 +6,7 @@
  */
 import { Toolbar as UIToolbar } from '@jupyterlab/ui-components';
 import { Widget } from '@lumino/widgets';
-import { Toolbar as ApputilsToolbar } from './toolbar';
+import { Toolbar as ApputilsToolbar } from './toolbar/index.js';
 
 /**
  * @deprecated since v4
@@ -19,8 +19,8 @@ export {
   CommandToolbarButton,
   CommandToolbarButtonComponent,
   IFrame,
-  IUseSignalProps,
-  IUseSignalState,
+  type IUseSignalProps,
+  type IUseSignalState,
   HoverBox,
   ReactWidget,
   Spinner,
@@ -32,32 +32,32 @@ export {
   VDomRenderer
 } from '@jupyterlab/ui-components';
 
-export * from './clipboard';
-export * from './commandlinker';
-export * from './commandpalette';
-export * from './dialog';
-export * from './domutils';
-export * from './inputdialog';
-export * from './kernelstatuses';
-export * from './licenses';
-export * from './mainareawidget';
-export * from './menufactory';
-export * from './notification';
-export * from './printing';
-export * from './runningSessions';
-export * from './sanitizer';
-export * from './semanticCommand';
-export * from './sessioncontext';
-export * from './thememanager';
-export * from './tokens';
+export * from './clipboard.js';
+export * from './commandlinker.js';
+export * from './commandpalette.js';
+export * from './dialog.js';
+export * from './domutils.js';
+export * from './inputdialog.js';
+export * from './kernelstatuses.js';
+export * from './licenses.js';
+export * from './mainareawidget.js';
+export * from './menufactory.js';
+export * from './notification.js';
+export * from './printing.js';
+export * from './runningSessions.js';
+export * from './sanitizer.js';
+export * from './semanticCommand.js';
+export * from './sessioncontext.js';
+export * from './thememanager.js';
+export * from './tokens.js';
 export {
   ToolbarWidgetRegistry,
   createDefaultFactory,
   createToolbarFactory,
   setToolbar
-} from './toolbar';
-export * from './widgettracker';
-export * from './windowresolver';
+} from './toolbar/index.js';
+export * from './widgettracker.js';
+export * from './windowresolver.js';
 
 // Merge Toolbar namespace to preserve API
 /**

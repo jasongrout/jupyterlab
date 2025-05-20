@@ -5,10 +5,10 @@ import { IEditorMimeTypeService } from '@jupyterlab/codeeditor';
 import { ABCWidgetFactory, DocumentRegistry } from '@jupyterlab/docregistry';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { ITranslator } from '@jupyterlab/translation';
-import { INotebookModel } from './model';
-import { NotebookPanel } from './panel';
-import { StaticNotebook } from './widget';
-import { NotebookHistory } from './history';
+import { type INotebookModel } from './model.js';
+import { NotebookPanel } from './panel.js';
+import { StaticNotebook } from './widget.js';
+import { NotebookHistory } from './history.js';
 
 /**
  * A widget factory for notebook panels.

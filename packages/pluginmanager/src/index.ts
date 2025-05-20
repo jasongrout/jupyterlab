@@ -6,6 +6,6 @@
  * @packageDocumentation
  * @module pluginmanager
  */
-export * from './model';
-export * from './widget';
-export * from './tokens';
+export * from './model.js';
+export * from './widget.js';
+export * from './tokens.js';

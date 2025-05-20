@@ -14,9 +14,9 @@ import {
 } from '@jupyterlab/ui-components';
 import { ArrayExt, find, map } from '@lumino/algorithm';
 import { JSONExt, PromiseDelegate, Token } from '@lumino/coreutils';
-import { IMessageHandler, Message, MessageLoop } from '@lumino/messaging';
+import { type IMessageHandler, Message, MessageLoop } from '@lumino/messaging';
 import { Debouncer } from '@lumino/polling';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import {
   AccordionPanel,
   BoxLayout,
@@ -32,8 +32,8 @@ import {
   Title,
   Widget
 } from '@lumino/widgets';
-import { JupyterFrontEnd } from './frontend';
-import { LayoutRestorer } from './layoutrestorer';
+import { JupyterFrontEnd } from './frontend.js';
+import { LayoutRestorer } from './layoutrestorer.js';
 
 /**
  * The class name added to AppShell instances.

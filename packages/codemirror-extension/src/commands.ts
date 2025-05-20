@@ -13,7 +13,7 @@ import { EditorView } from '@codemirror/view';
 import { selectNextOccurrence } from '@codemirror/search';
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 

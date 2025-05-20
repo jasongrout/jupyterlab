@@ -3,7 +3,7 @@
 
 import { CodeEditor } from '@jupyterlab/codeeditor';
 
-import { LanguageIdentifier } from '../lsp';
+import { type LanguageIdentifier } from '../lsp.js';
 
 export interface IExtractedCode {
   /**

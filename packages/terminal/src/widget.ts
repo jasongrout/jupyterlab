@@ -5,7 +5,7 @@ import { Terminal as TerminalNS } from '@jupyterlab/services';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { PromiseDelegate } from '@lumino/coreutils';
 import { Platform } from '@lumino/domutils';
@@ -20,7 +20,7 @@ import type { CanvasAddon } from '@xterm/addon-canvas';
 import type { FitAddon } from '@xterm/addon-fit';
 import type { WebLinksAddon } from '@xterm/addon-web-links';
 import type { WebglAddon } from '@xterm/addon-webgl';
-import { ITerminal } from '.';
+import { ITerminal } from './index.js';
 
 /**
  * The class name added to a terminal widget.

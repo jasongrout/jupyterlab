@@ -8,20 +8,20 @@
 import {
   ILabShell,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { CodeEditor, IPositionModel, LineCol } from '@jupyterlab/codeeditor';
 import { IStatusBar } from '@jupyterlab/statusbar';
 import { ITranslator } from '@jupyterlab/translation';
 import { Widget } from '@lumino/widgets';
-import { commandsPlugin } from './commands';
+import { commandsPlugin } from './commands.js';
 import {
   bindingPlugin,
   extensionPlugin,
   languagePlugin,
   servicesPlugin,
   themePlugin
-} from './services';
+} from './services.js';
 
 /**
  * A plugin providing a line/column status item to the application.

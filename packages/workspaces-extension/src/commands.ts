@@ -4,7 +4,7 @@
 import {
   IRouter,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   Dialog,
@@ -16,7 +16,7 @@ import {
 import { URLExt } from '@jupyterlab/coreutils';
 
 import { FileDialog, IDefaultFileBrowser } from '@jupyterlab/filebrowser';
-import { Contents, Workspace } from '@jupyterlab/services';
+import { Contents, type Workspace } from '@jupyterlab/services';
 import { IStateDB } from '@jupyterlab/statedb';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { ICommandPalette } from '@jupyterlab/apputils';

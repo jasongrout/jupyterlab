@@ -3,7 +3,7 @@
 | Distributed under the terms of the Modified BSD License.
 |----------------------------------------------------------------------------*/
 
-import { Extension } from '@codemirror/state';
+import { type Extension } from '@codemirror/state';
 
 import { EditorView } from '@codemirror/view';
 
@@ -11,9 +11,13 @@ import { ElementExt } from '@lumino/domutils';
 
 import { AttachmentsResolver } from '@jupyterlab/attachments';
 
-import { DOMUtils, ISessionContext } from '@jupyterlab/apputils';
+import { DOMUtils, type ISessionContext } from '@jupyterlab/apputils';
 
-import { ActivityMonitor, IChangedArgs, URLExt } from '@jupyterlab/coreutils';
+import {
+  ActivityMonitor,
+  type IChangedArgs,
+  URLExt
+} from '@jupyterlab/coreutils';
 
 import { CodeEditor, CodeEditorWrapper } from '@jupyterlab/codeeditor';
 
@@ -32,14 +36,14 @@ import {
 
 import {
   imageRendererFactory,
-  IRenderMime,
+  type IRenderMime,
   IRenderMimeRegistry,
   MimeModel
 } from '@jupyterlab/rendermime';
 
 import { Kernel, KernelMessage } from '@jupyterlab/services';
 
-import { IMapChange } from '@jupyter/ydoc';
+import { type IMapChange } from '@jupyter/ydoc';
 
 import { TableOfContentsUtils } from '@jupyterlab/toc';
 
@@ -47,7 +51,7 @@ import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 
 import { addIcon, collapseIcon, expandIcon } from '@jupyterlab/ui-components';
 
-import { JSONObject, PromiseDelegate, UUID } from '@lumino/coreutils';
+import { type JSONObject, PromiseDelegate, UUID } from '@lumino/coreutils';
 
 import { some } from '@lumino/algorithm';
 
@@ -57,33 +61,33 @@ import { Message, MessageLoop } from '@lumino/messaging';
 
 import { Debouncer } from '@lumino/polling';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 import { Panel, PanelLayout, Widget } from '@lumino/widgets';
 
-import { InputCollapser, OutputCollapser } from './collapser';
+import { InputCollapser, OutputCollapser } from './collapser.js';
 
 import {
   CellFooter,
   CellHeader,
-  ICellFooter,
-  ICellHeader
-} from './headerfooter';
+  type ICellFooter,
+  type ICellHeader
+} from './headerfooter.js';
 
-import { IInputPrompt, InputArea, InputPrompt } from './inputarea';
+import { type IInputPrompt, InputArea, InputPrompt } from './inputarea.js';
 
 import {
   CellModel,
-  IAttachmentsCellModel,
-  ICellModel,
-  ICodeCellModel,
-  IMarkdownCellModel,
-  IRawCellModel
-} from './model';
+  type IAttachmentsCellModel,
+  type ICellModel,
+  type ICodeCellModel,
+  type IMarkdownCellModel,
+  type IRawCellModel
+} from './model.js';
 
-import { InputPlaceholder, OutputPlaceholder } from './placeholder';
+import { InputPlaceholder, OutputPlaceholder } from './placeholder.js';
 
-import { ResizeHandle } from './resizeHandle';
+import { ResizeHandle } from './resizeHandle.js';
 
 /**
  * The CSS class added to cell widgets.

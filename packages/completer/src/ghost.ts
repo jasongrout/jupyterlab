@@ -3,7 +3,7 @@
 
 import {
   Decoration,
-  DecorationSet,
+  type DecorationSet,
   EditorView,
   WidgetType
 } from '@codemirror/view';

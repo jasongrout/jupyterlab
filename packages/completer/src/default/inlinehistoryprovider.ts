@@ -4,14 +4,14 @@ import type {
   IInlineCompletionContext,
   IInlineCompletionProvider,
   InlineCompletionTriggerKind
-} from '../tokens';
-import type { CompletionHandler } from '../handler';
+} from '../tokens.js';
+import type { CompletionHandler } from '../handler.js';
 import type { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { KernelMessage } from '@jupyterlab/services';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { historyIcon, LabIcon } from '@jupyterlab/ui-components';
 

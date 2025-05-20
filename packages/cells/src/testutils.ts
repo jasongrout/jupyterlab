@@ -7,8 +7,8 @@ import {
   CodeMirrorMimeTypeService,
   EditorLanguageRegistry
 } from '@jupyterlab/codemirror';
-import { CodeCellModel } from './model';
-import { Cell } from './widget';
+import { CodeCellModel } from './model.js';
+import { Cell } from './widget.js';
 
 /**
  * The default notebook content.

@@ -3,18 +3,18 @@
 
 import * as nbformat from '@jupyterlab/nbformat';
 import {
-  IObservableMap,
-  IObservableValue,
+  type IObservableMap,
+  type IObservableValue,
   ObservableMap
 } from '@jupyterlab/observables';
 import {
   AttachmentModel,
-  IAttachmentModel,
+  type IAttachmentModel,
   imageRendererFactory
 } from '@jupyterlab/rendermime';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
-import { IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 /**
  * The model for attachments.

@@ -5,7 +5,7 @@
 import {
   createDefaultFactory,
   setToolbar,
-  ToolbarRegistry
+  type ToolbarRegistry
 } from '@jupyterlab/apputils';
 import {
   Cell,
@@ -16,14 +16,14 @@ import {
 } from '@jupyterlab/cells';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
 import { Notebook, NotebookPanel } from '@jupyterlab/notebook';
-import { IObservableList, ObservableList } from '@jupyterlab/observables';
+import { type IObservableList, ObservableList } from '@jupyterlab/observables';
 import { ReactWidget, Toolbar } from '@jupyterlab/ui-components';
 import { some } from '@lumino/algorithm';
 import { CommandRegistry } from '@lumino/commands';
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 import { Signal } from '@lumino/signaling';
 import { PanelLayout, Widget } from '@lumino/widgets';
-import { IMapChange } from '@jupyter/ydoc';
+import { type IMapChange } from '@jupyter/ydoc';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 
 /*

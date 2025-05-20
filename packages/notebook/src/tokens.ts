@@ -11,12 +11,12 @@ import type { ITranslator } from '@jupyterlab/translation';
 import { Token } from '@lumino/coreutils';
 import type { ISignal } from '@lumino/signaling';
 import type { Widget } from '@lumino/widgets';
-import type { KernelError } from './actions';
-import type { INotebookModel } from './model';
-import type { NotebookTools } from './notebooktools';
-import type { NotebookPanel } from './panel';
-import type { StaticNotebook } from './widget';
-import type { NotebookWidgetFactory } from './widgetfactory';
+import type { KernelError } from './actions.js';
+import type { INotebookModel } from './model.js';
+import type { NotebookTools } from './notebooktools.js';
+import type { NotebookPanel } from './panel.js';
+import type { StaticNotebook } from './widget.js';
+import type { NotebookWidgetFactory } from './widgetfactory.js';
 
 /**
  * The notebook widget factory token.

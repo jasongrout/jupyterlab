@@ -1,26 +1,26 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
-import { ProviderReconciliator } from './reconciliator';
-import { CONTEXT_PROVIDER_ID } from './default/contextprovider';
-import { KERNEL_PROVIDER_ID } from './default/kernelprovider';
-import { CompletionHandler } from './handler';
-import { CompleterModel } from './model';
-import { InlineCompleter } from './inline';
+import { ProviderReconciliator } from './reconciliator.js';
+import { CONTEXT_PROVIDER_ID } from './default/contextprovider.js';
+import { KERNEL_PROVIDER_ID } from './default/kernelprovider.js';
+import { CompletionHandler } from './handler.js';
+import { CompleterModel } from './model.js';
+import { InlineCompleter } from './inline.js';
 import {
-  ICompleterSelection,
-  ICompletionContext,
-  ICompletionProvider,
+  type ICompleterSelection,
+  type ICompletionContext,
+  type ICompletionProvider,
   ICompletionProviderManager,
-  IInlineCompleterActions,
+  type IInlineCompleterActions,
   IInlineCompleterFactory,
-  IInlineCompleterSettings,
-  IInlineCompletionProvider,
-  IInlineCompletionProviderInfo
-} from './tokens';
-import { Completer } from './widget';
+  type IInlineCompleterSettings,
+  type IInlineCompletionProvider,
+  type IInlineCompletionProviderInfo
+} from './tokens.js';
+import { Completer } from './widget.js';
 
 /**
  * A manager for completion providers.

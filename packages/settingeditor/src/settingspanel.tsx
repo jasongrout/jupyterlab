@@ -8,13 +8,13 @@ import React, { useEffect, useState } from 'react';
 import { Settings } from '@jupyterlab/settingregistry';
 import { ITranslator } from '@jupyterlab/translation';
 import { IFormRendererRegistry } from '@jupyterlab/ui-components';
-import { ISignal } from '@lumino/signaling';
-import { PluginList } from './pluginlist';
-import { SettingsFormEditor } from './SettingsFormEditor';
-import { SettingsEditorPlaceholder } from './InstructionsPlaceholder';
+import { type ISignal } from '@lumino/signaling';
+import { PluginList } from './pluginlist.js';
+import { SettingsFormEditor } from './SettingsFormEditor.js';
+import { SettingsEditorPlaceholder } from './InstructionsPlaceholder.js';
 
 import type { Field } from '@rjsf/utils';
-import type { SettingsEditor } from './settingseditor';
+import type { SettingsEditor } from './settingseditor.js';
 export interface ISettingsPanelProps {
   /**
    * List of Settings objects that provide schema and values

@@ -5,7 +5,7 @@
  * @module mermaid
  */
 
-export * from './manager';
-export * from './markdown';
-export * from './mime';
-export * from './tokens';
+export * from './manager.js';
+export * from './markdown.js';
+export * from './mime.js';
+export * from './tokens.js';

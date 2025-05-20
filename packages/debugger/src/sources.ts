@@ -8,7 +8,7 @@ import { IConsoleTracker } from '@jupyterlab/console';
 import { IEditorTracker } from '@jupyterlab/fileeditor';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { textEditorIcon } from '@jupyterlab/ui-components';
-import { IDebugger } from './tokens';
+import { IDebugger } from './tokens.js';
 
 /**
  * The source and editor manager for a debugger instance.

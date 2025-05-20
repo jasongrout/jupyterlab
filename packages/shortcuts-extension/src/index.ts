@@ -7,26 +7,30 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { ISettingRegistry, SettingRegistry } from '@jupyterlab/settingregistry';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import {
-  IFormRenderer,
+  type IFormRenderer,
   IFormRendererRegistry
 } from '@jupyterlab/ui-components';
 import { CommandRegistry } from '@lumino/commands';
 import {
   JSONExt,
-  PartialJSONValue,
-  ReadonlyPartialJSONObject,
-  ReadonlyPartialJSONValue
+  type PartialJSONValue,
+  type ReadonlyPartialJSONObject,
+  type ReadonlyPartialJSONValue
 } from '@lumino/coreutils';
-import { DisposableSet, IDisposable } from '@lumino/disposable';
+import { DisposableSet, type IDisposable } from '@lumino/disposable';
 import { Platform } from '@lumino/domutils';
-import { CommandIDs, IShortcutsSettingsLayout, IShortcutUI } from './types';
-import { renderShortCut } from './renderer';
-import { ISignal, Signal } from '@lumino/signaling';
+import {
+  CommandIDs,
+  type IShortcutsSettingsLayout,
+  type IShortcutUI
+} from './types.js';
+import { renderShortCut } from './renderer.js';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 const SHORTCUT_PLUGIN_ID = '@jupyterlab/shortcuts-extension:shortcuts';
 

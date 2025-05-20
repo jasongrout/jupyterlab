@@ -6,7 +6,7 @@ import {
   LanguageSupport,
   LRLanguage,
   StreamLanguage,
-  StreamParser
+  type StreamParser
 } from '@codemirror/language';
 import { IEditorMimeTypeService } from '@jupyterlab/codeeditor';
 import { PathExt } from '@jupyterlab/coreutils';
@@ -14,9 +14,9 @@ import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { buildParser } from '@lezer/generator';
 import { highlightTree } from '@lezer/highlight';
 
-import { jupyterHighlightStyle } from './theme';
-import { IEditorLanguage, IEditorLanguageRegistry } from './token';
-import { pythonBuiltin } from './pythonBuiltin';
+import { jupyterHighlightStyle } from './theme.js';
+import { type IEditorLanguage, IEditorLanguageRegistry } from './token.js';
+import { pythonBuiltin } from './pythonBuiltin.js';
 
 /**
  * CodeMirror language registry

@@ -3,7 +3,7 @@
  * Distributed under the terms of the Modified BSD License.
  */
 
-export * from './customStyle';
-export * from './ipython-md';
-export * from './rulers';
-export * from './ybinding';
+export * from './customStyle.js';
+export * from './ipython-md.js';
+export * from './rulers.js';
+export * from './ybinding.js';

@@ -5,7 +5,7 @@ import { Popup, showPopup, TextItem } from '@jupyterlab/statusbar';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   classes,
@@ -15,7 +15,7 @@ import {
   VDomRenderer
 } from '@jupyterlab/ui-components';
 import React from 'react';
-import { CodeEditor } from './editor';
+import { CodeEditor } from './editor.js';
 import { DOMUtils } from '@jupyterlab/apputils';
 
 /**

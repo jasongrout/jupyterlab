@@ -10,22 +10,22 @@ import { BaseSettings } from '@jupyterlab/settingregistry';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   JSONExt,
-  JSONObject,
-  JSONValue,
-  PartialJSONObject,
-  PartialJSONValue,
-  ReadonlyPartialJSONObject,
-  ReadonlyPartialJSONValue
+  type JSONObject,
+  type JSONValue,
+  type PartialJSONObject,
+  type PartialJSONValue,
+  type ReadonlyPartialJSONObject,
+  type ReadonlyPartialJSONValue
 } from '@lumino/coreutils';
 import { Message } from '@lumino/messaging';
 import { SingletonLayout, Widget } from '@lumino/widgets';
 
-import { MetadataForm } from './token';
-import { FormWidget } from './form';
+import { type MetadataForm } from './token.js';
+import { FormWidget } from './form.js';
 
 /**
  * A class that create a metadata form widget

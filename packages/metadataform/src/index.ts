@@ -5,7 +5,7 @@
  * @module metadataform
  */
 
-export * from './form';
-export * from './metadataform';
-export * from './metadataformProvider';
-export * from './token';
+export * from './form.js';
+export * from './metadataform.js';
+export * from './metadataformProvider.js';
+export * from './token.js';

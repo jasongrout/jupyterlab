@@ -5,7 +5,7 @@ import { showErrorMessage } from '@jupyterlab/apputils';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   classes,
@@ -15,11 +15,11 @@ import {
 } from '@jupyterlab/ui-components';
 import { ArrayExt, map } from '@lumino/algorithm';
 import { CommandRegistry } from '@lumino/commands';
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
 import { AttachedProperty } from '@lumino/properties';
 import { Widget } from '@lumino/widgets';
 import * as React from 'react';
-import { ILauncher } from './tokens';
+import { ILauncher } from './tokens.js';
 
 /**
  * The class name added to Launcher instances.

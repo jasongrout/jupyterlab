@@ -5,7 +5,7 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { PageConfig } from '@jupyterlab/coreutils';
 import {
@@ -13,7 +13,7 @@ import {
   ISettingRegistry,
   SettingRegistry
 } from '@jupyterlab/settingregistry';
-import { SettingConnector } from './settingconnector';
+import { SettingConnector } from './settingconnector.js';
 
 /**
  * Provides the settings connector as a separate plugin to allow for alternative

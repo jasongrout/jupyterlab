@@ -10,7 +10,7 @@ import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { VDomModel } from '@jupyterlab/ui-components';
 import { Debouncer } from '@lumino/polling';
 import * as semver from 'semver';
-import { reportInstallError } from './dialog';
+import { reportInstallError } from './dialog.js';
 
 /**
  * Information about an extension.

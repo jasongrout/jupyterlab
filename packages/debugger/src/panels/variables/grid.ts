@@ -11,9 +11,9 @@ import { Message } from '@lumino/messaging';
 
 import { Panel } from '@lumino/widgets';
 
-import { IDebugger } from '../../tokens';
+import { IDebugger } from '../../tokens.js';
 
-import type * as GridPanelModule from './gridpanel';
+import type * as GridPanelModule from './gridpanel.js';
 
 /**
  * A data grid that displays variables in a debugger session.

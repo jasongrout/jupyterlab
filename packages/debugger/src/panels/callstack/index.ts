@@ -8,8 +8,8 @@ import {
 } from '@jupyterlab/ui-components';
 import { CommandRegistry } from '@lumino/commands';
 import { Panel } from '@lumino/widgets';
-import { IDebugger } from '../../tokens';
-import { CallstackBody } from './body';
+import { IDebugger } from '../../tokens.js';
+import { CallstackBody } from './body.js';
 
 /**
  * A Panel to show a callstack.

@@ -2,21 +2,21 @@
 // Distributed under the terms of the Modified BSD License.
 
 import * as nbformat from '@jupyterlab/nbformat';
-import { IOutputAreaModel, OutputAreaModel } from '@jupyterlab/outputarea';
+import { type IOutputAreaModel, OutputAreaModel } from '@jupyterlab/outputarea';
 import {
-  IOutputModel,
+  type IOutputModel,
   IRenderMimeRegistry,
   OutputModel
 } from '@jupyterlab/rendermime';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import {
-  IContentChange,
-  ILogger,
-  ILoggerOutputAreaModel,
-  ILogPayload,
-  IStateChange,
-  LogLevel
-} from './tokens';
+  type IContentChange,
+  type ILogger,
+  type ILoggerOutputAreaModel,
+  type ILogPayload,
+  type IStateChange,
+  type LogLevel
+} from './tokens.js';
 
 /**
  * All severity levels, including an internal one for metadata.

@@ -9,18 +9,18 @@ import {
   DocumentWidget
 } from '@jupyterlab/docregistry';
 import {
-  IRenderMime,
+  type IRenderMime,
   IRenderMimeRegistry,
   MimeModel
 } from '@jupyterlab/rendermime';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
-import { JSONObject, PromiseDelegate } from '@lumino/coreutils';
+import { type JSONObject, PromiseDelegate } from '@lumino/coreutils';
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { StackedLayout, Widget } from '@lumino/widgets';
 
 /**

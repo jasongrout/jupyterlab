@@ -4,16 +4,16 @@
 import { Cell, ICellModel } from '@jupyterlab/cells';
 import { CodeEditor, JSONEditor } from '@jupyterlab/codeeditor';
 import { ObservableJSON } from '@jupyterlab/observables';
-import { IMapChange } from '@jupyter/ydoc';
+import { type IMapChange } from '@jupyter/ydoc';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { Collapser } from '@jupyterlab/ui-components';
 import { ArrayExt } from '@lumino/algorithm';
-import { ReadonlyPartialJSONValue } from '@lumino/coreutils';
+import { type ReadonlyPartialJSONValue } from '@lumino/coreutils';
 import { ConflatableMessage, Message, MessageLoop } from '@lumino/messaging';
 import { PanelLayout, Widget } from '@lumino/widgets';
-import { INotebookModel } from './model';
-import { NotebookPanel } from './panel';
-import { INotebookTools, INotebookTracker } from './tokens';
+import { type INotebookModel } from './model.js';
+import { NotebookPanel } from './panel.js';
+import { INotebookTools, INotebookTracker } from './tokens.js';
 
 class RankedPanel<T extends Widget = Widget> extends Widget {
   constructor() {

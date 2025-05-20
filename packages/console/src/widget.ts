@@ -1,8 +1,8 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { createStandaloneCell, ISharedRawCell } from '@jupyter/ydoc';
-import { DOMUtils, ISessionContext } from '@jupyterlab/apputils';
+import { createStandaloneCell, type ISharedRawCell } from '@jupyter/ydoc';
+import { DOMUtils, type ISessionContext } from '@jupyterlab/apputils';
 import {
   AttachmentsCellModel,
   Cell,
@@ -17,18 +17,18 @@ import {
 } from '@jupyterlab/cells';
 import { IEditorMimeTypeService } from '@jupyterlab/codeeditor';
 import * as nbformat from '@jupyterlab/nbformat';
-import { IObservableList, ObservableList } from '@jupyterlab/observables';
+import { type IObservableList, ObservableList } from '@jupyterlab/observables';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { KernelMessage } from '@jupyterlab/services';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
-import { JSONObject, MimeData } from '@lumino/coreutils';
+import { type JSONObject, MimeData } from '@lumino/coreutils';
 import { Drag } from '@lumino/dragdrop';
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Panel, PanelLayout, SplitPanel, Widget } from '@lumino/widgets';
-import { runCell } from './cellexecutor';
-import { ConsoleHistory, IConsoleHistory } from './history';
-import type { IConsoleCellExecutor } from './tokens';
+import { runCell } from './cellexecutor.js';
+import { ConsoleHistory, type IConsoleHistory } from './history.js';
+import type { IConsoleCellExecutor } from './tokens.js';
 
 /**
  * The data attribute added to a widget that has an active kernel.

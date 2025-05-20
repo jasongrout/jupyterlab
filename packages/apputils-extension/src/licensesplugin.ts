@@ -6,7 +6,7 @@
 import {
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   ICommandPalette,
@@ -24,7 +24,7 @@ import {
   refreshIcon,
   Toolbar
 } from '@jupyterlab/ui-components';
-import { ReadonlyJSONObject } from '@lumino/coreutils';
+import { type ReadonlyJSONObject } from '@lumino/coreutils';
 
 /**
  * The command IDs used by the licenses plugin.

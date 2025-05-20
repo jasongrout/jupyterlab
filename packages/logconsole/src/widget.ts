@@ -1,28 +1,28 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IChangedArgs } from '@jupyterlab/coreutils';
+import { type IChangedArgs } from '@jupyterlab/coreutils';
 import * as nbformat from '@jupyterlab/nbformat';
-import { IOutputPrompt, OutputArea } from '@jupyterlab/outputarea';
+import { type IOutputPrompt, OutputArea } from '@jupyterlab/outputarea';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { Kernel, KernelMessage } from '@jupyterlab/services';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Panel, PanelLayout, StackedPanel, Widget } from '@lumino/widgets';
-import { LoggerOutputAreaModel, LogOutputModel } from './logger';
+import { LoggerOutputAreaModel, LogOutputModel } from './logger.js';
 import {
-  IContentChange,
-  ILogger,
+  type IContentChange,
+  type ILogger,
   ILoggerRegistry,
-  ILoggerRegistryChange,
-  IStateChange,
-  LogLevel
-} from './tokens';
+  type ILoggerRegistryChange,
+  type IStateChange,
+  type LogLevel
+} from './tokens.js';
 
 function toTitleCase(value: string) {
   return value.length === 0 ? value : value[0].toUpperCase() + value.slice(1);

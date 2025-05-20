@@ -15,17 +15,17 @@ import { ArrayExt } from '@lumino/algorithm';
 
 import { CommandRegistry } from '@lumino/commands';
 
-import { DebugProtocol } from '@vscode/debugprotocol';
+import { type DebugProtocol } from '@vscode/debugprotocol';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { convertType } from '.';
 
-import { Debugger } from '../../debugger';
+import { Debugger } from '../../debugger.js';
 
-import { IDebugger } from '../../tokens';
+import { IDebugger } from '../../tokens.js';
 
-import { VariablesModel } from './model';
+import { VariablesModel } from './model.js';
 
 /**
  * The body for tree of variables.

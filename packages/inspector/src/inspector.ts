@@ -5,10 +5,10 @@ import { Printing } from '@jupyterlab/apputils';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { Panel, PanelLayout, Widget } from '@lumino/widgets';
-import { IInspector } from './tokens';
+import { IInspector } from './tokens.js';
 
 /**
  * The class name added to inspector panels.

@@ -6,20 +6,20 @@ import { KernelSpec, Session } from '@jupyterlab/services';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { DebugProtocol } from '@vscode/debugprotocol';
+import { type DebugProtocol } from '@vscode/debugprotocol';
 
-import { Debugger } from './debugger';
+import { Debugger } from './debugger.js';
 
-import { VariablesModel } from './panels/variables/model';
+import { VariablesModel } from './panels/variables/model.js';
 
-import { IDebugger } from './tokens';
+import { IDebugger } from './tokens.js';
 
 /**
  * A concrete implementation of the IDebugger interface.

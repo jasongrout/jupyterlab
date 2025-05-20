@@ -12,9 +12,9 @@ import {
 import { CommandRegistry } from '@lumino/commands';
 import { Signal } from '@lumino/signaling';
 import { Panel } from '@lumino/widgets';
-import { IDebugger } from '../../tokens';
-import { BreakpointsBody } from './body';
-import { PauseOnExceptionsWidget } from './pauseonexceptions';
+import { IDebugger } from '../../tokens.js';
+import { BreakpointsBody } from './body.js';
+import { PauseOnExceptionsWidget } from './pauseonexceptions.js';
 
 /**
  * A Panel to show a list of breakpoints.

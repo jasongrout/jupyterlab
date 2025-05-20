@@ -1,15 +1,15 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
 import {
-  IFilter,
-  IFilters,
-  IReplaceOptions,
-  ISearchMatch,
-  ISearchProvider
-} from './tokens';
+  type IFilter,
+  type IFilters,
+  type IReplaceOptions,
+  type ISearchMatch,
+  type ISearchProvider
+} from './tokens.js';
 
 /**
  * Abstract class implementing the search provider interface.

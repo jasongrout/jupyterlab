@@ -6,8 +6,8 @@
 import { ITranslator } from '@jupyterlab/translation';
 import { VDomRenderer } from '@jupyterlab/ui-components';
 import { CommandRegistry } from '@lumino/commands';
-import { ReadonlyJSONObject, Token } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
+import { type ReadonlyJSONObject, Token } from '@lumino/coreutils';
+import { type IDisposable } from '@lumino/disposable';
 import { Widget } from '@lumino/widgets';
 
 /**

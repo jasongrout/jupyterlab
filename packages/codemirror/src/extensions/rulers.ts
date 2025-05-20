@@ -5,7 +5,7 @@
 
 // Inspired by https://discuss.codemirror.net/t/how-to-implement-ruler/4616/
 
-import { Extension, Facet } from '@codemirror/state';
+import { type Extension, Facet } from '@codemirror/state';
 import { EditorView, ViewPlugin, ViewUpdate } from '@codemirror/view';
 import { JSONExt } from '@lumino/coreutils';
 

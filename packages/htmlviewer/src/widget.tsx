@@ -8,7 +8,7 @@ import {
   ABCWidgetFactory,
   DocumentRegistry,
   DocumentWidget,
-  IDocumentWidget
+  type IDocumentWidget
 } from '@jupyterlab/docregistry';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import {
@@ -19,7 +19,7 @@ import {
   ToolbarButtonComponent,
   UseSignal
 } from '@jupyterlab/ui-components';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
 import * as React from 'react';
 

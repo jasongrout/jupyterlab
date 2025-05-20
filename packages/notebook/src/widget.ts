@@ -13,9 +13,9 @@ import {
   RawCell
 } from '@jupyterlab/cells';
 import { CodeEditor, IEditorMimeTypeService } from '@jupyterlab/codeeditor';
-import { IChangedArgs } from '@jupyterlab/coreutils';
+import { type IChangedArgs } from '@jupyterlab/coreutils';
 import * as nbformat from '@jupyterlab/nbformat';
-import { IObservableList } from '@jupyterlab/observables';
+import { type IObservableList } from '@jupyterlab/observables';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import type { IMapChange } from '@jupyter/ydoc';
 import { TableOfContentsUtils } from '@jupyterlab/toc';
@@ -27,17 +27,17 @@ import { ElementExt } from '@lumino/domutils';
 import { Drag } from '@lumino/dragdrop';
 import { Message } from '@lumino/messaging';
 import { AttachedProperty } from '@lumino/properties';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { h, VirtualDOM } from '@lumino/virtualdom';
 import { PanelLayout, Widget } from '@lumino/widgets';
-import { NotebookActions } from './actions';
-import { CellList } from './celllist';
-import { DROP_SOURCE_CLASS, DROP_TARGET_CLASS } from './constants';
-import { INotebookHistory } from './history';
-import { INotebookModel } from './model';
-import { NotebookViewModel, NotebookWindowedLayout } from './windowing';
-import { NotebookFooter } from './notebookfooter';
-import { CodeCellModel } from '../../cells/src/model';
+import { NotebookActions } from './actions.js';
+import { CellList } from './celllist.js';
+import { DROP_SOURCE_CLASS, DROP_TARGET_CLASS } from './constants.js';
+import { type INotebookHistory } from './history.js';
+import { type INotebookModel } from './model.js';
+import { NotebookViewModel, NotebookWindowedLayout } from './windowing.js';
+import { NotebookFooter } from './notebookfooter.js';
+import { CodeCellModel } from '../../cells/src/model.js';
 
 /**
  * The data attribute added to a widget that has an active kernel.

@@ -20,7 +20,7 @@ import {
   RE_DEFAULT_RENDERER,
   SUMMARY_CLASS,
   WARNING_CLASS
-} from './tokens';
+} from './tokens.js';
 
 /**
  * A mermaid diagram manager with cache.

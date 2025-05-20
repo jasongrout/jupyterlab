@@ -10,14 +10,14 @@ import { IStateDB } from '@jupyterlab/statedb';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { ReactWidget } from '@jupyterlab/ui-components';
 import { CommandRegistry } from '@lumino/commands';
-import { JSONExt, JSONObject, JSONValue } from '@lumino/coreutils';
+import { JSONExt, type JSONObject, type JSONValue } from '@lumino/coreutils';
 import { Message } from '@lumino/messaging';
-import { ISignal } from '@lumino/signaling';
+import { type ISignal } from '@lumino/signaling';
 import { SplitPanel, Widget } from '@lumino/widgets';
 import * as React from 'react';
-import { SettingsEditorPlaceholder } from './InstructionsPlaceholder';
-import { PluginEditor } from './plugineditor';
-import { PluginList } from './pluginlist';
+import { SettingsEditorPlaceholder } from './InstructionsPlaceholder.js';
+import { PluginEditor } from './plugineditor.js';
+import { PluginList } from './pluginlist.js';
 
 /**
  * The ratio panes in the setting editor.

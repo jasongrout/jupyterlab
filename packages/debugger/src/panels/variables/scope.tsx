@@ -6,13 +6,13 @@
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { HTMLSelect, ReactWidget, UseSignal } from '@jupyterlab/ui-components';
 import React, { useState } from 'react';
-import { IDebugger } from '../../tokens';
-import { VariablesBodyGrid } from './grid';
-import { VariablesBodyTree } from './tree';
+import { IDebugger } from '../../tokens.js';
+import { VariablesBodyGrid } from './grid.js';
+import { VariablesBodyTree } from './tree.js';
 
 /**
  * A React component to handle scope changes.

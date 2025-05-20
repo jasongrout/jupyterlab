@@ -9,15 +9,18 @@ import { ILabShell } from '@jupyterlab/application';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { ReactWidget } from '@jupyterlab/ui-components';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { FocusTracker, SingletonLayout, Widget } from '@lumino/widgets';
 import * as React from 'react';
-import { IPropertyInspector, IPropertyInspectorProvider } from './token';
+import {
+  type IPropertyInspector,
+  IPropertyInspectorProvider
+} from './token.js';
 
-export { IPropertyInspector, IPropertyInspectorProvider };
+export { type IPropertyInspector, IPropertyInspectorProvider };
 
 /**
  * The implementation of the PropertyInspector.

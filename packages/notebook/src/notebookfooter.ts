@@ -5,8 +5,8 @@
 
 import { Widget } from '@lumino/widgets';
 import { Message } from '@lumino/messaging';
-import { Notebook } from './widget';
-import { NotebookActions } from './actions';
+import { Notebook } from './widget.js';
+import { NotebookActions } from './actions.js';
 
 const NOTEBOOK_FOOTER_CLASS = 'jp-Notebook-footer';
 

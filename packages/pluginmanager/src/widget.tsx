@@ -4,11 +4,11 @@
  */
 
 import { VDomRenderer } from '@jupyterlab/apputils';
-import { ITranslator, TranslationBundle } from '@jupyterlab/translation';
+import { ITranslator, type TranslationBundle } from '@jupyterlab/translation';
 import { FilterBox, lockIcon, Table } from '@jupyterlab/ui-components';
 import { Panel } from '@lumino/widgets';
 import * as React from 'react';
-import { Action, IEntry, PluginListModel } from './model';
+import { type Action, type IEntry, PluginListModel } from './model.js';
 
 /**
  * A namespace for plugins panel.

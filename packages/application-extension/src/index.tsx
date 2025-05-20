@@ -15,7 +15,7 @@ import {
   ITreePathUpdater,
   JupyterFrontEnd,
   JupyterFrontEndContextMenu,
-  JupyterFrontEndPlugin,
+  type JupyterFrontEndPlugin,
   JupyterLab,
   LabShell,
   LayoutRestorer,
@@ -40,7 +40,7 @@ import { IStatusBar } from '@jupyterlab/statusbar';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   buildIcon,
@@ -53,13 +53,13 @@ import { find, some } from '@lumino/algorithm';
 import {
   JSONExt,
   PromiseDelegate,
-  ReadonlyPartialJSONValue
+  type ReadonlyPartialJSONValue
 } from '@lumino/coreutils';
 import { CommandRegistry } from '@lumino/commands';
 import { DisposableDelegate, DisposableSet } from '@lumino/disposable';
 import { DockLayout, DockPanel, Widget } from '@lumino/widgets';
 import * as React from 'react';
-import { topbar } from './topbar';
+import { topbar } from './topbar.js';
 
 /**
  * Default context menu item rank

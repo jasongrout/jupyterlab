@@ -1,18 +1,18 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IChangedArgs, URLExt } from '@jupyterlab/coreutils';
+import { type IChangedArgs, URLExt } from '@jupyterlab/coreutils';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
-import { Dialog, showDialog } from './dialog';
-import { ISplashScreen, IThemeManager } from './tokens';
+import { Dialog, showDialog } from './dialog.js';
+import { ISplashScreen, IThemeManager } from './tokens.js';
 
 /**
  * The number of milliseconds between theme loading attempts.

@@ -1,20 +1,20 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IWidgetTracker, WidgetTracker } from '@jupyterlab/apputils';
+import { type IWidgetTracker, WidgetTracker } from '@jupyterlab/apputils';
 import {
   DocumentRegistry,
   MimeDocument,
   MimeDocumentFactory
 } from '@jupyterlab/docregistry';
 import { IRenderMimeRegistry } from '@jupyterlab/rendermime';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { ITranslator } from '@jupyterlab/translation';
 import { LabIcon } from '@jupyterlab/ui-components';
 import { Token } from '@lumino/coreutils';
 import { AttachedProperty } from '@lumino/properties';
-import { JupyterFrontEnd, JupyterFrontEndPlugin } from './index';
-import { ILayoutRestorer } from './layoutrestorer';
+import { JupyterFrontEnd, type JupyterFrontEndPlugin } from './index.js';
+import { ILayoutRestorer } from './layoutrestorer.js';
 
 /**
  * A class that tracks mime documents.

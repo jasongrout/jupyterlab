@@ -12,7 +12,7 @@ import {
 import { Message, MessageLoop } from '@lumino/messaging';
 import { Debouncer, Throttler } from '@lumino/polling';
 import { Widget } from '@lumino/widgets';
-import { DROP_SOURCE_CLASS, DROP_TARGET_CLASS } from './constants';
+import { DROP_SOURCE_CLASS, DROP_TARGET_CLASS } from './constants.js';
 
 /**
  * Check whether the element is in a scrolling notebook.

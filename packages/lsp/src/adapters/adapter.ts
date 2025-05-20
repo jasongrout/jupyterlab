@@ -4,28 +4,31 @@
 import mergeWith from 'lodash.mergewith';
 
 import { Dialog, showDialog } from '@jupyterlab/apputils';
-import { DocumentRegistry, IDocumentWidget } from '@jupyterlab/docregistry';
+import {
+  DocumentRegistry,
+  type IDocumentWidget
+} from '@jupyterlab/docregistry';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
-import { JSONObject } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type JSONObject } from '@lumino/coreutils';
+import { type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { ClientCapabilities, LanguageIdentifier } from '../lsp';
-import { IVirtualPosition } from '../positioning';
+import { type ClientCapabilities, type LanguageIdentifier } from '../lsp.js';
+import { type IVirtualPosition } from '../positioning.js';
 import {
-  Document,
-  IDocumentConnectionData,
+  type Document,
+  type IDocumentConnectionData,
   ILSPCodeExtractorsManager,
   ILSPDocumentConnectionManager,
   ILSPFeatureManager,
-  ISocketConnectionOptions
-} from '../tokens';
-import { VirtualDocument } from '../virtual/document';
-import { EditorAdapter } from './editorAdapter';
+  type ISocketConnectionOptions
+} from '../tokens.js';
+import { VirtualDocument } from '../virtual/document.js';
+import { EditorAdapter } from './editorAdapter.js';
 
 type IButton = Dialog.IButton;
 const createButton = Dialog.createButton;

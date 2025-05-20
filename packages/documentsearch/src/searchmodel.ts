@@ -2,16 +2,16 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { VDomModel } from '@jupyterlab/ui-components';
-import { IObservableDisposable } from '@lumino/disposable';
+import { type IObservableDisposable } from '@lumino/disposable';
 import { Debouncer } from '@lumino/polling';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import {
-  IFilter,
-  IFilters,
-  IReplaceOptionsSupport,
-  ISearchProvider,
-  SelectionState
-} from './tokens';
+  type IFilter,
+  type IFilters,
+  type IReplaceOptionsSupport,
+  type ISearchProvider,
+  type SelectionState
+} from './tokens.js';
 
 /**
  * Search in a document model.

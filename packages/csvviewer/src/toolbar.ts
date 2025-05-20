@@ -5,7 +5,7 @@ import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { Styling } from '@jupyterlab/ui-components';
 import { Message } from '@lumino/messaging';
 import { Widget } from '@lumino/widgets';
-import type { CSVViewer } from './widget';
+import type { CSVViewer } from './widget.js';
 
 /**
  * The class name added to a csv toolbar widget.

@@ -11,9 +11,9 @@ import {
 import type { KernelMessage } from '@jupyterlab/services';
 import { nullTranslator } from '@jupyterlab/translation';
 import { findIndex } from '@lumino/algorithm';
-import { KernelError } from './actions';
-import type { INotebookModel } from './model';
-import type { INotebookCellExecutor } from './tokens';
+import { KernelError } from './actions.js';
+import type { INotebookModel } from './model.js';
+import type { INotebookCellExecutor } from './tokens.js';
 
 /**
  * Run a single notebook cell.

@@ -1,7 +1,10 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ISessionContext, translateKernelStatuses } from '@jupyterlab/apputils';
+import {
+  type ISessionContext,
+  translateKernelStatuses
+} from '@jupyterlab/apputils';
 
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import React from 'react';
@@ -15,14 +18,14 @@ import {
   VDomRenderer
 } from '@jupyterlab/ui-components';
 
-import { Notebook } from './widget';
+import { Notebook } from './widget.js';
 import { KernelMessage } from '@jupyterlab/services';
 import { Kernel } from '@jupyterlab/services';
-import { NotebookPanel } from './panel';
+import { NotebookPanel } from './panel.js';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { Widget } from '@lumino/widgets';
-import { JSONObject } from '@lumino/coreutils';
-import { IChangedArgs } from '@jupyterlab/coreutils';
+import { type JSONObject } from '@lumino/coreutils';
+import { type IChangedArgs } from '@jupyterlab/coreutils';
 
 /**
  * A react functional component for rendering execution indicator.

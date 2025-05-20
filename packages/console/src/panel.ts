@@ -2,7 +2,7 @@
 // Distributed under the terms of the Modified BSD License.
 
 import {
-  ISessionContext,
+  type ISessionContext,
   MainAreaWidget,
   SessionContext,
   SessionContextDialogs
@@ -17,11 +17,11 @@ import { ServiceManager } from '@jupyterlab/services';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { consoleIcon } from '@jupyterlab/ui-components';
 import { Token, UUID } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 import { Message } from '@lumino/messaging';
 import { Panel } from '@lumino/widgets';
-import { CodeConsole } from './widget';
-import type { IConsoleCellExecutor } from './tokens';
+import { CodeConsole } from './widget.js';
+import type { IConsoleCellExecutor } from './tokens.js';
 
 /**
  * The class name added to console panels.

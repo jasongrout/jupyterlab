@@ -10,14 +10,14 @@ import {
 import { signalToPromise } from '@jupyterlab/coreutils';
 import {
   GenericSearchProvider,
-  IBaseSearchProvider,
-  IFilters,
-  IReplaceOptions,
-  ISearchMatch
+  type IBaseSearchProvider,
+  type IFilters,
+  type IReplaceOptions,
+  type ISearchMatch
 } from '@jupyterlab/documentsearch';
 import { OutputArea } from '@jupyterlab/outputarea';
-import { ICellModel } from './model';
-import { Cell, CodeCell, MarkdownCell } from './widget';
+import { type ICellModel } from './model.js';
+import { Cell, CodeCell, MarkdownCell } from './widget.js';
 
 /**
  * Class applied on highlighted search matches

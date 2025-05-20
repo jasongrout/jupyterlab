@@ -16,12 +16,17 @@
  */
 import {
   EditorView,
-  PluginValue,
+  type PluginValue,
   ViewPlugin,
   ViewUpdate
 } from '@codemirror/view';
 import { Facet } from '@codemirror/state';
-import { YRange, ySyncAnnotation, YSyncConfig, ySyncFacet } from './ybinding';
+import {
+  YRange,
+  ySyncAnnotation,
+  YSyncConfig,
+  ySyncFacet
+} from './ybinding.js';
 import type { UndoManager } from 'yjs';
 
 interface IStackItem {

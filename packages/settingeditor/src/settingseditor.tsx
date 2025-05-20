@@ -15,13 +15,13 @@ import {
   UseSignal
 } from '@jupyterlab/ui-components';
 import { CommandRegistry } from '@lumino/commands';
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { SplitPanel } from '@lumino/widgets';
 import React from 'react';
-import { PluginList } from './pluginlist';
-import { SettingsPanel } from './settingspanel';
+import { PluginList } from './pluginlist.js';
+import { SettingsPanel } from './settingspanel.js';
 
 /**
  * Form based interface for editing settings.

@@ -3,11 +3,14 @@
 
 import { Text } from '@jupyterlab/coreutils';
 import { KernelMessage } from '@jupyterlab/services';
-import { SourceChange } from '@jupyter/ydoc';
-import { JSONObject } from '@lumino/coreutils';
-import { CompletionHandler } from '../handler';
-import { ICompletionContext, ICompletionProvider } from '../tokens';
-import { Completer } from '../widget';
+import { type SourceChange } from '@jupyter/ydoc';
+import { type JSONObject } from '@lumino/coreutils';
+import { CompletionHandler } from '../handler.js';
+import {
+  type ICompletionContext,
+  type ICompletionProvider
+} from '../tokens.js';
+import { Completer } from '../widget.js';
 
 export const KERNEL_PROVIDER_ID = 'CompletionProvider:kernel';
 /**

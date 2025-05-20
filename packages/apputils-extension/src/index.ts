@@ -11,7 +11,7 @@ import {
   ILayoutRestorer,
   IRouter,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   Dialog,
@@ -34,18 +34,18 @@ import { jupyterFaviconIcon } from '@jupyterlab/ui-components';
 import { PromiseDelegate } from '@lumino/coreutils';
 import { DisposableDelegate } from '@lumino/disposable';
 import { Debouncer, Throttler } from '@lumino/polling';
-import { announcements } from './announcements';
-import { licensesClient, licensesPlugin } from './licensesplugin';
-import { notificationPlugin } from './notificationplugin';
-import { Palette } from './palette';
-import { settingsConnector, settingsPlugin } from './settingsplugin';
-import { kernelStatus, runningSessionsStatus } from './statusbarplugin';
-import { subshellsSettings } from './subshell-settings';
-import { themesPaletteMenuPlugin, themesPlugin } from './themesplugins';
-import { toolbarRegistry } from './toolbarregistryplugin';
-import { workspacesPlugin } from './workspacesplugin';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
-import { displayShortcuts } from './shortcuts';
+import { announcements } from './announcements.js';
+import { licensesClient, licensesPlugin } from './licensesplugin.js';
+import { notificationPlugin } from './notificationplugin.js';
+import { Palette } from './palette.js';
+import { settingsConnector, settingsPlugin } from './settingsplugin.js';
+import { kernelStatus, runningSessionsStatus } from './statusbarplugin.js';
+import { subshellsSettings } from './subshell-settings.js';
+import { themesPaletteMenuPlugin, themesPlugin } from './themesplugins.js';
+import { toolbarRegistry } from './toolbarregistryplugin.js';
+import { workspacesPlugin } from './workspacesplugin.js';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { displayShortcuts } from './shortcuts.js';
 
 /**
  * The interval in milliseconds before recover options appear during splash.

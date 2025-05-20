@@ -19,7 +19,7 @@ import { IStateDB } from '@jupyterlab/statedb';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   caretDownIcon,
@@ -31,16 +31,16 @@ import { ArrayExt, filter, StringExt } from '@lumino/algorithm';
 import {
   MimeData,
   PromiseDelegate,
-  ReadonlyJSONObject
+  type ReadonlyJSONObject
 } from '@lumino/coreutils';
 import { ElementExt } from '@lumino/domutils';
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
 import { Drag } from '@lumino/dragdrop';
 import { Message, MessageLoop } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { h, VirtualDOM } from '@lumino/virtualdom';
 import { Widget } from '@lumino/widgets';
-import { FilterFileBrowserModel } from './model';
+import { FilterFileBrowserModel } from './model.js';
 
 /**
  * The class name added to DirListing widget.

@@ -8,7 +8,7 @@
 import {
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   createToolbarFactory,
@@ -20,14 +20,17 @@ import {
 import {
   CSVViewerFactory,
   TSVViewerFactory
-} from '@jupyterlab/csvviewer/lib/widget';
-import { CSVDelimiter } from '@jupyterlab/csvviewer/lib/toolbar';
+} from '@jupyterlab/csvviewer/lib/widget.js';
+import { CSVDelimiter } from '@jupyterlab/csvviewer/lib/toolbar.js';
 import type { CSVViewer } from '@jupyterlab/csvviewer';
 import type { TextRenderConfig } from '@jupyterlab/csvviewer';
-import { DocumentRegistry, IDocumentWidget } from '@jupyterlab/docregistry';
+import {
+  DocumentRegistry,
+  type IDocumentWidget
+} from '@jupyterlab/docregistry';
 import { ISearchProviderRegistry } from '@jupyterlab/documentsearch';
 import { IMainMenu } from '@jupyterlab/mainmenu';
-import { IObservableList } from '@jupyterlab/observables';
+import { type IObservableList } from '@jupyterlab/observables';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { ITranslator } from '@jupyterlab/translation';
 import type { DataGrid } from '@lumino/datagrid';
@@ -176,7 +179,7 @@ function activateCsv(
 
     // Delay await to execute `widget.title` setters (above) synchronously
     if (searchRegistry && !searchProviderInitialized) {
-      const { CSVSearchProvider } = await import('./searchprovider');
+      const { CSVSearchProvider } = await import('./searchprovider.js');
       searchRegistry.add('csv', CSVSearchProvider);
       searchProviderInitialized = true;
     }
@@ -339,7 +342,7 @@ function activateTsv(
 
     // Delay await to execute `widget.title` setters (above) synchronously
     if (searchRegistry && !searchProviderInitialized) {
-      const { CSVSearchProvider } = await import('./searchprovider');
+      const { CSVSearchProvider } = await import('./searchprovider.js');
       searchRegistry.add('tsv', CSVSearchProvider);
       searchProviderInitialized = true;
     }

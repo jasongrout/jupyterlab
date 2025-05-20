@@ -3,7 +3,7 @@
 
 import { Message } from '@lumino/messaging';
 import { Widget } from '@lumino/widgets';
-import { Dialog, showDialog } from './dialog';
+import { Dialog, showDialog } from './dialog.js';
 
 const INPUT_DIALOG_CLASS = 'jp-Input-Dialog';
 

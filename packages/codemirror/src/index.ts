@@ -5,14 +5,14 @@
  * @module codemirror
  */
 
-export * from './commands';
-export * from './editor';
-export * from './extension';
-export * from './extensions';
-export * from './factory';
-export * from './language';
-export * from './mimetype';
-export * from './searchprovider';
-export * from './theme';
-export * from './token';
-export * from './pythonBuiltin';
+export * from './commands.js';
+export * from './editor.js';
+export * from './extension.js';
+export * from './extensions/index.js';
+export * from './factory.js';
+export * from './language.js';
+export * from './mimetype.js';
+export * from './searchprovider.js';
+export * from './theme.js';
+export * from './token.js';
+export * from './pythonBuiltin.js';

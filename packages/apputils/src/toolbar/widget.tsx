@@ -4,7 +4,7 @@
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   circleEmptyIcon,
@@ -20,8 +20,11 @@ import {
 } from '@jupyterlab/ui-components';
 import { Widget } from '@lumino/widgets';
 import * as React from 'react';
-import { ISessionContext, SessionContextDialogs } from '../sessioncontext';
-import { translateKernelStatuses } from '../kernelstatuses';
+import {
+  type ISessionContext,
+  SessionContextDialogs
+} from '../sessioncontext.js';
+import { translateKernelStatuses } from '../kernelstatuses.js';
 /**
  * The class name added to toolbar kernel name text.
  */

@@ -10,8 +10,8 @@ import {
 } from '@jupyterlab/ui-components';
 import { CommandRegistry } from '@lumino/commands';
 import { Widget } from '@lumino/widgets';
-import { IToolbarWidgetRegistry, ToolbarRegistry } from '../tokens';
-import { ISignal, Signal } from '@lumino/signaling';
+import { IToolbarWidgetRegistry, type ToolbarRegistry } from '../tokens.js';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 /**
  * Concrete implementation of IToolbarWidgetRegistry interface

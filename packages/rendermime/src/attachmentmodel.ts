@@ -4,17 +4,17 @@
 |----------------------------------------------------------------------------*/
 
 import * as nbformat from '@jupyterlab/nbformat';
-import { IObservableJSON, ObservableJSON } from '@jupyterlab/observables';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { type IObservableJSON, ObservableJSON } from '@jupyterlab/observables';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import {
   JSONExt,
-  JSONObject,
-  PartialJSONObject,
-  PartialJSONValue,
-  ReadonlyPartialJSONObject
+  type JSONObject,
+  type PartialJSONObject,
+  type PartialJSONValue,
+  type ReadonlyPartialJSONObject
 } from '@lumino/coreutils';
-import { ISignal, Signal } from '@lumino/signaling';
-import { MimeModel } from './mimemodel';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { MimeModel } from './mimemodel.js';
 
 /**
  * The interface for an attachment model.

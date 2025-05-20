@@ -11,15 +11,15 @@ import { ITranslator } from '@jupyterlab/translation';
 import { FormComponent } from '@jupyterlab/ui-components';
 import {
   JSONExt,
-  PartialJSONObject,
-  ReadonlyJSONObject,
-  ReadonlyPartialJSONObject
+  type PartialJSONObject,
+  type ReadonlyJSONObject,
+  type ReadonlyPartialJSONObject
 } from '@lumino/coreutils';
 import { Debouncer } from '@lumino/polling';
-import { IChangeEvent } from '@rjsf/core';
+import { type IChangeEvent } from '@rjsf/core';
 import validatorAjv8 from '@rjsf/validator-ajv8';
-import { Field, UiSchema } from '@rjsf/utils';
-import { JSONSchema7 } from 'json-schema';
+import { type Field, type UiSchema } from '@rjsf/utils';
+import { type JSONSchema7 } from 'json-schema';
 import { Button } from '@jupyterlab/ui-components';
 
 /**

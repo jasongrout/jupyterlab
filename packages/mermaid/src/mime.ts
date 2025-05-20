@@ -12,8 +12,8 @@ import {
   MERMAID_CLASS,
   MERMAID_MIME_TYPE,
   WARNING_CLASS
-} from './tokens';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
+} from './tokens.js';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { PromiseDelegate } from '@lumino/coreutils';
 import { Widget } from '@lumino/widgets';
 

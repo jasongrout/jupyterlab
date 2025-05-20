@@ -11,10 +11,10 @@ import {
 } from '@jupyterlab/ui-components';
 import { CommandRegistry } from '@lumino/commands';
 import { Panel, Widget } from '@lumino/widgets';
-import { IDebugger } from '../../tokens';
-import { VariablesBodyGrid } from './grid';
-import { ScopeSwitcher } from './scope';
-import { VariablesBodyTree } from './tree';
+import { IDebugger } from '../../tokens.js';
+import { VariablesBodyGrid } from './grid.js';
+import { ScopeSwitcher } from './scope.js';
+import { VariablesBodyTree } from './tree.js';
 
 /**
  * A Panel to show a variable explorer.

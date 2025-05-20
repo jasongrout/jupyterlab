@@ -7,8 +7,8 @@ import {
   ToolbarButton,
   ToolbarButtonComponent
 } from '@jupyterlab/ui-components';
-import { IDebugger } from '../../tokens';
-import { Breakpoints } from './index';
+import { IDebugger } from '../../tokens.js';
+import { Breakpoints } from './index.js';
 
 const PAUSE_ON_EXCEPTION_CLASS = 'jp-debugger-pauseOnExceptions';
 const PAUSE_ON_EXCEPTION_BUTTON_CLASS = 'jp-PauseOnExceptions';

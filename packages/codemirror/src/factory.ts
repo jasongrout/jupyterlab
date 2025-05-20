@@ -1,18 +1,18 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { CodeEditor, IEditorFactoryService } from '@jupyterlab/codeeditor';
+import { CodeEditor, type IEditorFactoryService } from '@jupyterlab/codeeditor';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { EditorView, keymap } from '@codemirror/view';
-import { EditorExtensionRegistry } from './extension';
-import { CodeMirrorEditor } from './editor';
-import { EditorLanguageRegistry } from './language';
+import { EditorExtensionRegistry } from './extension.js';
+import { CodeMirrorEditor } from './editor.js';
+import { EditorLanguageRegistry } from './language.js';
 import {
-  IEditorExtensionFactory,
+  type IEditorExtensionFactory,
   IEditorExtensionRegistry,
-  IEditorFactoryOptions,
+  type IEditorFactoryOptions,
   IEditorLanguageRegistry
-} from './token';
+} from './token.js';
 
 /**
  * CodeMirror editor factory.

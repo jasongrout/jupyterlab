@@ -1,15 +1,15 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IWidgetTracker } from '@jupyterlab/apputils';
-import { IMarkdownParser, IRenderMime } from '@jupyterlab/rendermime';
+import { type IWidgetTracker } from '@jupyterlab/apputils';
+import { IMarkdownParser, type IRenderMime } from '@jupyterlab/rendermime';
 import {
   TableOfContents,
   TableOfContentsFactory,
   TableOfContentsModel,
   TableOfContentsUtils
 } from '@jupyterlab/toc';
-import { MarkdownDocument } from './widget';
+import { MarkdownDocument } from './widget.js';
 
 /**
  * Interface describing a Markdown viewer heading.

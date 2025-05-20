@@ -7,11 +7,11 @@ import { CodeMirrorEditor } from '@jupyterlab/codemirror';
 
 import { ActivityMonitor } from '@jupyterlab/coreutils';
 
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 
 import { Signal } from '@lumino/signaling';
 
-import { ISharedText, SourceChange } from '@jupyter/ydoc';
+import { type ISharedText, type SourceChange } from '@jupyter/ydoc';
 
 import {
   Compartment,
@@ -24,13 +24,13 @@ import {
 
 import {
   Decoration,
-  DecorationSet,
+  type DecorationSet,
   EditorView,
   gutter,
   GutterMarker
 } from '@codemirror/view';
 
-import { IDebugger } from '../tokens';
+import { IDebugger } from '../tokens.js';
 
 /**
  * The class name added to the current line.

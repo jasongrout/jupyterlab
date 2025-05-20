@@ -11,7 +11,7 @@ import { IStateDB } from '@jupyterlab/statedb';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   closeIcon,
@@ -20,7 +20,7 @@ import {
   expandAllIcon,
   FilterBox,
   getTreeItemElement,
-  IScore,
+  type IScore,
   LabIcon,
   PanelWithToolbar,
   ReactWidget,
@@ -33,12 +33,17 @@ import {
   UseSignal
 } from '@jupyterlab/ui-components';
 import { Token } from '@lumino/coreutils';
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
 import { ElementExt } from '@lumino/domutils';
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Panel, Widget } from '@lumino/widgets';
-import React, { isValidElement, ReactNode, useCallback, useRef } from 'react';
+import React, {
+  isValidElement,
+  type ReactNode,
+  useCallback,
+  useRef
+} from 'react';
 
 /**
  * The class name added to a running widget.

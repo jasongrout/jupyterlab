@@ -12,9 +12,9 @@ import {
   viewBreakpointIcon
 } from '@jupyterlab/ui-components';
 import React from 'react';
-import { IDebugger } from '../../tokens';
-import { SourcesBody } from './body';
-import { SourcePathComponent } from './sourcepath';
+import { IDebugger } from '../../tokens.js';
+import { SourcesBody } from './body.js';
+import { SourcePathComponent } from './sourcepath.js';
 
 /**
  * A Panel that shows a preview of the source code while debugging.

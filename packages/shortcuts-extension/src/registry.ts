@@ -5,11 +5,11 @@
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { CommandRegistry } from '@lumino/commands';
 import {
-  IKeybinding,
-  IShortcutRegistry,
-  IShortcutsSettingsLayout,
-  IShortcutTarget
-} from './types';
+  type IKeybinding,
+  type IShortcutRegistry,
+  type IShortcutsSettingsLayout,
+  type IShortcutTarget
+} from './types.js';
 
 /**
  * Shortcut registry used by Shortcut UI component.

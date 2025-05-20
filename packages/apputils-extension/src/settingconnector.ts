@@ -8,7 +8,7 @@ import {
   ISettingConnector,
   ISettingRegistry
 } from '@jupyterlab/settingregistry';
-import { DataConnector, IDataConnector } from '@jupyterlab/statedb';
+import { DataConnector, type IDataConnector } from '@jupyterlab/statedb';
 import { Throttler } from '@lumino/polling';
 
 /**

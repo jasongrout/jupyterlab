@@ -4,10 +4,10 @@
  */
 
 import { LanguageSupport, StreamLanguage } from '@codemirror/language';
-import { IYText } from '@jupyter/ydoc';
+import { type IYText } from '@jupyter/ydoc';
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { IEditorServices } from '@jupyterlab/codeeditor';
 import {
@@ -29,7 +29,7 @@ import {
   FormComponent,
   IFormRendererRegistry
 } from '@jupyterlab/ui-components';
-import { JSONExt, ReadonlyJSONValue } from '@lumino/coreutils';
+import { JSONExt, type ReadonlyJSONValue } from '@lumino/coreutils';
 import type { FieldProps } from '@rjsf/utils';
 import validatorAjv8 from '@rjsf/validator-ajv8';
 import React from 'react';

@@ -1,9 +1,9 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
 import { Widget } from '@lumino/widgets';
-import { ITableOfContentsRegistry, TableOfContents } from './tokens';
+import { ITableOfContentsRegistry, TableOfContents } from './tokens.js';
 
 /**
  * Class for registering table of contents generators.

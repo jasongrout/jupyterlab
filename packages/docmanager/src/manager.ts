@@ -1,28 +1,31 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ISessionContext, SessionContextDialogs } from '@jupyterlab/apputils';
-import { IChangedArgs, PathExt } from '@jupyterlab/coreutils';
+import {
+  type ISessionContext,
+  SessionContextDialogs
+} from '@jupyterlab/apputils';
+import { type IChangedArgs, PathExt } from '@jupyterlab/coreutils';
 import {
   Context,
   DocumentRegistry,
-  IDocumentWidget
+  type IDocumentWidget
 } from '@jupyterlab/docregistry';
 import { Contents, Kernel, ServiceManager } from '@jupyterlab/services';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { ArrayExt, find } from '@lumino/algorithm';
 import { UUID } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 import { AttachedProperty } from '@lumino/properties';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
-import { SaveHandler } from './savehandler';
+import { SaveHandler } from './savehandler.js';
 import {
   IDocumentManager,
   IDocumentWidgetOpener,
   IRecentsManager
-} from './tokens';
-import { DocumentWidgetManager } from './widgetmanager';
+} from './tokens.js';
+import { DocumentWidgetManager } from './widgetmanager.js';
 
 /**
  * The document manager.

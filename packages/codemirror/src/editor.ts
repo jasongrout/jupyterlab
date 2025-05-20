@@ -8,23 +8,23 @@ import {
   Compartment,
   EditorSelection,
   EditorState,
-  Extension,
+  type Extension,
   Prec,
-  StateCommand,
+  type StateCommand,
   Text
 } from '@codemirror/state';
-import { Command, EditorView, ViewUpdate } from '@codemirror/view';
+import { type Command, EditorView, ViewUpdate } from '@codemirror/view';
 import { CodeEditor } from '@jupyterlab/codeeditor';
-import { SyntaxNodeRef } from '@lezer/common';
+import { type SyntaxNodeRef } from '@lezer/common';
 import { UUID } from '@lumino/coreutils';
 import { Signal } from '@lumino/signaling';
-import { ExtensionsHandler } from './extension';
-import { EditorLanguageRegistry } from './language';
+import { ExtensionsHandler } from './extension.js';
+import { EditorLanguageRegistry } from './language.js';
 import {
   IEditorExtensionRegistry,
   IEditorLanguageRegistry,
-  IExtensionsHandler
-} from './token';
+  type IExtensionsHandler
+} from './token.js';
 
 /**
  * The class name added to CodeMirrorWidget instances.

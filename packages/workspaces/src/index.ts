@@ -5,5 +5,5 @@
  * @module workspaces
  */
 
-export * from './model';
-export * from './tokens';
+export * from './model.js';
+export * from './tokens.js';

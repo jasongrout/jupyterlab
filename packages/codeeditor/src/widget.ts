@@ -5,7 +5,7 @@ import { MimeData } from '@lumino/coreutils';
 import { Drag } from '@lumino/dragdrop';
 import { Message } from '@lumino/messaging';
 import { Widget } from '@lumino/widgets';
-import { CodeEditor } from './';
+import { CodeEditor } from './index.js';
 
 /**
  * The class name added to an editor widget that has a primary selection.

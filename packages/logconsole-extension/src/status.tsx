@@ -2,8 +2,8 @@
 // Distributed under the terms of the Modified BSD License.
 
 import {
-  IContentChange,
-  ILogger,
+  type IContentChange,
+  type ILogger,
   ILoggerRegistry
 } from '@jupyterlab/logconsole';
 import { GroupItem, TextItem } from '@jupyterlab/statusbar';

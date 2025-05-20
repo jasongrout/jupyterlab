@@ -9,7 +9,7 @@
 import {
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin,
+  type JupyterFrontEndPlugin,
   JupyterLab
 } from '@jupyterlab/application';
 import {
@@ -23,7 +23,7 @@ import {
   extensionIcon,
   refreshIcon
 } from '@jupyterlab/ui-components';
-import { ReadonlyJSONObject } from '@lumino/coreutils';
+import { type ReadonlyJSONObject } from '@lumino/coreutils';
 import {
   IPluginManager,
   PluginListModel,

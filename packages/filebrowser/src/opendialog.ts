@@ -6,11 +6,15 @@ import { PathExt } from '@jupyterlab/coreutils';
 import { IDocumentManager } from '@jupyterlab/docmanager';
 import { Contents } from '@jupyterlab/services';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
-import { IScore, newFolderIcon, refreshIcon } from '@jupyterlab/ui-components';
+import {
+  type IScore,
+  newFolderIcon,
+  refreshIcon
+} from '@jupyterlab/ui-components';
 import { PanelLayout, Widget } from '@lumino/widgets';
-import { FileBrowser } from './browser';
-import { FilterFileBrowserModel } from './model';
-import { IFileBrowserFactory } from './tokens';
+import { FileBrowser } from './browser.js';
+import { FilterFileBrowserModel } from './model.js';
+import { IFileBrowserFactory } from './tokens.js';
 import { PromiseDelegate } from '@lumino/coreutils';
 
 /**

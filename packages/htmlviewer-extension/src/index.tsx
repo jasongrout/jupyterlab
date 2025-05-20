@@ -10,7 +10,7 @@
 import {
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   createToolbarFactory,
@@ -25,7 +25,7 @@ import {
   IHTMLViewerTracker,
   ToolbarItems
 } from '@jupyterlab/htmlviewer';
-import { IObservableList } from '@jupyterlab/observables';
+import { type IObservableList } from '@jupyterlab/observables';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { ITranslator } from '@jupyterlab/translation';
 import { html5Icon } from '@jupyterlab/ui-components';

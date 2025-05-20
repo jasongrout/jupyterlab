@@ -9,7 +9,7 @@ import {
   ILabShell,
   ILabStatus,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin,
+  type JupyterFrontEndPlugin,
   JupyterLab
 } from '@jupyterlab/application';
 import {
@@ -26,7 +26,7 @@ import {
   showErrorMessage,
   UseSignal
 } from '@jupyterlab/apputils';
-import { IChangedArgs, PathExt, Time } from '@jupyterlab/coreutils';
+import { type IChangedArgs, PathExt, Time } from '@jupyterlab/coreutils';
 import {
   DocumentManager,
   IDocumentManager,
@@ -36,24 +36,27 @@ import {
   renameDialog,
   SavingStatus
 } from '@jupyterlab/docmanager';
-import { DocumentRegistry, IDocumentWidget } from '@jupyterlab/docregistry';
+import {
+  DocumentRegistry,
+  type IDocumentWidget
+} from '@jupyterlab/docregistry';
 import { Contents, Kernel } from '@jupyterlab/services';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { IStatusBar } from '@jupyterlab/statusbar';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { saveIcon } from '@jupyterlab/ui-components';
 import { some } from '@lumino/algorithm';
 import { CommandRegistry } from '@lumino/commands';
-import { JSONExt, ReadonlyPartialJSONObject } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
+import { JSONExt, type ReadonlyPartialJSONObject } from '@lumino/coreutils';
+import { type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
 import * as React from 'react';
-import { recentsManagerPlugin } from './recents';
+import { recentsManagerPlugin } from './recents.js';
 
 /**
  * The command IDs used by the document manager plugin.

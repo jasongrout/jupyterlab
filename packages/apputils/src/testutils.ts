@@ -5,7 +5,7 @@
 
 import { ServiceManager } from '@jupyterlab/services';
 import { UUID } from '@lumino/coreutils';
-import { SessionContext } from './sessioncontext';
+import { SessionContext } from './sessioncontext.js';
 
 /**
  * Create a client session object.

@@ -6,12 +6,12 @@ import { TextItem } from '@jupyterlab/statusbar';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { VDomModel, VDomRenderer } from '@jupyterlab/ui-components';
-import { JSONArray, JSONExt } from '@lumino/coreutils';
-import React, { KeyboardEvent } from 'react';
-import { ISessionContext } from './sessioncontext';
+import { type JSONArray, JSONExt } from '@lumino/coreutils';
+import React, { type KeyboardEvent } from 'react';
+import { type ISessionContext } from './sessioncontext.js';
 
 /**
  * Helper function to translate kernel statuses mapping by using

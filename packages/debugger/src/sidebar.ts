@@ -21,7 +21,7 @@ import { KernelSources as KernelSourcesPanel } from './panels/kernelSources';
 
 import { Variables as VariablesPanel } from './panels/variables';
 
-import { IDebugger } from './tokens';
+import { IDebugger } from './tokens.js';
 
 /**
  * A debugger sidebar.

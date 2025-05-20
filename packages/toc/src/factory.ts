@@ -1,12 +1,12 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IWidgetTracker } from '@jupyterlab/apputils';
+import { type IWidgetTracker } from '@jupyterlab/apputils';
 import { ActivityMonitor, PathExt } from '@jupyterlab/coreutils';
-import { IDocumentWidget } from '@jupyterlab/docregistry';
+import { type IDocumentWidget } from '@jupyterlab/docregistry';
 import { Widget } from '@lumino/widgets';
-import { TableOfContentsModel } from './model';
-import { TableOfContents } from './tokens';
+import { TableOfContentsModel } from './model.js';
+import { TableOfContents } from './tokens.js';
 
 /**
  * Timeout for throttling ToC rendering following model changes.

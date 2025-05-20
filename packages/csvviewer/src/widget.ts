@@ -6,15 +6,15 @@ import {
   ABCWidgetFactory,
   DocumentRegistry,
   DocumentWidget,
-  IDocumentWidget
+  type IDocumentWidget
 } from '@jupyterlab/docregistry';
 import { PromiseDelegate } from '@lumino/coreutils';
 import type * as DataGridModule from '@lumino/datagrid';
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { PanelLayout, Widget } from '@lumino/widgets';
-import type * as DSVModelModule from './model';
-import { CSVDelimiter } from './toolbar';
+import type * as DSVModelModule from './model.js';
+import { CSVDelimiter } from './toolbar.js';
 
 /**
  * The class name added to a CSV viewer.
@@ -558,7 +558,7 @@ namespace Private {
   export async function ensureDSVModel(): Promise<typeof DSVModelModule> {
     if (modelLoaded == null) {
       modelLoaded = new PromiseDelegate();
-      modelLoaded.resolve(await import('./model'));
+      modelLoaded.resolve(await import('./model.js'));
     }
     return modelLoaded.promise;
   }

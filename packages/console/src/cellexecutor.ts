@@ -5,7 +5,7 @@
 
 import { CodeCell } from '@jupyterlab/cells';
 import type { KernelMessage } from '@jupyterlab/services';
-import type { IConsoleCellExecutor } from './tokens';
+import type { IConsoleCellExecutor } from './tokens.js';
 
 /**
  * Run a console cell.

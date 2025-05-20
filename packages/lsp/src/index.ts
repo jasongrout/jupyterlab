@@ -6,12 +6,12 @@
  */
 
 export * from './adapters';
-export * from './connection_manager';
+export * from './connection_manager.js';
 export * from './extractors';
-export * from './feature';
-export * from './manager';
-export * from './plugin';
-export * from './positioning';
-export * from './tokens';
-export * from './utils';
-export * from './virtual/document';
+export * from './feature.js';
+export * from './manager.js';
+export * from './plugin.js';
+export * from './positioning.js';
+export * from './tokens.js';
+export * from './utils.js';
+export * from './virtual/document.js';

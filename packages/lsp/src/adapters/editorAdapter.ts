@@ -6,12 +6,12 @@ import {
   IEditorExtensionFactory
 } from '@jupyterlab/codemirror';
 
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 
 import { Signal } from '@lumino/signaling';
 
-import { WidgetLSPAdapter } from './adapter';
-import { Document } from '../tokens';
+import { WidgetLSPAdapter } from './adapter.js';
+import { type Document } from '../tokens.js';
 
 /**
  * The CodeEditor.IEditor adapter.

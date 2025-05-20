@@ -2,17 +2,17 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { Cell, CodeCell, ICellModel, MarkdownCell } from '@jupyterlab/cells';
-import { IMarkdownParser, IRenderMime } from '@jupyterlab/rendermime';
+import { IMarkdownParser, type IRenderMime } from '@jupyterlab/rendermime';
 import {
   TableOfContents,
   TableOfContentsFactory,
   TableOfContentsModel,
   TableOfContentsUtils
 } from '@jupyterlab/toc';
-import { KernelError, NotebookActions } from './actions';
-import { NotebookPanel } from './panel';
-import { INotebookTracker } from './tokens';
-import { Notebook } from './widget';
+import { KernelError, NotebookActions } from './actions.js';
+import { NotebookPanel } from './panel.js';
+import { INotebookTracker } from './tokens.js';
+import { Notebook } from './widget.js';
 
 /**
  * Cell running status

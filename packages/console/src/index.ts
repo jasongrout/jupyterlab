@@ -5,9 +5,9 @@
  * @module console
  */
 
-export * from './cellexecutor';
-export * from './foreign';
-export * from './history';
-export * from './panel';
-export * from './tokens';
-export * from './widget';
+export * from './cellexecutor.js';
+export * from './foreign.js';
+export * from './history.js';
+export * from './panel.js';
+export * from './tokens.js';
+export * from './widget.js';

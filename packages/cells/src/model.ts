@@ -3,31 +3,37 @@
 | Distributed under the terms of the Modified BSD License.
 |----------------------------------------------------------------------------*/
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { AttachmentsModel, IAttachmentsModel } from '@jupyterlab/attachments';
+import {
+  AttachmentsModel,
+  type IAttachmentsModel
+} from '@jupyterlab/attachments';
 
 import { CodeEditor } from '@jupyterlab/codeeditor';
 
-import { IChangedArgs } from '@jupyterlab/coreutils';
+import { type IChangedArgs } from '@jupyterlab/coreutils';
 
 import * as nbformat from '@jupyterlab/nbformat';
 
-import { IObservableString, ObservableValue } from '@jupyterlab/observables';
+import {
+  type IObservableString,
+  ObservableValue
+} from '@jupyterlab/observables';
 
 import { IOutputAreaModel, OutputAreaModel } from '@jupyterlab/outputarea';
 
 import {
-  CellChange,
+  type CellChange,
   createMutex,
   createStandaloneCell,
-  IExecutionState,
-  IMapChange,
-  ISharedAttachmentsCell,
-  ISharedCell,
-  ISharedCodeCell,
-  ISharedMarkdownCell,
-  ISharedRawCell,
+  type IExecutionState,
+  type IMapChange,
+  type ISharedAttachmentsCell,
+  type ISharedCell,
+  type ISharedCodeCell,
+  type ISharedMarkdownCell,
+  type ISharedRawCell,
   YCodeCell
 } from '@jupyter/ydoc';
 

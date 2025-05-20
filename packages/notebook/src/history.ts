@@ -2,15 +2,15 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { Cell } from '@jupyterlab/cells';
-import { ISessionContext } from '@jupyterlab/apputils';
+import { type ISessionContext } from '@jupyterlab/apputils';
 import { CodeEditor } from '@jupyterlab/codeeditor';
 import { KernelMessage } from '@jupyterlab/services';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 import { Signal } from '@lumino/signaling';
 import { IKernelConnection } from '@jupyterlab/services/lib/kernel/kernel';
 

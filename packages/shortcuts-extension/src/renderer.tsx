@@ -4,8 +4,8 @@
  */
 
 import React from 'react';
-import { ShortcutUI } from './components';
-import { IShortcutUI } from './types';
+import { ShortcutUI } from './components/index.js';
+import { type IShortcutUI } from './types.js';
 
 export const renderShortCut = (props: {
   external: IShortcutUI.IExternalBundle;

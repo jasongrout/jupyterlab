@@ -8,16 +8,16 @@ import {
   MarkdownCellModel,
   RawCellModel
 } from '@jupyterlab/cells';
-import { IObservableList } from '@jupyterlab/observables';
+import { type IObservableList } from '@jupyterlab/observables';
 import {
-  ISharedCell,
-  ISharedCodeCell,
-  ISharedMarkdownCell,
-  ISharedNotebook,
-  ISharedRawCell,
-  NotebookChange
+  type ISharedCell,
+  type ISharedCodeCell,
+  type ISharedMarkdownCell,
+  type ISharedNotebook,
+  type ISharedRawCell,
+  type NotebookChange
 } from '@jupyter/ydoc';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 /**
  * A cell list object that supports undo/redo.

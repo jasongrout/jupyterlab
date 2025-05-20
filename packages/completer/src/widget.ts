@@ -3,16 +3,16 @@
 
 import { Sanitizer } from '@jupyterlab/apputils';
 import { CodeEditor } from '@jupyterlab/codeeditor';
-import { IRenderMime, renderText } from '@jupyterlab/rendermime';
+import { type IRenderMime, renderText } from '@jupyterlab/rendermime';
 import { HoverBox, LabIcon } from '@jupyterlab/ui-components';
-import { JSONObject } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
+import { type JSONObject } from '@lumino/coreutils';
+import { type IDisposable } from '@lumino/disposable';
 import { ElementExt } from '@lumino/domutils';
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
 
-import { CompletionHandler } from './handler';
+import { CompletionHandler } from './handler.js';
 
 /**
  * The class name added to completer menu items.

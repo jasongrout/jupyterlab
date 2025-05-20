@@ -30,26 +30,26 @@
   THE SOFTWARE.
 */
 
-import { ISearchMatch } from '@jupyterlab/documentsearch';
-import { CodeMirrorEditor } from './editor';
+import { type ISearchMatch } from '@jupyterlab/documentsearch';
+import { CodeMirrorEditor } from './editor.js';
 import {
   EditorSelection,
-  Extension,
+  type Extension,
   StateEffect,
   StateEffectType,
   StateField
 } from '@codemirror/state';
-import { Decoration, DecorationSet, EditorView } from '@codemirror/view';
+import { Decoration, type DecorationSet, EditorView } from '@codemirror/view';
 import { CodeEditor } from '@jupyterlab/codeeditor';
 import {
   GenericSearchProvider,
-  IBaseSearchProvider,
-  IFilters,
-  IReplaceOptions,
+  type IBaseSearchProvider,
+  type IFilters,
+  type IReplaceOptions,
   TextSearchEngine
 } from '@jupyterlab/documentsearch';
-import { ISignal, Signal } from '@lumino/signaling';
-import { ISharedText, SourceChange } from '@jupyter/ydoc';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { type ISharedText, type SourceChange } from '@jupyter/ydoc';
 
 /**
  * Defines from which position the search should be executed.

@@ -11,7 +11,7 @@ import {
   ConnectionLost,
   IConnectionLost,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin,
+  type JupyterFrontEndPlugin,
   JupyterLab
 } from '@jupyterlab/application';
 import { Dialog, ICommandPalette, showDialog } from '@jupyterlab/apputils';

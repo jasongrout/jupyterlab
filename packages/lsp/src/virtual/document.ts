@@ -1,23 +1,23 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IDisposable } from '@lumino/disposable';
-import { IDocumentInfo } from '../ws-connection/types';
-import { IPosition } from '../positioning';
+import { type IDisposable } from '@lumino/disposable';
+import { type IDocumentInfo } from '../ws-connection/types.js';
+import { type IPosition } from '../positioning.js';
 import { CodeEditor } from '@jupyterlab/codeeditor';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { Document, ILSPCodeExtractorsManager } from '../tokens';
-import { DocumentConnectionManager } from '../connection_manager';
-import { IForeignCodeExtractor } from '../extractors/types';
-import { LanguageIdentifier } from '../lsp';
+import { type Document, ILSPCodeExtractorsManager } from '../tokens.js';
+import { DocumentConnectionManager } from '../connection_manager.js';
+import { type IForeignCodeExtractor } from '../extractors/types.js';
+import { type LanguageIdentifier } from '../lsp.js';
 import {
-  IEditorPosition,
-  IRootPosition,
-  ISourcePosition,
-  IVirtualPosition
-} from '../positioning';
-import { DefaultMap, untilReady } from '../utils';
+  type IEditorPosition,
+  type IRootPosition,
+  type ISourcePosition,
+  type IVirtualPosition
+} from '../positioning.js';
+import { DefaultMap, untilReady } from '../utils.js';
 
 type IRange = CodeEditor.IRange;
 

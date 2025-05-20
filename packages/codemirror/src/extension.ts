@@ -12,7 +12,7 @@ import {
 import {
   Compartment,
   EditorState,
-  Extension,
+  type Extension,
   Prec,
   StateEffect
 } from '@codemirror/state';
@@ -25,7 +25,7 @@ import {
   highlightSpecialChars,
   highlightTrailingWhitespace,
   highlightWhitespace,
-  KeyBinding,
+  type KeyBinding,
   keymap,
   lineNumbers,
   rectangularSelection,
@@ -33,18 +33,18 @@ import {
   tooltips
 } from '@codemirror/view';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
-import { JSONExt, ReadonlyJSONObject } from '@lumino/coreutils';
-import { IObservableDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
-import { StateCommands } from './commands';
-import { customTheme, CustomTheme, rulers } from './extensions';
+import { JSONExt, type ReadonlyJSONObject } from '@lumino/coreutils';
+import { type IObservableDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { StateCommands } from './commands.js';
+import { customTheme, type CustomTheme, rulers } from './extensions/index.js';
 import {
-  IConfigurableExtension,
-  IEditorExtensionFactory,
+  type IConfigurableExtension,
+  type IEditorExtensionFactory,
   IEditorExtensionRegistry,
   IEditorThemeRegistry,
-  IExtensionsHandler
-} from './token';
+  type IExtensionsHandler
+} from './token.js';
 import {
   closeSearchPanel,
   findNext,

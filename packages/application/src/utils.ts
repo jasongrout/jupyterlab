@@ -4,9 +4,12 @@
  */
 
 import { SemanticCommand } from '@jupyterlab/apputils';
-import { nullTranslator, TranslationBundle } from '@jupyterlab/translation';
+import {
+  nullTranslator,
+  type TranslationBundle
+} from '@jupyterlab/translation';
 import { CommandRegistry } from '@lumino/commands';
-import { JupyterFrontEnd } from './frontend';
+import { JupyterFrontEnd } from './frontend.js';
 
 export interface ISemanticCommandDefault {
   /**

@@ -4,11 +4,11 @@
 import { HoverBox } from '@jupyterlab/ui-components';
 import { CodeEditor } from '@jupyterlab/codeeditor';
 import {
-  IRenderMime,
+  type IRenderMime,
   IRenderMimeRegistry,
   MimeModel
 } from '@jupyterlab/rendermime';
-import { JSONObject } from '@lumino/coreutils';
+import { type JSONObject } from '@lumino/coreutils';
 import { Message } from '@lumino/messaging';
 import { PanelLayout, Widget } from '@lumino/widgets';
 

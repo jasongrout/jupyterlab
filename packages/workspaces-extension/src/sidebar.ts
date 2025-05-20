@@ -4,14 +4,17 @@
 |----------------------------------------------------------------------------*/
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { IWindowResolver } from '@jupyterlab/apputils';
 import { IWorkspaceCommands, IWorkspacesModel } from '@jupyterlab/workspaces';
-import { IRunningSessionManagers, IRunningSessions } from '@jupyterlab/running';
+import {
+  IRunningSessionManagers,
+  type IRunningSessions
+} from '@jupyterlab/running';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
-import { Workspace } from '@jupyterlab/services';
-import { WORKSPACE_ITEM_CLASS } from './commands';
+import { type Workspace } from '@jupyterlab/services';
+import { WORKSPACE_ITEM_CLASS } from './commands.js';
 import { blankIcon, checkIcon, deleteIcon } from '@jupyterlab/ui-components';
 
 /**

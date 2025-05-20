@@ -11,13 +11,17 @@
 
 import { ConsoleLogger, listen, MessageConnection } from 'vscode-ws-jsonrpc';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 import {
   registerServerCapability,
   unregisterServerCapability
-} from './server-capability-registration';
-import { IDocumentInfo, ILspConnection, ILspOptions } from './types';
+} from './server-capability-registration.js';
+import {
+  type IDocumentInfo,
+  type ILspConnection,
+  ILspOptions
+} from './types.js';
 
 import type * as protocol from 'vscode-languageserver-protocol';
 

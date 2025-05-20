@@ -5,10 +5,10 @@ import { showErrorMessage } from '@jupyterlab/apputils';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { fileUploadIcon, ToolbarButton } from '@jupyterlab/ui-components';
-import { FileBrowserModel } from './model';
+import { FileBrowserModel } from './model.js';
 
 /**
  * A widget which provides an upload button.

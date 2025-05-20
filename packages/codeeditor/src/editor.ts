@@ -2,14 +2,14 @@
 // Distributed under the terms of the Modified BSD License.
 
 import type { Extension } from '@codemirror/state';
-import { ISharedText, YFile } from '@jupyter/ydoc';
-import { IChangedArgs } from '@jupyterlab/coreutils';
-import { IObservableMap, ObservableMap } from '@jupyterlab/observables';
+import { type ISharedText, YFile } from '@jupyter/ydoc';
+import { type IChangedArgs } from '@jupyterlab/coreutils';
+import { type IObservableMap, ObservableMap } from '@jupyterlab/observables';
 import { ITranslator } from '@jupyterlab/translation';
-import { JSONObject } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
-import { IEditorMimeTypeService } from './mimetype';
+import { type JSONObject } from '@lumino/coreutils';
+import { type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { IEditorMimeTypeService } from './mimetype.js';
 
 /**
  * A namespace for code editors.

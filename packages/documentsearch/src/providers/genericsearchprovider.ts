@@ -3,11 +3,11 @@
 
 import { Widget } from '@lumino/widgets';
 import {
-  IHTMLSearchMatch,
-  ISearchProvider,
+  type IHTMLSearchMatch,
+  type ISearchProvider,
   ISearchProviderRegistry
-} from '../tokens';
-import { SearchProvider } from '../searchprovider';
+} from '../tokens.js';
+import { SearchProvider } from '../searchprovider.js';
 import { ITranslator } from '@jupyterlab/translation';
 
 export const FOUND_CLASSES = ['cm-string', 'cm-overlay', 'cm-searching'];
