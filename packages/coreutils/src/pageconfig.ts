@@ -3,7 +3,7 @@
 
 import { JSONExt } from '@lumino/coreutils';
 import minimist from 'minimist';
-import { URLExt } from './url';
+import { URLExt } from './url.js';
 
 /**
  * Declare stubs for the node variables.

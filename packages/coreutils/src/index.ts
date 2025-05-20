@@ -5,13 +5,13 @@
  * @module coreutils
  */
 
-export * from './activitymonitor';
-export * from './interfaces';
-export * from './lru';
-export * from './markdowncodeblocks';
-export * from './pageconfig';
-export * from './path';
-export * from './signal';
-export * from './text';
-export * from './time';
-export * from './url';
+export * from './activitymonitor.js';
+export * from './interfaces.js';
+export * from './lru.js';
+export * from './markdowncodeblocks.js';
+export * from './pageconfig.js';
+export * from './path.js';
+export * from './signal.js';
+export * from './text.js';
+export * from './time.js';
+export * from './url.js';

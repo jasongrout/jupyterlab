@@ -64,5 +64,6 @@
   },
   "jupyterlab": {
     "coreDependency": true
-  }
+  },
+  "type": "module"
 }
