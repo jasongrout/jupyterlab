@@ -152,7 +152,7 @@ def fix_files(errors, dry_run=False):
                         modified_lines.add(line_index)
                         
                         print(f"  Before: {line.strip()}")
-                        print(f"  After:  {new_line.strip()}")
+                        print(f"  After:  {new_line.strip()}\n")
                         total_fixed += 1
             
             # Write the file back if we made changes
