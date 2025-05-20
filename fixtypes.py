@@ -31,7 +31,10 @@ def get_tsc_errors():
         
         for match in re.finditer(type_error_pattern, output, re.MULTILINE):
             file_path, line, column, type_name = match.groups()
-                
+            if file_path.endswith('.d.ts'):
+                # Skip declaration files
+                continue
+
             errors.append({
                 'file_path': file_path,
                 'line': int(line),
@@ -41,11 +44,16 @@ def get_tsc_errors():
             })
         
         # Parse TS2835 errors (file extension required)
-        extension_error_pattern = r"^(.+\.ts[x]?)\((\d+),(\d+)\): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports.+Did you mean '(.+)'?"
+        extension_error_pattern = r"^(.+\.ts[x]?)\((\d+),(\d+)\): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports.+Did you mean '(.+)'\?"
         
         for match in re.finditer(extension_error_pattern, output, re.MULTILINE):
             file_path, line, column, suggested_path = match.groups()
                 
+            if file_path.endswith('.d.ts'):
+                # Skip declaration files
+                continue
+
+
             errors.append({
                 'file_path': file_path,
                 'line': int(line),
