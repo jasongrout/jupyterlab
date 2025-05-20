@@ -10,6 +10,8 @@ import fs from 'fs-extra';
 import childProcess from 'child_process';
 import { DepGraph } from 'dependency-graph';
 import sortPackageJson from 'sort-package-json';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 import assert from 'assert';
 
@@ -39,11 +41,11 @@ export function getLernaPaths(basePath = '.'): string[] {
   basePath = path.resolve(basePath);
   let packages;
   try {
-    let baseConfig = fs.readJSONSync(path.join(basePath, 'package.json'));
+    let baseConfig = require(path.join(basePath, 'package.json'));
     if (baseConfig.workspaces) {
       packages = baseConfig.workspaces.packages || baseConfig.workspaces;
     } else {
-      baseConfig = fs.readJSONSync(path.join(basePath, 'lerna.json'));
+      baseConfig = require(path.join(basePath, 'lerna.json'));
       packages = baseConfig.packages;
     }
   } catch (e) {
@@ -358,7 +360,7 @@ function findPackageJson(base: string, moduleDirs: string[]): NodeRequire {
   while (current !== root && !isModuleDir(current, moduleDirs)) {
     const pkgJsonPath = path.join(current, 'package.json');
     if (fs.existsSync(pkgJsonPath)) {
-      return fs.readJSONSync(pkgJsonPath);
+      return require(pkgJsonPath);
     }
     current = path.resolve(current, '..');
   }
@@ -380,7 +382,7 @@ function requirePackage(parentModule: string, module: string): NodeRequire {
     parentModulePath = require.resolve(parentModule);
   } catch {
     try {
-      return fs.readJSONSync(packagePath);
+      return require(packagePath);
     } catch {
       return findPackageJson(module, [path.resolve(packagePath, '..')]);
     }
