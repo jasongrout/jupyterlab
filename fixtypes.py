@@ -44,7 +44,7 @@ def get_tsc_errors():
             })
         
         # Parse TS2835 errors (file extension required)
-        extension_error_pattern = r"^(.+\.ts[x]?)\((\d+),(\d+)\): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports.+Did you mean '(.+)'\?"
+        extension_error_pattern = r"^(.+\.ts[x]?)\((\d+),(\d+)\): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports.+Did you mean '(.+?)'\?"
         
         for match in re.finditer(extension_error_pattern, output, re.MULTILINE):
             file_path, line, column, suggested_path = match.groups()
@@ -94,6 +94,26 @@ def fix_files(errors, dry_run=False):
             # Track which lines we've modified
             modified_lines = set()
             
+            # For multi-line imports, we need to identify the import block
+            import_blocks = {}  # maps start_line -> (end_line, module_path)
+            
+            # First pass: identify multi-line import blocks
+            for i, line in enumerate(lines):
+                # Check for the start of a multi-line import block
+                if 'import {' in line and not line.strip().endswith(';'):
+                    start_line = i
+                    module_path = None
+                    
+                    # Look for the end of this import block and the module path
+                    for j in range(i + 1, len(lines)):
+                        if 'from' in lines[j] and lines[j].strip().endswith(';'):
+                            # Found the end of the import block
+                            module_match = re.search(r"from\s+['\"](.+)['\"];", lines[j])
+                            if module_match:
+                                module_path = module_match.group(1)
+                                import_blocks[start_line] = (j, module_path)
+                                break
+                    
             # Fix each error
             for error in file_errors:
                 line_index = error['line'] - 1  # Convert to 0-based index
@@ -102,44 +122,74 @@ def fix_files(errors, dry_run=False):
                 if line_index in modified_lines:
                     continue
                 
-                line = lines[line_index]
-                
                 # Handle different error types
                 if error.get('error_code') == 1484:
                     # Fix type-only imports (TS1484)
                     type_name = error['type_name']
                     
-                    # Check if this is an import statement
-                    if 'import {' in line and '} from' in line:
-                        # Extract the imports
-                        import_match = re.search(r'import\s+\{([^}]+)\}\s+from', line)
-                        if import_match:
-                            imports = [imp.strip() for imp in import_match.group(1).split(',')]
+                    # Check if this line is part of a multi-line import
+                    in_multiline_import = False
+                    for start_line, (end_line, _) in import_blocks.items():
+                        if start_line <= line_index <= end_line:
+                            in_multiline_import = True
+                            break
+                    
+                    if in_multiline_import:
+                        # This is a multi-line import, handle it differently
+                        line = lines[line_index]
+                        
+                        # Check if this line contains just the type name
+                        # Handle both standalone and with trailing comma
+                        if re.search(r'^\s*' + re.escape(type_name) + r',?\s*$', line.strip()):
+                            # Add 'type' before the type name
+                            original_indent = re.match(r'(\s*)', line).group(1)
+                            if ',' in line:
+                                new_line = f"{original_indent}type {type_name},\n"
+                            else:
+                                new_line = f"{original_indent}type {type_name}\n"
                             
-                            # Update imports by adding 'type' before the problematic type
-                            updated_imports = []
-                            for imp in imports:
-                                # Check if this import is for the type we need to fix
-                                # Either exact match or "X as TypeName"
-                                if imp == type_name or re.search(rf'\w+\s+as\s+{re.escape(type_name)}$', imp):
-                                    if not imp.startswith('type '):
-                                        imp = f"type {imp}"
-                                updated_imports.append(imp)
-                            
-                            # Reconstruct the import statement
-                            new_line = line.replace(import_match.group(1), ", ".join(updated_imports))
                             lines[line_index] = new_line
                             modified_lines.add(line_index)
                             
                             print(f"  Before: {line.strip()}")
                             print(f"  After:  {new_line.strip()}\n")
                             total_fixed += 1
+                    else:
+                        # Regular single-line import
+                        line = lines[line_index]
+                        
+                        # Check if this is an import statement
+                        if 'import {' in line and '} from' in line:
+                            # Extract the imports
+                            import_match = re.search(r'import\s+\{([^}]+)\}\s+from', line)
+                            if import_match:
+                                imports = [imp.strip() for imp in import_match.group(1).split(',')]
+                                
+                                # Update imports by adding 'type' before the problematic type
+                                updated_imports = []
+                                for imp in imports:
+                                    # Check if this import is for the type we need to fix
+                                    # Either exact match or "X as TypeName"
+                                    if imp == type_name or re.search(rf'\w+\s+as\s+{re.escape(type_name)}$', imp):
+                                        if not imp.startswith('type '):
+                                            imp = f"type {imp}"
+                                    updated_imports.append(imp)
+                                
+                                # Reconstruct the import statement
+                                new_line = line.replace(import_match.group(1), ", ".join(updated_imports))
+                                lines[line_index] = new_line
+                                modified_lines.add(line_index)
+                                
+                                print(f"  Before: {line.strip()}")
+                                print(f"  After:  {new_line.strip()}\n")
+                                total_fixed += 1
                 
                 elif error.get('error_code') == 2835:
                     # Fix missing file extensions (TS2835)
                     suggested_path = error['suggested_path']
                     
                     # Find the import statement and replace the path
+                    line = lines[line_index]
                     import_pattern = r"from\s+['\"]([^'\"]+)['\"]"
                     import_match = re.search(import_pattern, line)
                     
