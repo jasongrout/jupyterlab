@@ -67,6 +67,25 @@ def get_tsc_errors():
                     "error_code": 2835,
                 }
             )
+            
+        # Parse TS2834 errors (relative import paths need explicit file extensions)
+        relative_import_error_pattern = r"^(.+\.ts[x]?)\((\d+),(\d+)\): error TS2834: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'"
+
+        for match in re.finditer(relative_import_error_pattern, output, re.MULTILINE):
+            file_path, line, column = match.groups()
+
+            if file_path.endswith(".d.ts"):
+                # Skip declaration files
+                continue
+
+            errors.append(
+                {
+                    "file_path": file_path,
+                    "line": int(line),
+                    "column": int(column),
+                    "error_code": 2834,
+                }
+            )
 
         return errors
     except Exception as e:
@@ -215,6 +234,32 @@ def fix_files(errors, dry_run=False):
                         print(f"  Before: {line.strip()}")
                         print(f"  After:  {new_line.strip()}\n")
                         total_fixed += 1
+                        
+                elif error.get("error_code") == 2834:
+                    # Fix relative import paths (TS2834) by adding /index.js
+                    line = lines[line_index]
+                    import_pattern = r"from\s+['\"]([^'\"]+)['\"]"
+                    import_match = re.search(import_pattern, line)
+
+                    if import_match:
+                        old_path = import_match.group(1)
+                        # Only add /index.js to relative paths that don't already have an extension
+                        if old_path.startswith('./') and not old_path.endswith('.js'):
+                            # Handle paths that might already have /index (without .js)
+                            if old_path.endswith('/index'):
+                                new_path = f"{old_path}.js"
+                            else:
+                                new_path = f"{old_path}/index.js"
+                            
+                            new_line = line.replace(f"'{old_path}'", f"'{new_path}'")
+                            new_line = new_line.replace(f'"{old_path}"', f'"{new_path}"')
+
+                            lines[line_index] = new_line
+                            modified_lines.add(line_index)
+
+                            print(f"  Before: {line.strip()}")
+                            print(f"  After:  {new_line.strip()}\n")
+                            total_fixed += 1
 
             # Write the file back if we made changes
             if modified_lines:
