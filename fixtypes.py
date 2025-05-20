@@ -2,7 +2,15 @@ import json
 import re
 import subprocess
 import sys
+import argparse
 from collections import defaultdict
+
+def parse_args():
+    """Parse command line arguments"""
+    parser = argparse.ArgumentParser(description="Fix TypeScript import errors")
+    parser.add_argument("--dry-run", action="store_true", 
+                      help="Show changes without modifying files")
+    return parser.parse_args()
 
 def get_tsc_errors():
     """Run tsc and get the errors as structured data"""
@@ -51,7 +59,7 @@ def get_tsc_errors():
         print(f"Error running tsc: {e}")
         return []
 
-def fix_files(errors):
+def fix_files(errors, dry_run=False):
     """Fix the files by modifying imports"""
     # Group errors by file to avoid multiple reads/writes
     file_groups = defaultdict(list)
@@ -116,7 +124,7 @@ def fix_files(errors):
                             modified_lines.add(line_index)
                             
                             print(f"  Before: {line.strip()}")
-                            print(f"  After:  {new_line.strip()}")
+                            print(f"  After:  {new_line.strip()}\n")
                             total_fixed += 1
                 
                 elif error.get('error_code') == 2835:
@@ -140,10 +148,13 @@ def fix_files(errors):
                         total_fixed += 1
             
             # Write the file back if we made changes
-            if False:#modified_lines:
-                with open(file_path, 'w', encoding='utf-8') as f:
-                    f.writelines(lines)
-                print(f"✓ Fixed {len(modified_lines)} import statements in {file_path}")
+            if modified_lines:
+                if dry_run:
+                    print(f"✓ Would fix {len(modified_lines)} import statements in {file_path} (dry run)")
+                else:
+                    with open(file_path, 'w', encoding='utf-8') as f:
+                        f.writelines(lines)
+                    print(f"✓ Fixed {len(modified_lines)} import statements in {file_path}")
             
         except Exception as e:
             print(f"Error processing {file_path}: {e}")
@@ -151,6 +162,11 @@ def fix_files(errors):
     return total_fixed
 
 def main():
+    args = parse_args()
+    
+    if args.dry_run:
+        print("Running in dry-run mode - no files will be modified")
+    
     print("Running TypeScript compiler to get errors...")
     errors = get_tsc_errors()
     print(errors)
@@ -160,9 +176,12 @@ def main():
         return
     
     # Fix the errors
-    total_fixed = fix_files(errors)
+    total_fixed = fix_files(errors, dry_run=args.dry_run)
     
-    print(f"\nDone! Fixed {total_fixed} import statements.")
+    if args.dry_run:
+        print(f"\nDone! Would fix {total_fixed} import statements (dry run)")
+    else:
+        print(f"\nDone! Fixed {total_fixed} import statements.")
 
 if __name__ == "__main__":
     main()
