@@ -1,8 +1,8 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { JSONValue } from '@lumino/coreutils';
-import { IObservableList, ObservableList } from './observablelist';
+import { type JSONValue } from '@lumino/coreutils';
+import { type IObservableList, ObservableList } from './observablelist.js';
 
 /**
  * An object which knows how to serialize and

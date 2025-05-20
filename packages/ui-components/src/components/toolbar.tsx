@@ -11,15 +11,15 @@ import {
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { find, map, some } from '@lumino/algorithm';
 import { CommandRegistry } from '@lumino/commands';
-import { ReadonlyJSONObject } from '@lumino/coreutils';
+import { type ReadonlyJSONObject } from '@lumino/coreutils';
 import { Message, MessageLoop } from '@lumino/messaging';
 import { AttachedProperty } from '@lumino/properties';
 import { Layout, PanelLayout, Widget } from '@lumino/widgets';
 import { Throttler } from '@lumino/polling';
 import * as React from 'react';
-import { ellipsesIcon, LabIcon } from '../icon';
-import { classes } from '../utils';
-import { ReactWidget, UseSignal } from './vdom';
+import { ellipsesIcon, LabIcon } from '../icon/index.js';
+import { classes } from '../utils.js';
+import { ReactWidget, UseSignal } from './vdom.js';
 
 provideJupyterDesignSystem().register([jpButton(), jpToolbar()]);
 addJupyterLabThemeChangeListener();

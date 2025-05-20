@@ -4,9 +4,9 @@
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { hpass, VirtualElement } from '@lumino/virtualdom';
 import { DockPanel, TabBar, TabPanel, Widget } from '@lumino/widgets';
-import { LabIconStyle } from '../../style';
-import { classes } from '../../utils';
-import { addIcon, closeIcon } from '../iconimports';
+import { LabIconStyle } from '../../style/index.js';
+import { classes } from '../../utils.js';
+import { addIcon, closeIcon } from '../iconimports.js';
 
 /**
  * a widget which displays titles as a single row or column of tabs.

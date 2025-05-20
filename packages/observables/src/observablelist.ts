@@ -2,8 +2,8 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { ArrayExt } from '@lumino/algorithm';
-import { IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
 
 /**
  * A list which can be observed for changes.

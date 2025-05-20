@@ -1,11 +1,11 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
-import { ReactWidget } from './vdom';
+import { ReactWidget } from './vdom.js';
 import { StringExt } from '@lumino/algorithm';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Search } from '@jupyter/react-components';
-import { searchIcon } from '../icon';
-import { ISignal } from '@lumino/signaling';
+import { searchIcon } from '../icon/index.js';
+import { type ISignal } from '@lumino/signaling';
 
 /**
  * The class name added to the filebrowser crumbs node.

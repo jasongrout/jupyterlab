@@ -5,11 +5,11 @@ import { ServerConnection } from '@jupyterlab/services';
 import { Gettext } from './gettext.js';
 import {
   DEFAULT_LANGUAGE_CODE,
-  DomainData,
+  type DomainData,
   ITranslator,
   ITranslatorConnector,
-  Language,
-  TranslationBundle,
+  type Language,
+  type TranslationBundle,
   TranslatorConnector
 } from './tokens.js';
 import { normalizeDomain } from './utils.js';

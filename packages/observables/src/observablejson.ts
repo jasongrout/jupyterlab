@@ -3,12 +3,12 @@
 
 import {
   JSONExt,
-  JSONObject,
-  PartialJSONObject,
-  ReadonlyPartialJSONValue
+  type JSONObject,
+  type PartialJSONObject,
+  type ReadonlyPartialJSONValue
 } from '@lumino/coreutils';
 import { Message } from '@lumino/messaging';
-import { IObservableMap, ObservableMap } from './observablemap';
+import { type IObservableMap, ObservableMap } from './observablemap.js';
 
 /**
  * An observable JSON value.

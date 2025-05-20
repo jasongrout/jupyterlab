@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { classes } from '../utils';
+import { classes } from '../utils.js';
 
 /**
  * Button component property

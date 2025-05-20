@@ -2,10 +2,10 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { Message } from '@lumino/messaging';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 import { Panel, PanelLayout, Title, Widget } from '@lumino/widgets';
 
-import { caretDownIcon } from '../icon';
+import { caretDownIcon } from '../icon/index.js';
 
 const COLLAPSE_CLASS = 'jp-Collapse';
 

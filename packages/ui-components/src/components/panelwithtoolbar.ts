@@ -4,7 +4,7 @@
  */
 
 import { Panel } from '@lumino/widgets';
-import { Toolbar } from './toolbar';
+import { Toolbar } from './toolbar.js';
 
 /**
  * A base class for panel widget with toolbar.

@@ -3,19 +3,22 @@
 
 import {
   JSONExt,
-  JSONObject,
-  JSONValue,
-  PartialJSONValue
+  type JSONObject,
+  type JSONValue,
+  type PartialJSONValue
 } from '@lumino/coreutils';
-import { DisposableSet, IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
-import { IObservableJSON, ObservableJSON } from './observablejson';
-import { IObservableMap, ObservableMap } from './observablemap';
-import { IObservableString, ObservableString } from './observablestring';
+import { DisposableSet, type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { type IObservableJSON, ObservableJSON } from './observablejson.js';
+import { type IObservableMap, ObservableMap } from './observablemap.js';
 import {
-  IObservableUndoableList,
+  type IObservableString,
+  ObservableString
+} from './observablestring.js';
+import {
+  type IObservableUndoableList,
   ObservableUndoableList
-} from './undoablelist';
+} from './undoablelist.js';
 
 /**
  * String type annotations for Observable objects that can be

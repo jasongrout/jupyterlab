@@ -4,19 +4,19 @@
  */
 
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
-import { JSONExt, ReadonlyJSONObject } from '@lumino/coreutils';
+import { JSONExt, type ReadonlyJSONObject } from '@lumino/coreutils';
 
-import Form, { FormProps, IChangeEvent } from '@rjsf/core';
+import Form, { type FormProps, type IChangeEvent } from '@rjsf/core';
 
 import {
   ADDITIONAL_PROPERTY_FLAG,
-  ArrayFieldTemplateProps,
+  type ArrayFieldTemplateProps,
   canExpand,
-  FieldTemplateProps,
+  type FieldTemplateProps,
   getTemplate,
-  ObjectFieldTemplateProps,
-  Registry,
-  UiSchema
+  type ObjectFieldTemplateProps,
+  type Registry,
+  type UiSchema
 } from '@rjsf/utils';
 
 import React from 'react';
@@ -26,7 +26,7 @@ import {
   caretUpIcon,
   closeIcon,
   LabIcon
-} from '../icon';
+} from '../icon/index.js';
 
 /**
  * Default `ui:options` for the UiSchema.
@@ -677,6 +677,10 @@ export function FormComponent(props: IFormComponentProps): JSX.Element {
   };
 
   return (
-    <Form templates={templates} formContext={formContext as any} {...others} />
+    <Form.default
+      templates={templates}
+      formContext={formContext as any}
+      {...others}
+    />
   );
 }

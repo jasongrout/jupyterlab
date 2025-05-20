@@ -1,8 +1,7 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { style as typestyleClass } from 'typestyle/lib';
-import { NestedCSSProperties } from 'typestyle/lib/types';
+import { types, style as typestyleClass } from 'typestyle';
 
 export namespace LabIconStyle {
   /**
@@ -91,13 +90,13 @@ export namespace LabIconStyle {
      * CSS properties that will be applied to the outer container
      * element via a typestyle class
      */
-    container?: NestedCSSProperties;
+    container?: types.NestedCSSProperties;
 
     /**
      * CSS properties that will be applied to the inner svg
      * element via a typestyle class
      */
-    element?: NestedCSSProperties;
+    element?: types.NestedCSSProperties;
 
     /**
      * Options that function as modifiers for this style's
@@ -130,7 +129,7 @@ export namespace LabIconStyle {
    */
   type ISheetResolvable = ISheet | IBuiltin;
 
-  export interface IProps extends NestedCSSProperties, ISheetOptions {
+  export interface IProps extends types.NestedCSSProperties, ISheetOptions {
     /**
      * Specify the icon styling. Can be either a string naming one of
      * the builtin icon stylesheets, a LabIconStyle.ISheet object, or an
@@ -387,7 +386,7 @@ export namespace LabIconStyle {
     }
   };
 
-  function _elementPositionFactory(extra: NestedCSSProperties): ISheet {
+  function _elementPositionFactory(extra: types.NestedCSSProperties): ISheet {
     return {
       container: {
         alignItems: 'center',

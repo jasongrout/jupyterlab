@@ -5,7 +5,7 @@ import { Gettext } from './gettext.js';
 import {
   DEFAULT_LANGUAGE_CODE,
   ITranslator,
-  TranslationBundle
+  type TranslationBundle
 } from './tokens.js';
 
 /**

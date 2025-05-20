@@ -1,9 +1,9 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
-import { IObservable } from './modeldb';
+import { type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { type IObservable } from './modeldb.js';
 
 /**
  * A map which can be observed for changes.
