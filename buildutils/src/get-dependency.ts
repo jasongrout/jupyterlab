@@ -5,7 +5,7 @@
 |----------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as utils from './utils';
+import * as utils from './utils.js';
 import packageJson from 'package-json';
 
 let allDeps: string[] = [];
@@ -76,7 +76,7 @@ export async function getDependency(name: string): Promise<string> {
   return Promise.resolve(version);
 }
 
-if (require.main === module) {
+if (import.meta.url.endsWith(process.argv[1])) {
   // Make sure we have required command line arguments.
   if (process.argv.length < 3) {
     const msg = '** Must supply a target library name\n';

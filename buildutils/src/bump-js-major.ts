@@ -6,7 +6,7 @@
 import { program as commander } from 'commander';
 import semver from 'semver';
 import path from 'path';
-import * as utils from './utils';
+import * as utils from './utils.js';
 
 /**
  * Get the packages that depend on a given package, recursively.

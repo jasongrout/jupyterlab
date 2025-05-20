@@ -6,7 +6,7 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as glob from 'glob';
-import { exitOnUncaughtException, readJSONFile } from './utils';
+import { exitOnUncaughtException, readJSONFile } from './utils.js';
 
 exitOnUncaughtException();
 

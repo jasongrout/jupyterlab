@@ -13,7 +13,7 @@ import glob from 'glob';
 
 import { Command } from 'commander';
 
-import * as utils from './utils';
+import * as utils from './utils.js';
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 const DEFAULT_OUT_DIR = path.join(os.tmpdir(), 'verdaccio');
@@ -308,6 +308,6 @@ program
     publishPackages(options.path || process.cwd());
   });
 
-if (require.main === module) {
+if (import.meta.url.endsWith(process.argv[1])) {
   program.parse(process.argv);
 }

@@ -7,7 +7,7 @@ import { program as commander } from 'commander';
 import * as crypto from 'crypto';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import * as utils from './utils';
+import * as utils from './utils.js';
 
 // Specify the program signature.
 commander

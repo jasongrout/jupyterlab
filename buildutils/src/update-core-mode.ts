@@ -5,8 +5,8 @@
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import * as utils from './utils';
-import { upgradeLock } from './update-staging-lock';
+import * as utils from './utils.js';
+import { upgradeLock } from './update-staging-lock.js';
 
 // Run integrity to update the dev_mode package.json
 utils.run('jlpm integrity');

@@ -5,7 +5,7 @@
 |----------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as utils from './utils';
+import * as utils from './utils.js';
 import packageJson from 'package-json';
 
 import { program as commander } from 'commander';

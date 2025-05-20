@@ -39,11 +39,11 @@ export function getLernaPaths(basePath = '.'): string[] {
   basePath = path.resolve(basePath);
   let packages;
   try {
-    let baseConfig = require(path.join(basePath, 'package.json'));
+    let baseConfig = fs.readJSONSync(path.join(basePath, 'package.json'));
     if (baseConfig.workspaces) {
       packages = baseConfig.workspaces.packages || baseConfig.workspaces;
     } else {
-      baseConfig = require(path.join(basePath, 'lerna.json'));
+      baseConfig = fs.readJSONSync(path.join(basePath, 'lerna.json'));
       packages = baseConfig.packages;
     }
   } catch (e) {
@@ -358,7 +358,7 @@ function findPackageJson(base: string, moduleDirs: string[]): NodeRequire {
   while (current !== root && !isModuleDir(current, moduleDirs)) {
     const pkgJsonPath = path.join(current, 'package.json');
     if (fs.existsSync(pkgJsonPath)) {
-      return require(pkgJsonPath);
+      return fs.readJSONSync(pkgJsonPath);
     }
     current = path.resolve(current, '..');
   }
@@ -380,7 +380,7 @@ function requirePackage(parentModule: string, module: string): NodeRequire {
     parentModulePath = require.resolve(parentModule);
   } catch {
     try {
-      return require(packagePath);
+      return fs.readJSONSync(packagePath);
     } catch {
       return findPackageJson(module, [path.resolve(packagePath, '..')]);
     }

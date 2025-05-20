@@ -4,7 +4,7 @@
 |----------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as utils from './utils';
+import * as utils from './utils.js';
 import packageJson from 'package-json';
 import { program as commander } from 'commander';
 import semver from 'semver';
@@ -82,6 +82,6 @@ points to the latest prerelease after it.`
     }
   });
 
-if (require.main === module) {
+if (import.meta.url.endsWith(process.argv[1])) {
   commander.parse(process.argv);
 }

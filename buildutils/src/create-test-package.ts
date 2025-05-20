@@ -5,9 +5,9 @@
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import * as utils from './utils';
+import * as utils from './utils.js';
 
-if (require.main === module) {
+if (import.meta.url.endsWith(process.argv[1])) {
   // Make sure we have required command line arguments.
   if (process.argv.length !== 3) {
     const msg = '** Must supply a source package name\n';

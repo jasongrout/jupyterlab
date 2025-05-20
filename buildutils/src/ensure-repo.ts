@@ -12,15 +12,15 @@
  * Manage the metapackage meta package.
  */
 import { execSync } from 'child_process';
-import * as glob from 'glob';
+import glob from 'glob';
 import * as path from 'path';
-import * as fs from 'fs-extra';
-import * as utils from './utils';
+import fs from 'fs-extra';
+import * as utils from './utils.js';
 import {
   ensurePackage,
   ensureUiComponents,
-  IEnsurePackageOptions
-} from './ensure-package';
+  type IEnsurePackageOptions
+} from './ensure-package.js';
 
 type Dict<T> = { [key: string]: T };
 
@@ -892,7 +892,7 @@ export async function ensureIntegrity(): Promise<boolean> {
   return true;
 }
 
-if (require.main === module) {
+if (import.meta.url.endsWith(process.argv[1])) {
   void ensureIntegrity().catch(e => {
     process.exitCode = 1;
     console.error(e);

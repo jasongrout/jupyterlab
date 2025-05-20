@@ -6,7 +6,7 @@
 import * as fs from 'fs-extra';
 import * as glob from 'glob';
 import * as path from 'path';
-import * as utils from './utils';
+import * as utils from './utils.js';
 
 utils.exitOnUncaughtException();
 

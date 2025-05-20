@@ -3,14 +3,14 @@
 | Distributed under the terms of the Modified BSD License.
 |----------------------------------------------------------------------------*/
 
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import * as glob from 'glob';
 import * as minimatch from 'minimatch';
 import * as path from 'path';
 import * as prettier from 'prettier';
 import * as ts from 'typescript';
-import { getDependency } from './get-dependency';
-import * as utils from './utils';
+import { getDependency } from './get-dependency.js';
+import * as utils from './utils.js';
 
 const HEADER_TEMPLATE = `
 /*-----------------------------------------------------------------------------
@@ -160,8 +160,10 @@ export async function ensurePackage(
 
   // For TypeScript files, verify imports match dependencies.
   let filenames: string[] = [];
-  filenames = glob.sync(path.join(pkgPath, 'src/*.ts*'));
-  filenames = filenames.concat(glob.sync(path.join(pkgPath, 'src/**/*.ts*')));
+  filenames = glob.default.sync(path.join(pkgPath, 'src/*.ts*'));
+  filenames = filenames.concat(
+    glob.default.sync(path.join(pkgPath, 'src/**/*.ts*'))
+  );
 
   const tsConfigPath = path.join(pkgPath, 'tsconfig.json');
   const usesTS = fs.existsSync(tsConfigPath);
@@ -403,14 +405,14 @@ export async function ensurePackage(
   const published = new Set<string>(
     data.files
       ? data.files.reduce((acc: string[], curr: string) => {
-          return acc.concat(glob.sync(path.join(pkgPath, curr)));
+          return acc.concat(glob.default.sync(path.join(pkgPath, curr)));
         }, [])
       : []
   );
 
   // Ensure that the `schema` directories match what is in the `package.json`
   const schemaDir = data.jupyterlab && data.jupyterlab.schemaDir;
-  const schemas = glob.sync(
+  const schemas = glob.default.sync(
     path.join(pkgPath, schemaDir || 'schema', '*.json')
   );
   if (schemaDir && !schemas.length && pkgPath.indexOf('examples') == -1) {
@@ -425,7 +427,7 @@ export async function ensurePackage(
   }
 
   // Ensure that the `style` directories match what is in the `package.json`
-  const styles = glob.sync(path.join(pkgPath, 'style', '**/*.*'));
+  const styles = glob.default.sync(path.join(pkgPath, 'style', '**/*.*'));
   const styleIndex: { [key: string]: string } = {};
   if (styles.length && usesTS) {
     // If there is no theme path, the style/styleModule must be defined
@@ -499,7 +501,7 @@ export async function ensurePackage(
       const sideEffects = new Set<string>(
         data.sideEffects
           ? data.sideEffects.reduce((acc: string[], curr: string) => {
-              return acc.concat(glob.sync(path.join(pkgPath, curr)));
+              return acc.concat(glob.default.sync(path.join(pkgPath, curr)));
             }, [])
           : []
       );
@@ -652,6 +654,9 @@ export async function ensurePackage(
     data.scripts['build:all'] = 'npm run build';
   }
 
+  // Ensure the package is interpreted as an ES moduleReference
+  data['type'] = 'module';
+
   // Ensure the main module has an @packageDocumentation comment
   let mainFile = path.join(pkgPath, 'src', 'index.ts');
   if (!fs.existsSync(mainFile)) {
@@ -720,7 +725,9 @@ export async function ensureUiComponents(
   const pkgName = utils.stem(pkgPath);
   const messages: string[] = [];
 
-  const svgPaths = glob.sync(path.join(pkgPath, 'style/icons', '**/*.svg'));
+  const svgPaths = glob.default.sync(
+    path.join(pkgPath, 'style/icons', '**/*.svg')
+  );
 
   /* support for glob import of icon svgs */
   const iconSrcDir = path.join(pkgPath, 'src/icon');

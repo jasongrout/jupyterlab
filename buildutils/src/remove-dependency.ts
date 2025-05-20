@@ -5,7 +5,7 @@
 |----------------------------------------------------------------------------*/
 
 import * as path from 'path';
-import * as utils from './utils';
+import * as utils from './utils.js';
 
 // Make sure we have required command line arguments.
 if (process.argv.length !== 3) {

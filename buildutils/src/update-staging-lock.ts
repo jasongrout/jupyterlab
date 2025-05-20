@@ -10,7 +10,7 @@ import { program } from 'commander';
 import fs from 'fs';
 import micromatch from 'micromatch';
 import semver from 'semver';
-import { exitOnUncaughtException, run } from './utils';
+import { exitOnUncaughtException, run } from './utils.js';
 
 /**
  * Yarn lock entry
@@ -149,7 +149,7 @@ function loadPackages(lockFile: string): Record<string, YarnEntry> {
   return parseSyml(yarnLock);
 }
 
-if (require.main === module) {
+if (import.meta.url.endsWith(process.argv[1])) {
   program
     .description(
       'Update yarn.lock at minima; aka only packages matching the provided pattern (support fnmatch syntax) are updated.'

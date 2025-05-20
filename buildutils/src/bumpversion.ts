@@ -4,7 +4,7 @@
 |----------------------------------------------------------------------------*/
 
 import { program as commander } from 'commander';
-import * as utils from './utils';
+import * as utils from './utils.js';
 
 // Specify the program signature.
 commander
