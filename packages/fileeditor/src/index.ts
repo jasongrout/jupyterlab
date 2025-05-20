@@ -5,10 +5,10 @@
  * @module fileeditor
  */
 
-export * from './fileeditorlspadapter';
-export * from './searchprovider';
-export * from './syntaxstatus';
-export * from './tabspacestatus';
-export * from './toc';
-export * from './tokens';
-export * from './widget';
+export * from './fileeditorlspadapter.js';
+export * from './searchprovider.js';
+export * from './syntaxstatus.js';
+export * from './tabspacestatus.js';
+export * from './toc/index.js';
+export * from './tokens.js';
+export * from './widget.js';

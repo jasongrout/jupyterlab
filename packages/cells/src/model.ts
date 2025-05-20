@@ -21,7 +21,7 @@ import {
   ObservableValue
 } from '@jupyterlab/observables';
 
-import { IOutputAreaModel, OutputAreaModel } from '@jupyterlab/outputarea';
+import { type IOutputAreaModel, OutputAreaModel } from '@jupyterlab/outputarea';
 
 import {
   type CellChange,

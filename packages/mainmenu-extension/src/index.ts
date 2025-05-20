@@ -10,7 +10,7 @@ import {
   ILabShell,
   IRouter,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   Dialog,
@@ -20,19 +20,19 @@ import {
 } from '@jupyterlab/apputils';
 import { PageConfig, URLExt } from '@jupyterlab/coreutils';
 import {
-  IEditMenu,
-  IFileMenu,
-  IHelpMenu,
-  IKernelMenu,
+  type IEditMenu,
+  type IFileMenu,
+  type IHelpMenu,
+  type IKernelMenu,
   IMainMenu,
-  IRunMenu,
-  ITabsMenu,
-  IViewMenu,
+  type IRunMenu,
+  type ITabsMenu,
+  type IViewMenu,
   MainMenu
 } from '@jupyterlab/mainmenu';
 import { ServerConnection } from '@jupyterlab/services';
 import { ISettingRegistry, SettingRegistry } from '@jupyterlab/settingregistry';
-import { ITranslator, TranslationBundle } from '@jupyterlab/translation';
+import { ITranslator, type TranslationBundle } from '@jupyterlab/translation';
 import {
   fastForwardIcon,
   RankedMenu,
@@ -42,9 +42,9 @@ import {
 } from '@jupyterlab/ui-components';
 import { find } from '@lumino/algorithm';
 import { JSONExt } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 import { Menu, Widget } from '@lumino/widgets';
-import { recentsMenuPlugin } from './recents';
+import { recentsMenuPlugin } from './recents.js';
 
 const PLUGIN_ID = '@jupyterlab/mainmenu-extension:plugin';
 

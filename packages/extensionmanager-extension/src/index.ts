@@ -8,7 +8,7 @@
 import {
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { Dialog, ICommandPalette, showDialog } from '@jupyterlab/apputils';
 import { ExtensionsPanel, ListModel } from '@jupyterlab/extensionmanager';
@@ -16,7 +16,7 @@ import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import { extensionIcon } from '@jupyterlab/ui-components';
 

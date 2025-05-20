@@ -7,7 +7,7 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { COMPLETER_ACTIVE_CLASS } from '@jupyterlab/codeeditor';
 import { CommandToolbarButton } from '@jupyterlab/ui-components';
@@ -27,14 +27,14 @@ import {
   caretLeftIcon,
   caretRightIcon,
   checkIcon,
-  IFormRenderer,
+  type IFormRenderer,
   IFormRendererRegistry
 } from '@jupyterlab/ui-components';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import type { FieldProps } from '@rjsf/utils';
 import { CommandRegistry } from '@lumino/commands';
 
-import { renderAvailableProviders } from './renderer';
+import { renderAvailableProviders } from './renderer.js';
 
 const COMPLETION_MANAGER_PLUGIN = '@jupyterlab/completer-extension:manager';
 const INLINE_COMPLETER_PLUGIN =

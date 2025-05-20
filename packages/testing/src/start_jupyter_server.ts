@@ -12,8 +12,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import { PageConfig, URLExt } from '@jupyterlab/coreutils';
-import { JSONObject, PromiseDelegate, UUID } from '@lumino/coreutils';
-import { sleep } from './common';
+import { type JSONObject, PromiseDelegate, UUID } from '@lumino/coreutils';
+import { sleep } from './common.js';
 
 /**
  * A Jupyter Server that runs as a child process.

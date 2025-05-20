@@ -4,14 +4,14 @@
  */
 
 import React from 'react';
-import { FieldProps } from '@rjsf/utils';
+import { type FieldProps } from '@rjsf/utils';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { addIcon, checkIcon, LabIcon } from '@jupyterlab/ui-components';
 import { reduce } from '@lumino/algorithm';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 
 /**

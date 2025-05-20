@@ -20,11 +20,11 @@ export {
   dangerDialog,
   dismissDialog,
   simulate
-} from './common';
+} from './common.js';
 
 export {
   IFileSystemFileEntryOptions,
   IFileSystemDirectoryEntryOptions
-} from './jest-data-transfer-mock';
+} from './jest-data-transfer-mock.js';
 
-export { JupyterServer } from './start_jupyter_server';
+export { JupyterServer } from './start_jupyter_server.js';

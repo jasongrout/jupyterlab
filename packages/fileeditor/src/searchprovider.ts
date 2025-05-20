@@ -5,14 +5,14 @@ import { MainAreaWidget } from '@jupyterlab/apputils';
 import { CodeMirrorEditor, EditorSearchProvider } from '@jupyterlab/codemirror';
 import { CodeEditor } from '@jupyterlab/codeeditor';
 import {
-  IFilters,
-  IReplaceOptionsSupport,
-  ISearchProvider
+  type IFilters,
+  type IReplaceOptionsSupport,
+  type ISearchProvider
 } from '@jupyterlab/documentsearch';
 import { ITranslator } from '@jupyterlab/translation';
 import { Widget } from '@lumino/widgets';
-import { FileEditor } from './widget';
-import { ISharedText, SourceChange } from '@jupyter/ydoc';
+import { FileEditor } from './widget.js';
+import { type ISharedText, type SourceChange } from '@jupyter/ydoc';
 
 /**
  * Helper type

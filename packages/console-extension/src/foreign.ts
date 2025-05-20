@@ -3,7 +3,7 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { ICommandPalette } from '@jupyterlab/apputils';
 import {
@@ -14,7 +14,7 @@ import {
 } from '@jupyterlab/console';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { ITranslator } from '@jupyterlab/translation';
-import { ReadonlyPartialJSONObject } from '@lumino/coreutils';
+import { type ReadonlyPartialJSONObject } from '@lumino/coreutils';
 import { AttachedProperty } from '@lumino/properties';
 
 /**

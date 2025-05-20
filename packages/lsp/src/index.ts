@@ -5,9 +5,9 @@
  * @module lsp
  */
 
-export * from './adapters';
+export * from './adapters/index.js';
 export * from './connection_manager.js';
-export * from './extractors';
+export * from './extractors/index.js';
 export * from './feature.js';
 export * from './manager.js';
 export * from './plugin.js';

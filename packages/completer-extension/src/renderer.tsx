@@ -4,7 +4,7 @@
  */
 
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
-import { ReadonlyPartialJSONObject } from '@lumino/coreutils';
+import { type ReadonlyPartialJSONObject } from '@lumino/coreutils';
 import type { FieldProps } from '@rjsf/utils';
 import React, { useState } from 'react';
 

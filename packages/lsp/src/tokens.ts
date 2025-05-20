@@ -12,7 +12,7 @@ import {
 } from '@lumino/disposable';
 import { type ISignal, Signal } from '@lumino/signaling';
 
-import { EditorAdapter, WidgetLSPAdapter } from './adapters';
+import { EditorAdapter, WidgetLSPAdapter } from './adapters/index.js';
 import { type IForeignCodeExtractor } from './extractors/types.js';
 import {
   type AnyCompletion,

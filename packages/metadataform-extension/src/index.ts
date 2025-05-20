@@ -7,13 +7,13 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { INotebookTools } from '@jupyterlab/notebook';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { ITranslator } from '@jupyterlab/translation';
 import { IFormRendererRegistry } from '@jupyterlab/ui-components';
-import { JSONExt, PartialJSONArray } from '@lumino/coreutils';
+import { JSONExt, type PartialJSONArray } from '@lumino/coreutils';
 
 import {
   IMetadataFormProvider,

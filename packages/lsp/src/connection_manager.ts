@@ -4,7 +4,7 @@
 import { PageConfig, URLExt } from '@jupyterlab/coreutils';
 import { type ISignal, Signal } from '@lumino/signaling';
 
-import { WidgetLSPAdapter } from './adapters';
+import { WidgetLSPAdapter } from './adapters/index.js';
 import { LSPConnection } from './connection.js';
 import { type ClientCapabilities } from './lsp.js';
 import { type AskServersToSendTraceNotifications } from './plugin.js';

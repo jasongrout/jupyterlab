@@ -26,8 +26,8 @@ import { DirListing } from '@jupyterlab/filebrowser';
 import * as nbformat from '@jupyterlab/nbformat';
 
 import {
-  IOutputPrompt,
-  IStdin,
+  type IOutputPrompt,
+  type IStdin,
   OutputArea,
   OutputPrompt,
   SimplifiedOutputArea,

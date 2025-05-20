@@ -3,9 +3,9 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
-import { ILoggerRegistry, LogLevel } from '@jupyterlab/logconsole';
+import { ILoggerRegistry, type LogLevel } from '@jupyterlab/logconsole';
 import * as nbformat from '@jupyterlab/nbformat';
 import { INotebookTracker, NotebookPanel } from '@jupyterlab/notebook';
 import { KernelMessage } from '@jupyterlab/services';

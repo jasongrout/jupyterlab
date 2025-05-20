@@ -9,7 +9,7 @@ import { PromiseDelegate } from '@lumino/coreutils';
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 
 import { ILatexTypesetter } from '@jupyterlab/rendermime';

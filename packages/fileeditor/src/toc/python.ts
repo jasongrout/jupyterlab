@@ -3,11 +3,17 @@
 
 /*eslint no-invalid-regexp: ["error", { "allowConstructorFlags": ["d"] }]*/
 
-import { DocumentRegistry, IDocumentWidget } from '@jupyterlab/docregistry';
+import {
+  DocumentRegistry,
+  type IDocumentWidget
+} from '@jupyterlab/docregistry';
 import { TableOfContents, TableOfContentsModel } from '@jupyterlab/toc';
 import { Widget } from '@lumino/widgets';
-import { FileEditor } from '../widget';
-import { EditorTableOfContentsFactory, IEditorHeading } from './factory';
+import { FileEditor } from '../widget.js';
+import {
+  EditorTableOfContentsFactory,
+  type IEditorHeading
+} from './factory.js';
 
 /**
  * Regular expression to create the outline

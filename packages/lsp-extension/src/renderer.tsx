@@ -2,7 +2,7 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
-import { ITranslator, TranslationBundle } from '@jupyterlab/translation';
+import { ITranslator, type TranslationBundle } from '@jupyterlab/translation';
 import { closeIcon } from '@jupyterlab/ui-components';
 import { UUID } from '@lumino/coreutils';
 import { Debouncer } from '@lumino/polling';

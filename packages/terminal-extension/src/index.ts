@@ -8,7 +8,7 @@
 import {
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   Clipboard,
@@ -19,7 +19,10 @@ import {
 } from '@jupyterlab/apputils';
 import { ILauncher } from '@jupyterlab/launcher';
 import { IMainMenu } from '@jupyterlab/mainmenu';
-import { IRunningSessionManagers, IRunningSessions } from '@jupyterlab/running';
+import {
+  IRunningSessionManagers,
+  type IRunningSessions
+} from '@jupyterlab/running';
 import { Terminal, TerminalAPI } from '@jupyterlab/services';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import {

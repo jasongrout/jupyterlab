@@ -6,10 +6,10 @@
 import {
   ILabShell,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { IEditorLanguageRegistry } from '@jupyterlab/codemirror';
-import { IDocumentWidget } from '@jupyterlab/docregistry';
+import { type IDocumentWidget } from '@jupyterlab/docregistry';
 import {
   EditorSyntaxStatus,
   FileEditor,

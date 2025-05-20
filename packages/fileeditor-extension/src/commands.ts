@@ -24,7 +24,7 @@ import {
 import { ICompletionProviderManager } from '@jupyterlab/completer';
 import { IConsoleTracker } from '@jupyterlab/console';
 import { MarkdownCodeBlocks, PathExt } from '@jupyterlab/coreutils';
-import { IDocumentWidget } from '@jupyterlab/docregistry';
+import { type IDocumentWidget } from '@jupyterlab/docregistry';
 import { IDefaultFileBrowser } from '@jupyterlab/filebrowser';
 import { FileEditor, IEditorTracker } from '@jupyterlab/fileeditor';
 import { ILauncher } from '@jupyterlab/launcher';
@@ -33,7 +33,7 @@ import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import {
   ITranslator,
   nullTranslator,
-  TranslationBundle
+  type TranslationBundle
 } from '@jupyterlab/translation';
 import {
   consoleIcon,
@@ -49,11 +49,11 @@ import {
 import { find } from '@lumino/algorithm';
 import { CommandRegistry } from '@lumino/commands';
 import {
-  JSONObject,
-  ReadonlyJSONObject,
-  ReadonlyPartialJSONObject
+  type JSONObject,
+  type ReadonlyJSONObject,
+  type ReadonlyPartialJSONObject
 } from '@lumino/coreutils';
-import { DisposableSet, IDisposable } from '@lumino/disposable';
+import { DisposableSet, type IDisposable } from '@lumino/disposable';
 
 const autoClosingBracketsNotebook = 'notebook:toggle-autoclosing-brackets';
 const autoClosingBracketsConsole = 'console:toggle-autoclosing-brackets';

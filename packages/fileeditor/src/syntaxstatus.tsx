@@ -5,12 +5,12 @@
 
 import { CodeEditor, IEditorMimeTypeService } from '@jupyterlab/codeeditor';
 import { IEditorLanguageRegistry } from '@jupyterlab/codemirror';
-import { IChangedArgs } from '@jupyterlab/coreutils';
+import { type IChangedArgs } from '@jupyterlab/coreutils';
 import { Popup, showPopup, TextItem } from '@jupyterlab/statusbar';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { VDomModel, VDomRenderer } from '@jupyterlab/ui-components';
 import { CommandRegistry } from '@lumino/commands';
-import { JSONObject } from '@lumino/coreutils';
+import { type JSONObject } from '@lumino/coreutils';
 import { Menu } from '@lumino/widgets';
 import React from 'react';
 

@@ -8,7 +8,7 @@
 import {
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   createToolbarFactory,
@@ -33,7 +33,10 @@ import {
 } from '@jupyterlab/codemirror';
 import { ICompletionProviderManager } from '@jupyterlab/completer';
 import { IConsoleTracker } from '@jupyterlab/console';
-import { DocumentRegistry, IDocumentWidget } from '@jupyterlab/docregistry';
+import {
+  DocumentRegistry,
+  type IDocumentWidget
+} from '@jupyterlab/docregistry';
 import { ISearchProviderRegistry } from '@jupyterlab/documentsearch';
 import { IDefaultFileBrowser } from '@jupyterlab/filebrowser';
 import {
@@ -57,8 +60,8 @@ import {
   WidgetLSPAdapterTracker
 } from '@jupyterlab/lsp';
 import { IMainMenu } from '@jupyterlab/mainmenu';
-import { IObservableList } from '@jupyterlab/observables';
-import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
+import { type IObservableList } from '@jupyterlab/observables';
+import { type IRenderMime } from '@jupyterlab/rendermime-interfaces';
 import { Session } from '@jupyterlab/services';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { IStatusBar } from '@jupyterlab/statusbar';
@@ -66,14 +69,19 @@ import { ITableOfContentsRegistry } from '@jupyterlab/toc';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { IFormRendererRegistry, MenuSvg } from '@jupyterlab/ui-components';
 import { find } from '@lumino/algorithm';
-import { JSONObject } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
+import { type JSONObject } from '@lumino/coreutils';
+import { type IDisposable } from '@lumino/disposable';
 import { Widget } from '@lumino/widgets';
 
-import { CommandIDs, Commands, FACTORY, IFileTypeData } from './commands';
-import { editorSyntaxStatus } from './syntaxstatus';
+import {
+  CommandIDs,
+  Commands,
+  FACTORY,
+  type IFileTypeData
+} from './commands.js';
+import { editorSyntaxStatus } from './syntaxstatus.js';
 
-export { Commands } from './commands';
+export { Commands } from './commands.js';
 
 /**
  * The editor tracker extension.

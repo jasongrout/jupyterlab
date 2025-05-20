@@ -9,7 +9,7 @@ import {
   type JSONArray,
   JSONExt,
   type JSONObject,
-  JSONValue
+  type JSONValue
 } from '@lumino/coreutils';
 import * as React from 'react';
 import Highlighter from 'react-highlight-words';

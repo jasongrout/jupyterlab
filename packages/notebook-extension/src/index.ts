@@ -12,7 +12,7 @@ import {
   ILayoutRestorer,
   IRouter,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   createToolbarFactory,
@@ -21,7 +21,7 @@ import {
   IKernelStatusModel,
   InputDialog,
   ISanitizer,
-  ISessionContext,
+  type ISessionContext,
   ISessionContextDialogs,
   IToolbarWidgetRegistry,
   MainAreaWidget,
@@ -38,7 +38,7 @@ import {
   IEditorServices,
   IPositionModel
 } from '@jupyterlab/codeeditor';
-import { IChangedArgs, PageConfig } from '@jupyterlab/coreutils';
+import { type IChangedArgs, PageConfig } from '@jupyterlab/coreutils';
 
 import {
   IEditorExtensionRegistry,
@@ -47,7 +47,10 @@ import {
 import { ICompletionProviderManager } from '@jupyterlab/completer';
 import { IDocumentManager } from '@jupyterlab/docmanager';
 import { ToolbarItems as DocToolbarItems } from '@jupyterlab/docmanager-extension';
-import { DocumentRegistry, IDocumentWidget } from '@jupyterlab/docregistry';
+import {
+  DocumentRegistry,
+  type IDocumentWidget
+} from '@jupyterlab/docregistry';
 import { ISearchProviderRegistry } from '@jupyterlab/documentsearch';
 import {
   IDefaultFileBrowser,
@@ -86,14 +89,14 @@ import {
   StaticNotebook,
   ToolbarItems
 } from '@jupyterlab/notebook';
-import { IObservableList } from '@jupyterlab/observables';
+import { type IObservableList } from '@jupyterlab/observables';
 import { IPropertyInspectorProvider } from '@jupyterlab/property-inspector';
 import {
   IMarkdownParser,
-  IRenderMime,
+  type IRenderMime,
   IRenderMimeRegistry
 } from '@jupyterlab/rendermime';
-import { NbConvert } from '@jupyterlab/services';
+import { type NbConvert } from '@jupyterlab/services';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { IStateDB } from '@jupyterlab/statedb';
 import { IStatusBar } from '@jupyterlab/statusbar';
@@ -107,7 +110,7 @@ import {
   cutIcon,
   duplicateIcon,
   fastForwardIcon,
-  IFormRenderer,
+  type IFormRenderer,
   IFormRendererRegistry,
   moveDownIcon,
   moveUpIcon,
@@ -122,21 +125,21 @@ import { ArrayExt } from '@lumino/algorithm';
 import { CommandRegistry } from '@lumino/commands';
 import {
   JSONExt,
-  JSONObject,
-  ReadonlyJSONValue,
-  ReadonlyPartialJSONObject,
+  type JSONObject,
+  type ReadonlyJSONValue,
+  type ReadonlyPartialJSONObject,
   UUID
 } from '@lumino/coreutils';
-import { DisposableSet, IDisposable } from '@lumino/disposable';
+import { DisposableSet, type IDisposable } from '@lumino/disposable';
 import { Message, MessageLoop } from '@lumino/messaging';
 import { Menu, Panel, Widget } from '@lumino/widgets';
-import { cellExecutor } from './cellexecutor';
-import { logNotebookOutput } from './nboutput';
-import { ActiveCellTool } from './tool-widgets/activeCellToolWidget';
+import { cellExecutor } from './cellexecutor.js';
+import { logNotebookOutput } from './nboutput.js';
+import { ActiveCellTool } from './tool-widgets/activeCellToolWidget.js';
 import {
   CellMetadataField,
   NotebookMetadataField
-} from './tool-widgets/metadataEditorFields';
+} from './tool-widgets/metadataEditorFields.js';
 
 /**
  * The command IDs used by the notebook plugin.

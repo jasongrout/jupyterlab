@@ -9,7 +9,7 @@ import {
   ILabStatus,
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   createToolbarFactory,
@@ -17,7 +17,7 @@ import {
   ICommandPalette,
   IKernelStatusModel,
   ISanitizer,
-  ISessionContext,
+  type ISessionContext,
   ISessionContextDialogs,
   IToolbarWidgetRegistry,
   Sanitizer,
@@ -43,7 +43,7 @@ import {
 import { IDefaultFileBrowser } from '@jupyterlab/filebrowser';
 import { ILauncher } from '@jupyterlab/launcher';
 import { IMainMenu } from '@jupyterlab/mainmenu';
-import { IRenderMime, IRenderMimeRegistry } from '@jupyterlab/rendermime';
+import { type IRenderMime, IRenderMimeRegistry } from '@jupyterlab/rendermime';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import {
@@ -64,15 +64,15 @@ import {
 import { find } from '@lumino/algorithm';
 import {
   JSONExt,
-  JSONObject,
-  ReadonlyJSONValue,
-  ReadonlyPartialJSONObject,
+  type JSONObject,
+  type ReadonlyJSONValue,
+  type ReadonlyPartialJSONObject,
   UUID
 } from '@lumino/coreutils';
 import { DisposableSet } from '@lumino/disposable';
 import { DockLayout, Menu, Widget } from '@lumino/widgets';
-import foreign from './foreign';
-import { cellExecutor } from './cellexecutor';
+import foreign from './foreign.js';
+import { cellExecutor } from './cellexecutor.js';
 
 /**
  * The command IDs used by the console plugin.

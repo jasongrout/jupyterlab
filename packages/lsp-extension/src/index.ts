@@ -7,7 +7,7 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin,
+  type JupyterFrontEndPlugin,
   LabShell
 } from '@jupyterlab/application';
 import {
@@ -26,19 +26,22 @@ import {
   TLanguageServerId,
   WidgetLSPAdapterTracker
 } from '@jupyterlab/lsp';
-import { IRunningSessionManagers, IRunningSessions } from '@jupyterlab/running';
+import {
+  IRunningSessionManagers,
+  type IRunningSessions
+} from '@jupyterlab/running';
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { ITranslator } from '@jupyterlab/translation';
 import {
-  IFormRenderer,
+  type IFormRenderer,
   IFormRendererRegistry,
   LabIcon,
   pythonIcon
 } from '@jupyterlab/ui-components';
-import { PartialJSONObject } from '@lumino/coreutils';
+import { type PartialJSONObject } from '@lumino/coreutils';
 import { Signal } from '@lumino/signaling';
 
-import { renderServerSetting } from './renderer';
+import { renderServerSetting } from './renderer.js';
 
 import type { FieldProps } from '@rjsf/utils';
 

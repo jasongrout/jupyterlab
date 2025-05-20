@@ -5,11 +5,11 @@
 
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { PathExt } from '@jupyterlab/coreutils';
 import { showErrorMessage } from '@jupyterlab/apputils';
-import { IRecentsManager, RecentDocument } from '@jupyterlab/docmanager';
+import { IRecentsManager, type RecentDocument } from '@jupyterlab/docmanager';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { IFileBrowserCommands } from '@jupyterlab/filebrowser';
 import { IMainMenu } from '@jupyterlab/mainmenu';

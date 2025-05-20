@@ -7,7 +7,7 @@
 
 /* global globalThis */
 
-import { DataTransferMock } from './jest-data-transfer-mock';
+import { DataTransferMock } from './jest-data-transfer-mock.js';
 
 globalThis.DragEvent = class DragEvent extends Event {
   dataTransfer: DataTransfer;

@@ -3,7 +3,10 @@
 
 import { IEditorMimeTypeService } from '@jupyterlab/codeeditor';
 import { CodeMirrorEditor } from '@jupyterlab/codemirror';
-import { DocumentRegistry, IDocumentWidget } from '@jupyterlab/docregistry';
+import {
+  DocumentRegistry,
+  type IDocumentWidget
+} from '@jupyterlab/docregistry';
 import {
   Document,
   IAdapterOptions,
@@ -13,7 +16,7 @@ import {
 } from '@jupyterlab/lsp';
 import { PromiseDelegate } from '@lumino/coreutils';
 
-import { FileEditor } from './widget';
+import { FileEditor } from './widget.js';
 
 export interface IFileEditorAdapterOptions extends IAdapterOptions {
   /**

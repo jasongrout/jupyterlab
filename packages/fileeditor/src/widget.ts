@@ -11,7 +11,7 @@ import {
   ABCWidgetFactory,
   DocumentRegistry,
   DocumentWidget,
-  IDocumentWidget
+  type IDocumentWidget
 } from '@jupyterlab/docregistry';
 import { textEditorIcon } from '@jupyterlab/ui-components';
 import { PromiseDelegate } from '@lumino/coreutils';

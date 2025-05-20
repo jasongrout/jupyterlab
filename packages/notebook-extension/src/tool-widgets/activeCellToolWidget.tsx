@@ -4,10 +4,10 @@
  */
 
 import React from 'react';
-import { FieldProps } from '@rjsf/utils';
+import { type FieldProps } from '@rjsf/utils';
 import { IEditorLanguageRegistry } from '@jupyterlab/codemirror';
 import { INotebookTracker, NotebookTools } from '@jupyterlab/notebook';
-import { ISharedText } from '@jupyter/ydoc';
+import { type ISharedText } from '@jupyter/ydoc';
 import { PanelLayout, Widget } from '@lumino/widgets';
 import { CodeCellModel, ICellModel, InputPrompt } from '@jupyterlab/cells';
 import { Debouncer } from '@lumino/polling';

@@ -11,7 +11,7 @@ import {
   ILabStatus,
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import {
   Dialog,
@@ -46,11 +46,11 @@ import {
   settingsIcon,
   undoIcon
 } from '@jupyterlab/ui-components';
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 import {
   ImportSettingsDialogBodyWidget,
   ImportSettingsWidget
-} from './importSettingsWidget';
+} from './importSettingsWidget.js';
 
 /**
  * The command IDs used by the setting editor.

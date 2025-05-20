@@ -20,7 +20,7 @@ import {
 import {
   type IDocumentInfo,
   type ILspConnection,
-  ILspOptions
+  type ILspOptions
 } from './types.js';
 
 import type * as protocol from 'vscode-languageserver-protocol';

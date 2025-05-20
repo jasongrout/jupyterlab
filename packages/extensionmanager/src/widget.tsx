@@ -21,7 +21,7 @@ import ReactPaginate from 'react-paginate';
 import {
   type Action,
   type IActionOptions,
-  IEntry,
+  type IEntry,
   ListModel
 } from './model.js';
 

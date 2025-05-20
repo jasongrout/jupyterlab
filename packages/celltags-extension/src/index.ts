@@ -8,14 +8,14 @@
 import type { FieldProps } from '@rjsf/utils';
 import {
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 
 import { INotebookTracker } from '@jupyterlab/notebook';
 
-import { CellTagField } from './celltag';
+import { CellTagField } from './celltag.js';
 import {
-  IFormRenderer,
+  type IFormRenderer,
   IFormRendererRegistry
 } from '@jupyterlab/ui-components';
 

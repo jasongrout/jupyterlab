@@ -1,13 +1,16 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { DocumentRegistry, IDocumentWidget } from '@jupyterlab/docregistry';
+import {
+  DocumentRegistry,
+  type IDocumentWidget
+} from '@jupyterlab/docregistry';
 import {
   TableOfContents,
   TableOfContentsFactory,
   TableOfContentsModel
 } from '@jupyterlab/toc';
-import { FileEditor } from '../widget';
+import { FileEditor } from '../widget.js';
 
 /**
  * Interface describing a file editor heading.

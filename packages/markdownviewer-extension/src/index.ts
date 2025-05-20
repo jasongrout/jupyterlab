@@ -8,7 +8,7 @@
 import {
   ILayoutRestorer,
   JupyterFrontEnd,
-  JupyterFrontEndPlugin
+  type JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { ISanitizer, WidgetTracker } from '@jupyterlab/apputils';
 import { PathExt } from '@jupyterlab/coreutils';
@@ -20,7 +20,7 @@ import {
   MarkdownViewerTableOfContentsFactory
 } from '@jupyterlab/markdownviewer';
 import {
-  IRenderMime,
+  type IRenderMime,
   IRenderMimeRegistry,
   markdownRendererFactory
 } from '@jupyterlab/rendermime';
