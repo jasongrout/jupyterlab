@@ -1,11 +1,11 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ServerConnection } from '../serverconnection';
-import { Session } from '.';
+import { ServerConnection } from '../serverconnection.js';
+import { Session } from '../index.js';
 import { URLExt } from '@jupyterlab/coreutils';
-import { updateLegacySessionModel, validateModel } from './validate';
-import { ISessionAPIClient } from './session';
+import { updateLegacySessionModel, validateModel } from './validate.js';
+import { type ISessionAPIClient } from './session.js';
 
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;

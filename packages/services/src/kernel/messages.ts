@@ -2,7 +2,7 @@
 // Distributed under the terms of the Modified BSD License.
 
 import * as nbformat from '@jupyterlab/nbformat';
-import { JSONObject, UUID } from '@lumino/coreutils';
+import { type JSONObject, UUID } from '@lumino/coreutils';
 
 export interface IOptions<T extends Message> {
   session: string;

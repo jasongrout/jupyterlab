@@ -5,15 +5,15 @@ import type { DocumentChange, ISharedDocument, YDocument } from '@jupyter/ydoc';
 
 import { PathExt, URLExt } from '@jupyterlab/coreutils';
 
-import { PartialJSONObject } from '@lumino/coreutils';
+import { type PartialJSONObject } from '@lumino/coreutils';
 
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { ServerConnection } from '..';
+import { ServerConnection } from '../index.js';
 
-import * as validate from './validate';
+import * as validate from './validate.js';
 
 /**
  * The url for the default drive service.

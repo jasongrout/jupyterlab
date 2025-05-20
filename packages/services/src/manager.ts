@@ -1,35 +1,35 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IDisposable } from '@lumino/disposable';
+import { type IDisposable } from '@lumino/disposable';
 
 import { Poll } from '@lumino/polling';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { Builder, BuildManager } from './builder';
+import { type Builder, BuildManager } from './builder/index.js';
 
-import { Contents, ContentsManager } from './contents';
+import { Contents, ContentsManager } from './contents/index.js';
 
-import { Event, EventManager } from './event';
+import { type Event, EventManager } from './event/index.js';
 
-import { Kernel, KernelManager } from './kernel';
+import { Kernel, KernelManager } from './kernel/index.js';
 
-import { KernelSpec, KernelSpecManager } from './kernelspec';
+import { KernelSpec, KernelSpecManager } from './kernelspec/index.js';
 
-import { NbConvert, NbConvertManager } from './nbconvert';
+import { type NbConvert, NbConvertManager } from './nbconvert/index.js';
 
-import { ServerConnection } from './serverconnection';
+import { ServerConnection } from './serverconnection.js';
 
-import { Session, SessionManager } from './session';
+import { Session, SessionManager } from './session/index.js';
 
-import { Setting, SettingManager } from './setting';
+import { type Setting, SettingManager } from './setting/index.js';
 
-import { Terminal, TerminalManager } from './terminal';
+import { Terminal, TerminalManager } from './terminal/index.js';
 
-import { User, UserManager } from './user';
+import { type User, UserManager } from './user/index.js';
 
-import { Workspace, WorkspaceManager } from './workspace';
+import { type Workspace, WorkspaceManager } from './workspace/index.js';
 
 /**
  * A Jupyter services manager.

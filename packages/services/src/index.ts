@@ -5,21 +5,21 @@
  * @module services
  */
 
-export * from './basemanager';
-export * from './config';
-export * from './connectionstatus';
-export * from './contents';
-export * from './event';
-export * from './kernel';
-export * from './kernelspec';
-export * from './manager';
-export * from './serverconnection';
-export * from './session';
-export * from './setting';
-export * from './terminal';
-export * from './tokens';
-export * from './user';
-export * from './workspace';
-export * from './nbconvert';
+export * from './basemanager.js';
+export * from './config/index.js';
+export * from './connectionstatus.js';
+export * from './contents/index.js';
+export * from './event/index.js';
+export * from './kernel/index.js';
+export * from './kernelspec/index.js';
+export * from './manager.js';
+export * from './serverconnection.js';
+export * from './session/index.js';
+export * from './setting/index.js';
+export * from './terminal/index.js';
+export * from './tokens.js';
+export * from './user/index.js';
+export * from './workspace/index.js';
+export * from './nbconvert/index.js';
 
-export { Builder } from './builder';
+export { type Builder } from './builder/index.js';

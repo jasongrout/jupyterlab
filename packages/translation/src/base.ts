@@ -1,12 +1,12 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { Gettext } from './gettext';
+import { Gettext } from './gettext.js';
 import {
   DEFAULT_LANGUAGE_CODE,
   ITranslator,
   TranslationBundle
-} from './tokens';
+} from './tokens.js';
 
 /**
  * A translator that loads a dummy language bundle that returns the same input

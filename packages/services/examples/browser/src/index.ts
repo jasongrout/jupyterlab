@@ -11,15 +11,15 @@ import { PageConfig, URLExt } from '@jupyterlab/coreutils';
   'example/'
 );
 
-import * as comm from './comm';
-import * as config from './config';
-import * as contents from './contents';
-import * as kernel from './kernel';
-import * as kernelspec from './kernelspec';
-import * as session from './session';
-import * as terminal from './terminal';
+import * as comm from './comm.js';
+import * as config from './config.js';
+import * as contents from './contents.js';
+import * as kernel from './kernel.js';
+import * as kernelspec from './kernelspec.js';
+import * as session from './session.js';
+import * as terminal from './terminal.js';
 
-import { log } from './log';
+import { log } from './log.js';
 
 async function main() {
   try {

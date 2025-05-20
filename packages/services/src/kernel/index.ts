@@ -2,13 +2,13 @@
 // Distributed under the terms of the Modified BSD License.
 
 // Namespace some of our modules for convenience and backwards compatibility.
-import { CommsOverSubshells } from './comm';
-import * as Kernel from './kernel';
-import * as KernelMessage from './messages';
-import * as KernelAPI from './restapi';
-import { KernelConnection } from './default';
+import { CommsOverSubshells } from './comm.js';
+import * as Kernel from './kernel.js';
+import * as KernelMessage from './messages.js';
+import * as KernelAPI from './restapi.js';
+import { KernelConnection } from './default.js';
 
-export * from './manager';
+export * from './manager.js';
 export {
   Kernel,
   KernelMessage,

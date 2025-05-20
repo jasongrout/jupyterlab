@@ -5,17 +5,17 @@ import { URLExt } from '@jupyterlab/coreutils';
 
 import {
   JSONExt,
-  PartialJSONObject,
-  ReadonlyJSONObject
+  type PartialJSONObject,
+  type ReadonlyJSONObject
 } from '@lumino/coreutils';
 
 import { Poll } from '@lumino/polling';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { ServerConnection } from '../serverconnection';
+import { ServerConnection } from '../serverconnection.js';
 
-import { BaseManager, IManager as IBaseManager } from '../basemanager';
+import { BaseManager, type IManager as IBaseManager } from '../basemanager.js';
 
 /**
  * The url for the lab workspaces service.

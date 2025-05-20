@@ -1,13 +1,13 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { JSONObject, PromiseDelegate } from '@lumino/coreutils';
+import { type JSONObject, PromiseDelegate } from '@lumino/coreutils';
 
 import { DisposableDelegate } from '@lumino/disposable';
 
-import * as Kernel from './kernel';
+import * as Kernel from './kernel.js';
 
-import * as KernelMessage from './messages';
+import * as KernelMessage from './messages.js';
 
 /**
  * The Comm Over Subshell Enum

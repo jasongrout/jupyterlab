@@ -4,18 +4,18 @@
 import {
   ConfigSection,
   Contents,
-  Event,
+  type Event,
   Kernel,
   KernelSpec,
-  NbConvert,
+  type NbConvert,
   ServerConnection,
   Session,
-  Setting,
+  type Setting,
   Terminal,
-  User,
-  Workspace
-} from '.';
-import { ServiceManager } from './manager';
+  type User,
+  type Workspace
+} from './index.js';
+import { ServiceManager } from './manager.js';
 
 import { type IPlugin, Token } from '@lumino/coreutils';
 

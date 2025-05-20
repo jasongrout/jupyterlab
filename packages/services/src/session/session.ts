@@ -1,17 +1,20 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IDisposable, IObservableDisposable } from '@lumino/disposable';
+import {
+  type IDisposable,
+  type IObservableDisposable
+} from '@lumino/disposable';
 
-import { ISignal } from '@lumino/signaling';
+import { type ISignal } from '@lumino/signaling';
 
-import { Kernel, KernelMessage } from '../kernel';
+import { Kernel, KernelMessage } from '../kernel/index.js';
 
-import { ServerConnection } from '..';
+import { ServerConnection } from '../index.js';
 
-import { IChangedArgs } from '@jupyterlab/coreutils';
+import { type IChangedArgs } from '@jupyterlab/coreutils';
 
-import { DeepPartial } from './restapi';
+import { type DeepPartial } from './restapi.js';
 
 /**
  * Interface of a session object.

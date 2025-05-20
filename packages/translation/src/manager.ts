@@ -2,7 +2,7 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { ServerConnection } from '@jupyterlab/services';
-import { Gettext } from './gettext';
+import { Gettext } from './gettext.js';
 import {
   DEFAULT_LANGUAGE_CODE,
   DomainData,
@@ -11,8 +11,8 @@ import {
   Language,
   TranslationBundle,
   TranslatorConnector
-} from './tokens';
-import { normalizeDomain } from './utils';
+} from './tokens.js';
+import { normalizeDomain } from './utils.js';
 
 /**
  * Translation Manager.

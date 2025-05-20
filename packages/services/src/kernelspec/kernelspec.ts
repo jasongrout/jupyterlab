@@ -1,12 +1,12 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ISignal } from '@lumino/signaling';
+import { type ISignal } from '@lumino/signaling';
 
-import { IManager as IBaseManager } from '../basemanager';
-import { ISpecModel, ISpecModels } from './restapi';
-import { ServerConnection } from '..';
-export { ISpecModel, ISpecModels };
+import { type IManager as IBaseManager } from '../basemanager.js';
+import { type ISpecModel, type ISpecModels } from './restapi.js';
+import { ServerConnection } from '../index.js';
+export { type ISpecModel, type ISpecModels };
 
 /**
  * Object which manages kernel instances for a given base url.

@@ -1,25 +1,25 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IDataConnector } from '@jupyterlab/statedb';
+import { type IDataConnector } from '@jupyterlab/statedb';
 import { CommandRegistry } from '@lumino/commands';
 import {
   JSONExt,
-  JSONObject,
-  JSONValue,
-  PartialJSONArray,
-  PartialJSONObject,
-  PartialJSONValue,
-  ReadonlyJSONObject,
-  ReadonlyPartialJSONObject,
-  ReadonlyPartialJSONValue
+  type JSONObject,
+  type JSONValue,
+  type PartialJSONArray,
+  type PartialJSONObject,
+  type PartialJSONValue,
+  type ReadonlyJSONObject,
+  type ReadonlyPartialJSONObject,
+  type ReadonlyPartialJSONValue
 } from '@lumino/coreutils';
-import { DisposableDelegate, IDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
-import Ajv, { Options as AjvOptions } from 'ajv';
+import { DisposableDelegate, type IDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
+import Ajv from 'ajv';
 import * as json5 from 'json5';
 import SCHEMA from './plugin-schema.json';
-import { ISettingRegistry } from './tokens';
+import { ISettingRegistry } from './tokens.js';
 
 /**
  * An alias for the JSON deep copy function.
@@ -30,7 +30,7 @@ const copy = JSONExt.deepCopy;
  *
  * https://ajv.js.org/options.html
  */
-const AJV_DEFAULT_OPTIONS: Partial<AjvOptions> = {
+const AJV_DEFAULT_OPTIONS: Partial<Ajv.Options> = {
   /**
    * @todo the implications of enabling strict mode are beyond the scope of
    *       the initial PR
@@ -256,11 +256,12 @@ export class DefaultSchemaValidator implements ISchemaValidator {
     return null;
   }
 
-  private _composer: Ajv = new Ajv({
+  private _composer = new Ajv.Ajv({
     useDefaults: true,
     ...AJV_DEFAULT_OPTIONS
   });
-  private _validator: Ajv = new Ajv({ ...AJV_DEFAULT_OPTIONS });
+
+  private _validator: Ajv.Ajv = new Ajv.Ajv({ ...AJV_DEFAULT_OPTIONS });
 }
 
 /**

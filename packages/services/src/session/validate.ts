@@ -1,11 +1,11 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { validateModel as validateKernelModel } from '../kernel/validate';
+import { validateModel as validateKernelModel } from '../kernel/validate.js';
 
-import * as Session from './session';
+import * as Session from './session.js';
 
-import { validateProperty } from '../validate';
+import { validateProperty } from '../validate.js';
 
 /**
  * Validate an `Session.IModel` object.

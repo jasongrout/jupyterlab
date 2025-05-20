@@ -2,8 +2,8 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { PageConfig, URLExt } from '@jupyterlab/coreutils';
-import { ServerConnection } from '../serverconnection';
-import { ITerminal, ITerminalAPIClient } from './terminal';
+import { ServerConnection } from '../serverconnection.js';
+import { type ITerminal, type ITerminalAPIClient } from './terminal.js';
 
 /**
  * The url for the terminal service.

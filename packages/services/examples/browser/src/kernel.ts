@@ -3,7 +3,7 @@
 
 import { KernelAPI, KernelManager, KernelMessage } from '@jupyterlab/services';
 
-import { log } from './log';
+import { log } from './log.js';
 
 export async function main(): Promise<void> {
   // Start a python kernel

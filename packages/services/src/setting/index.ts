@@ -7,7 +7,7 @@ import { ISettingRegistry } from '@jupyterlab/settingregistry';
 
 import { DataConnector } from '@jupyterlab/statedb';
 
-import { ServerConnection } from '../serverconnection';
+import { ServerConnection } from '../serverconnection.js';
 
 /**
  * The url for the lab settings service.

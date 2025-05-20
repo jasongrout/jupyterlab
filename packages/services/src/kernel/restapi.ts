@@ -1,10 +1,10 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ServerConnection } from '../serverconnection';
+import { ServerConnection } from '../serverconnection.js';
 import { URLExt } from '@jupyterlab/coreutils';
-import { validateModel, validateModels } from './validate';
-import { IKernelAPIClient } from './kernel';
+import { validateModel, validateModels } from './validate.js';
+import { type IKernelAPIClient } from './kernel.js';
 
 /**
  * The kernel model provided by the server.

@@ -4,10 +4,10 @@
     "lib": ["DOM", "ES2018"],
     "outDir": "lib",
     "rootDir": "src",
-    "module": "commonjs",
     "types": ["node"]
   },
   "include": ["src/**/*"],
+  "exclude": ["webpack.config.js"],
   "references": [
     {
       "path": "../coreutils"

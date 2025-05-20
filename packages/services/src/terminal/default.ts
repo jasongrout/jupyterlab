@@ -3,14 +3,14 @@
 
 import { URLExt } from '@jupyterlab/coreutils';
 
-import { JSONPrimitive, PromiseDelegate } from '@lumino/coreutils';
+import { type JSONPrimitive, PromiseDelegate } from '@lumino/coreutils';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { ServerConnection } from '..';
+import { ServerConnection } from '../index.js';
 
-import * as Terminal from './terminal';
-import { TerminalAPIClient } from './restapi';
+import * as Terminal from './terminal.js';
+import { TerminalAPIClient } from './restapi.js';
 
 /**
  * An implementation of a terminal interface.

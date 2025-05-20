@@ -3,14 +3,14 @@
 
 import { Poll } from '@lumino/polling';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { ServerConnection } from '..';
+import { ServerConnection } from '../index.js';
 
-import * as Terminal from './terminal';
-import { BaseManager } from '../basemanager';
-import { TerminalAPIClient } from './restapi';
-import { TerminalConnection } from './default';
+import * as Terminal from './terminal.js';
+import { BaseManager } from '../basemanager.js';
+import { TerminalAPIClient } from './restapi.js';
+import { TerminalConnection } from './default.js';
 
 /**
  * A terminal session manager.

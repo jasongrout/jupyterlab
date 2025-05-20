@@ -7,17 +7,21 @@
 /// <reference types="jest" preserve="true"/>
 
 import { PathExt } from '@jupyterlab/coreutils';
-import { PartialJSONObject, ReadonlyJSONObject, UUID } from '@lumino/coreutils';
+import {
+  type PartialJSONObject,
+  type ReadonlyJSONObject,
+  UUID
+} from '@lumino/coreutils';
 import { AttachedProperty } from '@lumino/properties';
-import { ISignal, Signal } from '@lumino/signaling';
-import { BaseManager } from './basemanager';
-import { Contents, ContentsManager } from './contents';
-import { Kernel, KernelMessage } from './kernel';
-import { KernelSpec } from './kernelspec';
-import { ServiceManager } from './manager';
-import { ServerConnection } from './serverconnection';
-import { Session } from './session';
-import { User, UserManager } from './user';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { BaseManager } from './basemanager.js';
+import { Contents, ContentsManager } from './contents/index.js';
+import { Kernel, KernelMessage } from './kernel/index.js';
+import { KernelSpec } from './kernelspec/index.js';
+import { ServiceManager } from './manager.js';
+import { ServerConnection } from './serverconnection.js';
+import { Session } from './session/index.js';
+import { type User, UserManager } from './user/index.js';
 
 // The default kernel name
 export const DEFAULT_NAME = 'python3';

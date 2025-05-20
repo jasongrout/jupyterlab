@@ -7,7 +7,7 @@ import {
   ServerConnection
 } from '@jupyterlab/services';
 
-import { log } from './log';
+import { log } from './log.js';
 
 export async function main(): Promise<void> {
   log('Config');

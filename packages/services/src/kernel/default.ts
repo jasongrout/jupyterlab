@@ -3,29 +3,34 @@
 
 import { URLExt } from '@jupyterlab/coreutils';
 
-import { JSONExt, JSONObject, PromiseDelegate, UUID } from '@lumino/coreutils';
+import {
+  JSONExt,
+  type JSONObject,
+  PromiseDelegate,
+  UUID
+} from '@lumino/coreutils';
 
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { CommsOverSubshells, ServerConnection } from '..';
+import { CommsOverSubshells, ServerConnection } from '../index.js';
 
-import { CommHandler } from './comm';
+import { CommHandler } from './comm.js';
 
-import * as Kernel from './kernel';
+import * as Kernel from './kernel.js';
 
-import * as KernelMessage from './messages';
+import * as KernelMessage from './messages.js';
 
 import {
   KernelControlFutureHandler,
   KernelFutureHandler,
   KernelShellFutureHandler
-} from './future';
+} from './future.js';
 
-import * as validate from './validate';
-import { KernelSpec } from '../kernelspec';
+import * as validate from './validate.js';
+import { KernelSpec } from '../kernelspec/index.js';
 
-import { KERNEL_SERVICE_URL, KernelAPIClient } from './restapi';
-import { KernelSpecAPIClient } from '../kernelspec/restapi';
+import { KERNEL_SERVICE_URL, KernelAPIClient } from './restapi.js';
+import { KernelSpecAPIClient } from '../kernelspec/restapi.js';
 
 // Stub for requirejs.
 declare let requirejs: any;

@@ -1,11 +1,11 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import * as KernelMessage from './messages';
+import * as KernelMessage from './messages.js';
 
-import { IModel } from './restapi';
+import { type IModel } from './restapi.js';
 
-import { validateProperty } from '../validate';
+import { validateProperty } from '../validate.js';
 
 /**
  * Required fields for `IKernelHeader`.

@@ -3,8 +3,8 @@
 
 import { PromiseDelegate } from '@lumino/coreutils';
 import { DisposableDelegate } from '@lumino/disposable';
-import * as Kernel from './kernel';
-import * as KernelMessage from './messages';
+import * as Kernel from './kernel.js';
+import * as KernelMessage from './messages.js';
 
 declare let setImmediate: any;
 

@@ -1,7 +1,7 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import * as KernelMessage from './messages';
+import * as KernelMessage from './messages.js';
 
 /**
  * Serialize a kernel message for transport.

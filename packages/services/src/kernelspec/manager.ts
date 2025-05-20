@@ -3,12 +3,12 @@
 
 import { JSONExt } from '@lumino/coreutils';
 import { Poll } from '@lumino/polling';
-import { ISignal, Signal } from '@lumino/signaling';
+import { type ISignal, Signal } from '@lumino/signaling';
 
-import { BaseManager } from '../basemanager';
-import { ServerConnection } from '../serverconnection';
-import * as KernelSpec from './kernelspec';
-import { ISpecModels, KernelSpecAPIClient } from './restapi';
+import { BaseManager } from '../basemanager.js';
+import { ServerConnection } from '../serverconnection.js';
+import * as KernelSpec from './kernelspec.js';
+import { type ISpecModels, KernelSpecAPIClient } from './restapi.js';
 
 /**
  * An implementation of a kernel spec manager.

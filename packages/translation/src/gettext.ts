@@ -13,8 +13,8 @@
 | See: https://github.com/DefinitelyTyped/DefinitelyTyped
 |----------------------------------------------------------------------------*/
 
-import { DEFAULT_LANGUAGE_CODE } from './tokens';
-import { normalizeDomain } from './utils';
+import { DEFAULT_LANGUAGE_CODE } from './tokens.js';
+import { normalizeDomain } from './utils.js';
 
 /**
  * A plural form function.

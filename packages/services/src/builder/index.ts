@@ -3,7 +3,7 @@
 
 import { PageConfig, URLExt } from '@jupyterlab/coreutils';
 
-import { ServerConnection } from '../serverconnection';
+import { ServerConnection } from '../serverconnection.js';
 
 /**
  * The url for the lab build service.

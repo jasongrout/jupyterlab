@@ -4,7 +4,7 @@
 import { KernelManager } from '@jupyterlab/services';
 import { PromiseDelegate } from '@lumino/coreutils';
 
-import { log } from './log';
+import { log } from './log.js';
 
 export async function main(): Promise<void> {
   // Start a python kernel

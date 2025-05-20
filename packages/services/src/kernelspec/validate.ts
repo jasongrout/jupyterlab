@@ -1,8 +1,8 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ISpecModel, ISpecModels } from './restapi';
-import { validateProperty } from '../validate';
+import { type ISpecModel, type ISpecModels } from './restapi.js';
+import { validateProperty } from '../validate.js';
 
 /**
  * Validate a server kernelspec model to a client side model.

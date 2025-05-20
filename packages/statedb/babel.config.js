@@ -3,4 +3,5 @@
  * Distributed under the terms of the Modified BSD License.
  */
 
-module.exports = require('@jupyterlab/testing/lib/babel-config');
+import config from '@jupyterlab/testing/lib/babel-config';
+export default config;

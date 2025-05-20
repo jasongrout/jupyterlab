@@ -2,13 +2,13 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { Poll } from '@lumino/polling';
-import { ISignal, Signal } from '@lumino/signaling';
-import { CommsOverSubshells, KernelSpec, ServerConnection } from '..';
-import * as Kernel from './kernel';
-import { BaseManager } from '../basemanager';
-import { IKernelOptions, KernelAPIClient } from './restapi';
-import { KernelConnection } from './default';
-import { KernelSpecAPIClient } from '../kernelspec/restapi';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { CommsOverSubshells, KernelSpec, ServerConnection } from '../index.js';
+import * as Kernel from './kernel.js';
+import { BaseManager } from '../basemanager.js';
+import { type IKernelOptions, KernelAPIClient } from './restapi.js';
+import { KernelConnection } from './default.js';
+import { KernelSpecAPIClient } from '../kernelspec/restapi.js';
 
 /**
  * An implementation of a kernel manager.

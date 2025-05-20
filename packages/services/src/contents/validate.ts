@@ -1,8 +1,8 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { Contents } from './index';
-import { validateProperty } from '../validate';
+import { Contents } from './index.js';
+import { validateProperty } from '../validate.js';
 
 /**
  * Validate an `Contents.IModel` object.

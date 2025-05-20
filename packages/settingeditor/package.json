@@ -78,5 +78,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "styleModule": "style/index.js"
+  "styleModule": "style/index.js",
+"type": "module"
 }

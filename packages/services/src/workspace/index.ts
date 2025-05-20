@@ -5,9 +5,9 @@ import { URLExt } from '@jupyterlab/coreutils';
 
 import { DataConnector } from '@jupyterlab/statedb';
 
-import { ReadonlyPartialJSONObject } from '@lumino/coreutils';
+import { type ReadonlyPartialJSONObject } from '@lumino/coreutils';
 
-import { ServerConnection } from '../serverconnection';
+import { ServerConnection } from '../serverconnection.js';
 
 /**
  * The url for the lab workspaces service.

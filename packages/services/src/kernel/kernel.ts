@@ -1,26 +1,29 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { JSONObject, JSONValue } from '@lumino/coreutils';
+import { type JSONObject, type JSONValue } from '@lumino/coreutils';
 
-import { IDisposable, IObservableDisposable } from '@lumino/disposable';
+import {
+  type IDisposable,
+  type IObservableDisposable
+} from '@lumino/disposable';
 
-import { ISignal } from '@lumino/signaling';
+import { type ISignal } from '@lumino/signaling';
 
-import { CommsOverSubshells, ServerConnection } from '..';
+import { CommsOverSubshells, ServerConnection } from '../index.js';
 
-import * as KernelMessage from './messages';
+import * as KernelMessage from './messages.js';
 
-import { IManager as IBaseManager } from '../basemanager';
+import { type IManager as IBaseManager } from '../basemanager.js';
 
-import { KernelSpec } from '../kernelspec';
+import { KernelSpec } from '../kernelspec/index.js';
 
-import { IKernelSpecAPIClient } from '../kernelspec/kernelspec';
+import { type IKernelSpecAPIClient } from '../kernelspec/kernelspec.js';
 
-import { IKernelOptions, IModel } from './restapi';
+import { type IKernelOptions, type IModel } from './restapi.js';
 
-export { Status } from './messages';
-export { IKernelOptions, IModel };
+export { type Status } from './messages.js';
+export { type IKernelOptions, type IModel };
 
 /**
  * Interface of a Kernel connection that is managed by a session.

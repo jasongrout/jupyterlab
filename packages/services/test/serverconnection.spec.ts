@@ -3,9 +3,9 @@
 
 import { PageConfig } from '@jupyterlab/coreutils';
 import { JupyterServer } from '@jupyterlab/testing';
-import { ServerConnection } from '../src';
-import { getRequestHandler } from './utils';
-import { KernelMessage } from '../src/kernel';
+import { ServerConnection } from '../src.js';
+import { getRequestHandler } from './utils.js';
+import { KernelMessage } from '../src/kernel.js';
 
 const server = new JupyterServer();
 

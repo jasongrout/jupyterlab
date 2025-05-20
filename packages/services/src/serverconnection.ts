@@ -2,8 +2,8 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { PageConfig, URLExt } from '@jupyterlab/coreutils';
-import { KernelMessage } from './kernel';
-import { deserialize, serialize } from './kernel/serialize';
+import { KernelMessage } from './kernel/index.js';
+import { deserialize, serialize } from './kernel/serialize.js';
 
 let WEBSOCKET: typeof WebSocket;
 

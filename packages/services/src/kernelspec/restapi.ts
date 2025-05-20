@@ -1,12 +1,12 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { ServerConnection } from '../serverconnection';
-import { IKernelSpecAPIClient } from './kernelspec';
-import { validateSpecModels } from './validate';
+import { ServerConnection } from '../serverconnection.js';
+import { type IKernelSpecAPIClient } from './kernelspec.js';
+import { validateSpecModels } from './validate.js';
 
 import { URLExt } from '@jupyterlab/coreutils';
-import { PartialJSONObject } from '@lumino/coreutils';
+import { type PartialJSONObject } from '@lumino/coreutils';
 
 /**
  * The url for the kernelspec service.

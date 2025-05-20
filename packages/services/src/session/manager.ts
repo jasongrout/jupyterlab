@@ -2,13 +2,13 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { Poll } from '@lumino/polling';
-import { ISignal, Signal } from '@lumino/signaling';
-import { ServerConnection } from '../serverconnection';
-import * as Session from './session';
-import { BaseManager } from '../basemanager';
-import { SessionConnection } from './default';
-import { SessionAPIClient } from './restapi';
-import { Kernel } from '../kernel';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { ServerConnection } from '../serverconnection.js';
+import * as Session from './session.js';
+import { BaseManager } from '../basemanager.js';
+import { SessionConnection } from './default.js';
+import { SessionAPIClient } from './restapi.js';
+import { Kernel } from '../kernel/index.js';
 
 /**
  * An implementation of a session manager.

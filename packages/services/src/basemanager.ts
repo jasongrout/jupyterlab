@@ -1,9 +1,9 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
-import { IObservableDisposable } from '@lumino/disposable';
-import { ISignal, Signal } from '@lumino/signaling';
-import { ServerConnection } from './serverconnection';
+import { type IObservableDisposable } from '@lumino/disposable';
+import { type ISignal, Signal } from '@lumino/signaling';
+import { ServerConnection } from './serverconnection.js';
 
 /**
  * Object which manages kernel instances for a given base url.

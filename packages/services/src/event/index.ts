@@ -2,11 +2,11 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { URLExt } from '@jupyterlab/coreutils';
-import { JSONObject, ReadonlyJSONObject } from '@lumino/coreutils';
-import { IDisposable } from '@lumino/disposable';
+import { type JSONObject, type ReadonlyJSONObject } from '@lumino/coreutils';
+import { type IDisposable } from '@lumino/disposable';
 import { Poll } from '@lumino/polling';
-import { IStream, Signal, Stream } from '@lumino/signaling';
-import { ServerConnection } from '../serverconnection';
+import { type IStream, Signal, Stream } from '@lumino/signaling';
+import { ServerConnection } from '../serverconnection.js';
 
 /**
  * The url for the jupyter-server events service.

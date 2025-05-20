@@ -3,7 +3,7 @@
 
 import { URLExt } from '@jupyterlab/coreutils';
 
-import { ServerConnection } from '../serverconnection';
+import { ServerConnection } from '../serverconnection.js';
 
 import { PromiseDelegate } from '@lumino/coreutils';
 
