@@ -18,6 +18,7 @@
   },
   "license": "BSD-3-Clause",
   "author": "Project Jupyter",
+  "type": "module",
   "main": "../lib/extension/index.js",
   "types": "../lib/extension/index.d.ts",
   "files": [

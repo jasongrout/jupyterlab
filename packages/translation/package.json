@@ -17,6 +17,7 @@
   },
   "license": "BSD-3-Clause",
   "author": "Project Jupyter",
+  "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "directories": {
@@ -52,6 +53,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "type": "module"
+  }
 }

@@ -2,6 +2,7 @@
   "name": "@jupyterlab/example-federated-core",
   "version": "3.5.0-alpha.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "npm run clean && webpack",
     "clean": "rimraf static",

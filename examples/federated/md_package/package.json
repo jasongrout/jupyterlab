@@ -2,6 +2,7 @@
   "name": "@jupyterlab/example-federated-md",
   "version": "3.5.0-alpha.0",
   "private": true,
+  "type": "module",
   "main": "./index.js",
   "scripts": {
     "build": "npm run clean && build-labextension --development --core-path ../core_package .",

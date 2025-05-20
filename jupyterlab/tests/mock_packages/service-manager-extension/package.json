@@ -2,6 +2,7 @@
   "name": "@jupyterlab/mock-service-manager-extension",
   "version": "4.5.0-alpha.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@jupyterlab/services": "^7.5.0-alpha.0"
   },

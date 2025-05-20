@@ -2,6 +2,7 @@
   "name": "@jupyterlab/example-simple-list",
   "version": "4.5.0-alpha.0",
   "private": true,
+  "type": "module",
   "style": "style/index.css",
   "scripts": {
     "build": "tsc && webpack",

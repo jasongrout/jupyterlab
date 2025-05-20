@@ -2,6 +2,7 @@
   "name": "@jupyterlab/example-federated-middle",
   "version": "3.4.0-alpha.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "npm run clean && build-labextension --core-path ../core_package .",
     "clean": "rimraf ../labextensions/@jupyterlab/example-federated-middle"

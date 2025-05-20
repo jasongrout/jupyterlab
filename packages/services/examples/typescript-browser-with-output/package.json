@@ -5,6 +5,7 @@
   "sideEffects": [
     "style/*"
   ],
+  "type": "module",
   "style": "style/index.css",
   "files": [
     "style/index.css",

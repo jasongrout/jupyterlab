@@ -16,6 +16,7 @@
     "style/*.css",
     "style/index.js"
   ],
+  "type": "module",
   "main": "style/index.js",
   "directories": {
     "style": "style/"

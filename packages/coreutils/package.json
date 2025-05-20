@@ -13,6 +13,7 @@
   "license": "BSD-3-Clause",
   "author": "Project Jupyter",
   "sideEffects": false,
+  "type": "module",
   "main": "lib/index.js",
   "browser": {
     "path": "path-browserify"
@@ -64,6 +65,5 @@
   },
   "jupyterlab": {
     "coreDependency": true
-  },
-  "type": "module"
+  }
 }
