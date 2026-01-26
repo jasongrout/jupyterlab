@@ -233,7 +233,13 @@ function activateCsv(
         widget.content.goToLine(result.value);
       }
     },
-    isEnabled
+    isEnabled,
+    describedBy: {
+      args: {
+        type: 'object',
+        properties: {}
+      }
+    }
   });
 
   if (mainMenu) {
@@ -393,7 +399,13 @@ function activateTsv(
         widget.content.goToLine(result.value);
       }
     },
-    isEnabled
+    isEnabled,
+    describedBy: {
+      args: {
+        type: 'object',
+        properties: {}
+      }
+    }
   });
 
   if (mainMenu) {

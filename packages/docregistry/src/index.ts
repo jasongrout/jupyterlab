@@ -10,3 +10,4 @@ export * from './default.js';
 export * from './mimedocument.js';
 export * from './registry.js';
 export * from './components.js';
+export * from './kernelfilestypes.js';

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@lumino/widgets": "^2.7.1"
+    "@lumino/widgets": "^2.7.3"
   },
   "jupyterlab": {
     "mimeExtension": true

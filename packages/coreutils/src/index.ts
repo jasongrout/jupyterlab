@@ -15,3 +15,4 @@ export * from './signal.js';
 export * from './text.js';
 export * from './time.js';
 export * from './url.js';
+export * from './pluginregistry.js';

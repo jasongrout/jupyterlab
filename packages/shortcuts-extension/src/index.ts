@@ -110,6 +110,12 @@ const shortcuts: JupyterFrontEndPlugin<void> = {
       app.commands.addCommand(CommandIDs.editBinding, {
         label: trans.__('Edit Keybinding'),
         caption: trans.__('Edit existing keybinding'),
+        describedBy: {
+          args: {
+            type: 'object',
+            properties: {}
+          }
+        },
         execute: () => {
           const node = app.contextMenuHitTest(isKeybindingNode);
           const keybinding = node?.dataset['keybinding'];
@@ -128,6 +134,12 @@ const shortcuts: JupyterFrontEndPlugin<void> = {
       app.commands.addCommand(CommandIDs.deleteBinding, {
         label: trans.__('Delete Keybinding'),
         caption: trans.__('Delete chosen keybinding'),
+        describedBy: {
+          args: {
+            type: 'object',
+            properties: {}
+          }
+        },
         execute: () => {
           const node = app.contextMenuHitTest(isKeybindingNode);
           const keybinding = node?.dataset['keybinding'];
@@ -146,6 +158,12 @@ const shortcuts: JupyterFrontEndPlugin<void> = {
       app.commands.addCommand(CommandIDs.addBinding, {
         label: trans.__('Add Keybinding'),
         caption: trans.__('Add new keybinding for existing shortcut target'),
+        describedBy: {
+          args: {
+            type: 'object',
+            properties: {}
+          }
+        },
         execute: () => {
           const node = app.contextMenuHitTest(isKeybindingNode);
           const shortcutId = node?.dataset['shortcut'];
@@ -162,6 +180,12 @@ const shortcuts: JupyterFrontEndPlugin<void> = {
       commands.addCommand(CommandIDs.toggleSelectors, {
         label: trans.__('Toggle Selectors'),
         caption: trans.__('Toggle command selectors'),
+        describedBy: {
+          args: {
+            type: 'object',
+            properties: {}
+          }
+        },
         execute: () => {
           actionRequested.emit({
             request: 'toggle-selectors'
@@ -172,6 +196,12 @@ const shortcuts: JupyterFrontEndPlugin<void> = {
       commands.addCommand(CommandIDs.resetAll, {
         label: trans.__('Reset All'),
         caption: trans.__('Reset all shortcuts'),
+        describedBy: {
+          args: {
+            type: 'object',
+            properties: {}
+          }
+        },
         execute: () => {
           actionRequested.emit({
             request: 'reset-all'

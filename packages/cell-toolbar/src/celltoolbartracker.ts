@@ -4,14 +4,13 @@
 |----------------------------------------------------------------------------*/
 import {
   createDefaultFactory,
-  setToolbar,
   type ToolbarRegistry
 } from '@jupyterlab/apputils';
 import {
   Cell,
   CellModel,
   CodeCell,
-  ICellModel,
+  type ICellModel,
   MarkdownCell
 } from '@jupyterlab/cells';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
@@ -205,11 +204,18 @@ export class CellToolbarTracker implements IDisposable {
       );
       const promises: Promise<void>[] = [cell.ready];
       if (this._toolbarFactory) {
-        setToolbar(cell, this._toolbarFactory, toolbarWidget);
-        // FIXME toolbarWidget.update() - strangely this does not work
-        (toolbarWidget.layout as PanelLayout).widgets.forEach(w => {
-          w.update();
-        });
+        // Use our custom factory directly instead of setToolbar
+        const toolbarItems = this._toolbarFactory(cell);
+        for (const { name, widget } of toolbarItems) {
+          toolbarWidget.addItem(name, widget);
+          if (
+            widget instanceof ReactWidget &&
+            (widget as ReactWidget).renderPromise !== undefined
+          ) {
+            (widget as ReactWidget).update();
+            promises.push((widget as ReactWidget).renderPromise!);
+          }
+        }
       } else {
         for (const { name, widget } of this._toolbarItems!) {
           toolbarWidget.addItem(name, widget);
@@ -518,37 +524,62 @@ const defaultToolbarItems: ToolbarRegistry.IWidget[] = [
  */
 export class CellBarExtension implements DocumentRegistry.WidgetExtension {
   static readonly FACTORY_NAME = 'Cell';
+  static readonly WIDGET_ID_ARG = 'widgetId';
 
   constructor(
     commands: CommandRegistry,
     toolbarFactory?: (
-      widget: Widget
+      widget: Widget,
+      commandArgs?: Record<string, any>
     ) => IObservableList<ToolbarRegistry.IToolbarItem>
   ) {
     this._commands = commands;
     this._toolbarFactory = toolbarFactory ?? this.defaultToolbarFactory;
   }
 
+  protected createItemFactory(commands: CommandRegistry) {
+    return createDefaultFactory(commands);
+  }
+
   protected get defaultToolbarFactory(): (
-    widget: Widget
+    widget: Widget,
+    commandArgs?: Record<string, any>
   ) => IObservableList<ToolbarRegistry.IToolbarItem> {
-    const itemFactory = createDefaultFactory(this._commands);
-    return (widget: Widget) =>
+    const itemFactory = this.createItemFactory(this._commands);
+    return (widget: Widget, commandArgs?: Record<string, any>) =>
       new ObservableList({
         values: defaultToolbarItems.map(item => {
+          const itemWithArgs = commandArgs
+            ? {
+                ...item,
+                args: { ...item.args, ...commandArgs }
+              }
+            : item;
+
           return {
             name: item.name,
-            widget: itemFactory(CellBarExtension.FACTORY_NAME, widget, item)
+            widget: itemFactory(
+              CellBarExtension.FACTORY_NAME,
+              widget,
+              itemWithArgs
+            )
           };
         })
       });
   }
 
   createNew(panel: NotebookPanel): IDisposable {
+    // Create a factory that passes the widget ID to the toolbar factory
+    const factoryWithWidgetId = (widget: Widget) => {
+      return this._toolbarFactory(widget, {
+        [CellBarExtension.WIDGET_ID_ARG]: panel.id
+      });
+    };
+
     return (this._tracker = new CellToolbarTracker(
       panel,
       undefined,
-      this._toolbarFactory
+      factoryWithWidgetId
     ));
   }
 
@@ -570,7 +601,8 @@ export class CellBarExtension implements DocumentRegistry.WidgetExtension {
 
   private _commands: CommandRegistry;
   private _toolbarFactory: (
-    widget: Widget
+    widget: Widget,
+    commandArgs?: Record<string, any>
   ) => IObservableList<ToolbarRegistry.IToolbarItem>;
   private _tracker: CellToolbarTracker;
 }

@@ -7,11 +7,7 @@
 /// <reference types="jest" preserve="true"/>
 
 import { PathExt } from '@jupyterlab/coreutils';
-import {
-  type PartialJSONObject,
-  type ReadonlyJSONObject,
-  UUID
-} from '@lumino/coreutils';
+import { ReadonlyJSONObject, UUID } from '@lumino/coreutils';
 import { AttachedProperty } from '@lumino/properties';
 import { type ISignal, Signal } from '@lumino/signaling';
 import { BaseManager } from './basemanager.js';
@@ -791,7 +787,7 @@ export class FakeUserManager extends BaseManager implements User.IManager {
 
         this._userChanged.emit({
           identity: this._identity,
-          permissions: this._permissions as PartialJSONObject
+          permissions: this._permissions as ReadonlyJSONObject
         });
 
         resolve();

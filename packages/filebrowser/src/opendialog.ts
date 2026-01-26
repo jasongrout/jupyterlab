@@ -93,32 +93,8 @@ export namespace FileDialog {
   export async function getOpenFiles(
     options: IFileOptions
   ): Promise<Dialog.IResult<Contents.IModel[]>> {
-    const translator = options.translator || nullTranslator;
-    const trans = translator.load('jupyterlab');
-    const openDialog = new OpenDialog(
-      options.manager,
-      options.filter,
-      translator,
-      options.defaultPath,
-      options.label
-    );
-    const dialogOptions: Partial<Dialog.IOptions<Contents.IModel[]>> = {
-      title: options.title,
-      buttons: [
-        Dialog.cancelButton(),
-        Dialog.okButton({
-          label: trans.__('Select')
-        })
-      ],
-      focusNodeSelector: options.focusNodeSelector,
-      host: options.host,
-      renderer: options.renderer,
-      body: openDialog
-    };
+    const dialog = new OpenDialog(options);
 
-    await openDialog.ready;
-
-    const dialog = new Dialog(dialogOptions);
     return dialog.launch();
   }
 
@@ -144,10 +120,46 @@ export namespace FileDialog {
   }
 }
 
+class OpenDialog extends Dialog<Contents.IModel[]> {
+  constructor(options: FileDialog.IFileOptions) {
+    const translator = options.translator || nullTranslator;
+    const trans = translator.load('jupyterlab');
+
+    const handleOpenFile = () => {
+      // Resolve the dialog with current filebrowser selection
+      this.resolve();
+    };
+
+    const openDialog = new OpenDialogBody(
+      options.manager,
+      options.filter,
+      translator,
+      options.defaultPath,
+      options.label,
+      true,
+      handleOpenFile
+    );
+
+    super({
+      title: options.title,
+      buttons: [
+        Dialog.cancelButton(),
+        Dialog.okButton({
+          label: trans.__('Select')
+        })
+      ],
+      focusNodeSelector: options.focusNodeSelector,
+      host: options.host,
+      renderer: options.renderer,
+      body: openDialog
+    });
+  }
+}
+
 /**
  * Open dialog widget
  */
-class OpenDialog
+class OpenDialogBody
   extends Widget
   implements Dialog.IBodyWidget<Contents.IModel[]>
 {
@@ -157,7 +169,8 @@ class OpenDialog
     translator?: ITranslator,
     defaultPath?: string,
     label?: string,
-    filterDirectories?: boolean
+    filterDirectories?: boolean,
+    handleOpenFile?: (path: string) => void
   ) {
     super();
     translator = translator ?? nullTranslator;
@@ -171,7 +184,8 @@ class OpenDialog
       {},
       translator,
       defaultPath,
-      filterDirectories
+      filterDirectories,
+      handleOpenFile
     )
       .then(browser => {
         this._browser = browser;
@@ -216,7 +230,7 @@ class OpenDialog
         layout.addWidget(this._browser);
 
         /**
-         * Dispose browser model when OpenDialog
+         * Dispose browser model when OpenDialogBody
          * is disposed.
          */
         this.dispose = () => {
@@ -307,7 +321,8 @@ namespace Private {
     options: IFileBrowserFactory.IOptions = {},
     translator?: ITranslator,
     defaultPath?: string,
-    filterDirectories?: boolean
+    filterDirectories?: boolean,
+    handleOpenFile?: (path: string) => void
   ): Promise<FileBrowser> => {
     translator = translator || nullTranslator;
     const model = new FilterFileBrowserModel({
@@ -322,7 +337,8 @@ namespace Private {
     const widget = new FileBrowser({
       id,
       model,
-      translator
+      translator,
+      handleOpenFile
     });
 
     if (defaultPath) {

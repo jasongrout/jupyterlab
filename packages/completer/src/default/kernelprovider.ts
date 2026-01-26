@@ -11,6 +11,7 @@ import {
   type ICompletionProvider
 } from '../tokens.js';
 import { Completer } from '../widget.js';
+import { isHintableMimeType } from '../utils.js';
 
 export const KERNEL_PROVIDER_ID = 'CompletionProvider:kernel';
 /**
@@ -127,7 +128,16 @@ export class KernelCompleterProvider implements ICompletionProvider {
    * Kernel provider will activate the completer in continuous mode after
    * the `.` character.
    */
-  shouldShowContinuousHint(visible: boolean, changed: SourceChange): boolean {
+  shouldShowContinuousHint(
+    visible: boolean,
+    changed: SourceChange,
+    context?: ICompletionContext
+  ): boolean {
+    const mimeType = context?.editor?.model.mimeType ?? '';
+    if (!isHintableMimeType(mimeType)) {
+      return false;
+    }
+
     const sourceChange = changed.sourceChange;
     if (sourceChange == null) {
       return true;
