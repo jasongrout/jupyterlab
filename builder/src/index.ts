@@ -3,5 +3,5 @@
 | Distributed under the terms of the Modified BSD License.
 |----------------------------------------------------------------------------*/
 
-export * from './build';
-export * from './webpack-plugins';
+export * from './build.js';
+export * from './webpack-plugins.js';

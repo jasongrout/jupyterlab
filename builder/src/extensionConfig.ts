@@ -3,8 +3,8 @@
 
 import * as path from 'path';
 import * as webpack from 'webpack';
-import { Build } from './build';
-import { WPPlugin } from './webpack-plugins';
+import { Build } from './build.js';
+import { WPPlugin } from './webpack-plugins.js';
 import { merge } from 'webpack-merge';
 import * as fs from 'fs-extra';
 import * as glob from 'glob';
@@ -32,7 +32,7 @@ function generateConfig({
 }: IOptions = {}): webpack.Configuration[] {
   const data = require(path.join(packagePath, 'package.json'));
 
-  const ajv = new Ajv({ useDefaults: true, strict: false });
+  const ajv = new Ajv.default({ useDefaults: true, strict: false });
   const validate = ajv.compile(require('../metadata_schema.json'));
   let valid = validate(data.jupyterlab ?? {});
   if (!valid) {

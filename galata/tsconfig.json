@@ -4,7 +4,7 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
-    "module": "commonjs",
+    "module": "Node16",
     "types": ["node"],
     "lib": ["DOM", "DOM.iterable", "es2019.array", "esnext"]
   },

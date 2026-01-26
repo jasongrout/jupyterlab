@@ -20,7 +20,7 @@ declare module 'duplicate-package-checker-webpack-plugin';
 declare module 'duplicate-package-checker-webpack-plugin' {
   import * as webpack from 'webpack';
 
-  export = DuplicatePackageCheckerWebpackPlugin;
+  export default DuplicatePackageCheckerWebpackPlugin;
 
   class DuplicatePackageCheckerWebpackPlugin {
     constructor(options?: DuplicatePackageCheckerWebpackPlugin.Options);

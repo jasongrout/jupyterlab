@@ -44,7 +44,7 @@
 import * as path from 'path';
 import { program as commander } from 'commander';
 import webpack from 'webpack';
-import generateConfig from './extensionConfig';
+import generateConfig from './extensionConfig.js';
 import { stdout as colors } from 'supports-color';
 
 commander
