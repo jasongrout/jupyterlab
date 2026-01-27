@@ -239,7 +239,7 @@ function generateConfig({
   if (mode === 'production') {
     plugins.push(
       new WPPlugin.JSONLicenseWebpackPlugin({
-        excludedPackageTest: packageName => packageName === data.name
+        excludedPackageTest: (packageName: string) => packageName === data.name
       })
     );
   }

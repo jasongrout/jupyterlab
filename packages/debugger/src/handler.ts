@@ -16,7 +16,7 @@ import { ConsoleHandler } from './handlers/console.js';
 import { FileHandler } from './handlers/file.js';
 import { NotebookHandler } from './handlers/notebook.js';
 import { IDebugger } from './tokens.js';
-import { ISettingRegistry } from '@jupyterlab/settingregistry.js';
+import { ISettingRegistry } from '@jupyterlab/settingregistry';
 
 const TOOLBAR_DEBUGGER_ITEM = 'debugger-icon';
 

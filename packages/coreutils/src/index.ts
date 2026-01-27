@@ -16,3 +16,4 @@ export * from './text.js';
 export * from './time.js';
 export * from './url.js';
 export * from './pluginregistry.js';
+export * from './testutils.js';

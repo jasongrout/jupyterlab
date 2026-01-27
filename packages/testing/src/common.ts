@@ -9,9 +9,9 @@ import { PromiseDelegate } from '@lumino/coreutils';
 
 import { type ISignal, Signal } from '@lumino/signaling';
 
-import { sleep } from '@jupyterlab/coreutils/lib/testutils';
+import { sleep } from '@jupyterlab/coreutils';
 
-export { sleep } from '@jupyterlab/coreutils/lib/testutils';
+export { sleep } from '@jupyterlab/coreutils';
 
 // Add a simple polyfill for `PointerEvent` which is not yet supported by jsdom
 // see https://github.com/jsdom/jsdom/pull/2666

@@ -7,8 +7,8 @@ import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plu
 import * as fs from 'fs-extra';
 import * as rspack from '@rspack/core';
 import { LicenseWebpackPlugin } from 'license-webpack-plugin';
-import { LicenseIdentifiedModule } from 'license-webpack-plugin/dist/LicenseIdentifiedModule';
-import { PluginOptions } from 'license-webpack-plugin/dist/PluginOptions';
+import type { LicenseIdentifiedModule } from 'license-webpack-plugin/dist/LicenseIdentifiedModule.js';
+import type { PluginOptions } from 'license-webpack-plugin/dist/PluginOptions.js';
 
 // From
 // https://github.com/webpack/webpack/blob/95120bdf98a01649740b104bebc426b0123651ce/lib/WatchIgnorePlugin.js
@@ -175,8 +175,6 @@ export namespace WPPlugin {
         }
       );
     }
-
-    options: DuplicatePackageCheckerPlugin.Options;
   }
 
   /**

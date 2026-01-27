@@ -22,7 +22,7 @@ export {
   simulate
 } from './common.js';
 
-export {
+export type {
   IFileSystemFileEntryOptions,
   IFileSystemDirectoryEntryOptions
 } from './jest-data-transfer-mock.js';

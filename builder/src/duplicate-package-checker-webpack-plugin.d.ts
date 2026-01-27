@@ -24,6 +24,7 @@ declare module 'duplicate-package-checker-webpack-plugin' {
 
   class DuplicatePackageCheckerWebpackPlugin {
     constructor(options?: DuplicatePackageCheckerWebpackPlugin.Options);
+    options: DuplicatePackageCheckerWebpackPlugin.Options;
     apply(compiler: rspack.Compiler): void;
   }
 
