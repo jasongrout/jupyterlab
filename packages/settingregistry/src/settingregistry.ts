@@ -175,7 +175,27 @@ export class DefaultSchemaValidator implements ISchemaValidator {
     try {
       user = json5.parse(plugin.raw) as JSONObject;
     } catch (error) {
+      // json5 throws SyntaxError with extra properties (lineNumber, columnNumber, description)
       if (error instanceof SyntaxError) {
+        if (
+          'column' in error &&
+          'description' in error &&
+          'lineNumber' in error
+        ) {
+          const { column, description, lineNumber } = error as SyntaxError & {
+            column: number;
+            description: string;
+            lineNumber: number;
+          };
+          return [
+            {
+              instancePath: '',
+              keyword: 'parse',
+              schemaPath: '',
+              message: `${description} (line ${lineNumber} column ${column})`
+            }
+          ];
+        }
         return [
           {
             instancePath: '',
@@ -186,17 +206,7 @@ export class DefaultSchemaValidator implements ISchemaValidator {
         ];
       }
 
-      const { column, description } = error;
-      const line = error.lineNumber;
-
-      return [
-        {
-          instancePath: '',
-          keyword: 'parse',
-          schemaPath: '',
-          message: `${description} (line ${line} column ${column})`
-        }
-      ];
+      throw error;
     }
 
     if (!validate(user)) {
@@ -608,7 +618,10 @@ export class SettingRegistry implements ISettingRegistry {
           await this._load(await this._transform('fetch', plugin));
         } catch (errors) {
           /* Ignore silently if no transformers. */
-          if (errors[0]?.keyword !== 'unset') {
+          if (
+            Array.isArray(errors) &&
+            (errors as Array<{ keyword?: string }>)[0]?.keyword !== 'unset'
+          ) {
             console.warn('Ignored setting registry preload errors.', errors);
           }
         }
