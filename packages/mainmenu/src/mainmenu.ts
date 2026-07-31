@@ -157,9 +157,7 @@ export class MainMenu extends MenuBar implements IMainMenu {
     MenuSvg.overrideDefaultRenderer(menu);
 
     const rank =
-      options.rank ??
-      ('rank' in menu ? (menu as RankedMenu).rank : undefined) ??
-      IRankedMenu.DEFAULT_RANK;
+      options.rank ?? (menu as RankedMenu).rank ?? IRankedMenu.DEFAULT_RANK;
     const rankItem = { menu, rank };
     const index = ArrayExt.upperBound(this._items, rankItem, Private.itemCmp);
 
