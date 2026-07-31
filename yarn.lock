@@ -3419,7 +3419,7 @@ __metadata:
     mini-svg-data-uri: ^1.4.4
     rimraf: ~5.0.5
     style-loader: ~3.3.1
-    typescript: ~5.9.3
+    typescript: ~6.0.3
   languageName: unknown
   linkType: soft
 
@@ -20668,7 +20668,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:>=3 < 6, typescript@npm:~5.9.3":
+"typescript@npm:>=3 < 6":
   version: 5.9.3
   resolution: "typescript@npm:5.9.3"
   bin:
@@ -20688,7 +20688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@>=3 < 6#~builtin<compat/typescript>, typescript@patch:typescript@~5.9.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@>=3 < 6#~builtin<compat/typescript>":
   version: 5.9.3
   resolution: "typescript@patch:typescript@npm%3A5.9.3#~builtin<compat/typescript>::version=5.9.3&hash=85af82"
   bin:
