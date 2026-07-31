@@ -173,7 +173,7 @@ function activate(
         toSkip,
         translator,
         status,
-        query: args.query as string
+        query: args.query!
       })
     });
 
