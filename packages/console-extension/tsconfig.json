@@ -34,6 +34,9 @@
       "path": "../mainmenu"
     },
     {
+      "path": "../outputarea"
+    },
+    {
       "path": "../rendermime"
     },
     {

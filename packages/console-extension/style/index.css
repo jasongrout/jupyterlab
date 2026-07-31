@@ -11,8 +11,12 @@
 @import url('~@jupyterlab/rendermime/style/index.css');
 @import url('~@jupyterlab/application/style/index.css');
 @import url('~@jupyterlab/filebrowser/style/index.css');
+<<<<<<< HEAD
 @import url('~@jupyterlab/cells/style/index.css');
 @import url('~@jupyterlab/completer/style/index.css');
+=======
+@import url('~@jupyterlab/outputarea/style/index.css');
+>>>>>>> a1ff0aa5eb
 @import url('~@jupyterlab/console/style/index.css');
 @import url('~@jupyterlab/launcher/style/index.css');
 @import url('~@jupyterlab/mainmenu/style/index.css');

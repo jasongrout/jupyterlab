@@ -701,6 +701,9 @@ export class Context<
         if (this.isDisposed) {
           return;
         }
+        if (path !== this._path) {
+          return this._revert(initializeModel);
+        }
         if (contents.content) {
           if (contents.format === 'json') {
             model.fromJSON(contents.content);
@@ -727,6 +730,9 @@ export class Context<
         }
       })
       .catch(async err => {
+        if (!this.isDisposed && path !== this._path) {
+          return this._revert(initializeModel);
+        }
         const localPath = this._manager.contents.localPath(this._path);
         const name = PathExt.basename(localPath);
         void this._handleError(
