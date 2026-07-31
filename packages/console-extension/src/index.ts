@@ -1279,7 +1279,10 @@ async function activateConsole(
       try {
         await session.setName(result.value);
       } catch (error) {
-        void showErrorMessage(trans.__('Rename Error'), error);
+        void showErrorMessage(
+          trans.__('Rename Error'),
+          error as string | Dialog.IError
+        );
       }
     },
     isEnabled: () => contextMenuConsole() !== null || isEnabled(),
