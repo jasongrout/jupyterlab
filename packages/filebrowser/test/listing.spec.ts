@@ -12,6 +12,7 @@ import type {
   IFileSystemFileEntryOptions
 } from '@jupyterlab/testing';
 import { framePromise, signalToPromise, sleep } from '@jupyterlab/testing';
+import { Gettext, NullTranslator } from '@jupyterlab/translation';
 import { Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
 import expect from 'expect';
@@ -19,6 +20,22 @@ import { simulate } from 'simulate-event';
 import { DirListing, FilterFileBrowserModel } from '../src';
 
 const ITEM_TEXT_CLASS = 'jp-DirListing-itemText';
+
+function createGermanTranslator(): NullTranslator {
+  const bundle = new Gettext({ domain: 'jupyterlab', locale: 'de' });
+  bundle.loadJSON(
+    {
+      '': {
+        domain: 'jupyterlab',
+        language: 'de',
+        pluralForms: 'nplurals=2; plural=n>1;'
+      },
+      'filename\u0004image': ['Bild']
+    },
+    'jupyterlab'
+  );
+  return new NullTranslator(bundle);
+}
 
 // Returns the minimal args needed to create a new DirListing instance
 const createOptionsForConstructor: () => DirListing.IOptions = () => ({
@@ -188,6 +205,27 @@ describe('filebrowser/listing', () => {
         const topLevel = getItemTitles(dirListing);
         expect(topLevel.length).toBe(1);
         expect(topLevel[0]).toMatch(/^image-\d{8}-\d{6}\.png$/);
+      });
+
+      it('should translate the file name of a data URI upload', async () => {
+        const dt = new DataTransfer();
+        const dataUri =
+          'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+        dt.setData('url', dataUri);
+        const event = new DragEvent('drop', { dataTransfer: dt });
+        const options = {
+          ...createOptionsForConstructor(),
+          translator: createGermanTranslator()
+        };
+        const dirListing = new TestDirListing(options);
+        Widget.attach(dirListing, document.body);
+        dirListing.handleEvent(event);
+        await signalToPromise(dirListing.allUploaded);
+        await dirListing.model.refresh();
+
+        const topLevel = getItemTitles(dirListing);
+        expect(topLevel.length).toBe(1);
+        expect(topLevel[0]).toMatch(/^Bild-\d{8}-\d{6}\.png$/);
       });
 
       it('should upload an audio file from data URI on drag', async () => {

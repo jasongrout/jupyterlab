@@ -17,8 +17,25 @@ import {
   svgRendererFactory,
   textRendererFactory
 } from '@jupyterlab/rendermime';
+import { Gettext, NullTranslator } from '@jupyterlab/translation';
 import type { JSONObject, JSONValue } from '@lumino/coreutils';
 import { Widget } from '@lumino/widgets';
+
+function createGermanTranslator(): NullTranslator {
+  const bundle = new Gettext({ domain: 'jupyterlab', locale: 'de' });
+  bundle.loadJSON(
+    {
+      '': {
+        domain: 'jupyterlab',
+        language: 'de',
+        pluralForms: 'nplurals=2; plural=n>1;'
+      },
+      'filename\u0004image': ['Bild']
+    },
+    'jupyterlab'
+  );
+  return new NullTranslator(bundle);
+}
 
 function createModel(
   mimeType: string,
@@ -1072,6 +1089,31 @@ describe('rendermime/factories', () => {
         expect(downloadURL).toMatch(/^image\/png:image-\d{8}-\d{6}\.png:data:/);
       });
 
+      it('should translate the file name in drag data for img elements', async () => {
+        const source =
+          '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=">';
+        const f = htmlRendererFactory;
+        const mimeType = 'text/html';
+        const model = createModel(mimeType, source);
+        const w = f.createRenderer({
+          mimeType,
+          ...defaultOptions,
+          translator: createGermanTranslator()
+        });
+        await w.renderModel(model);
+        const img = w.node.querySelector('img') as HTMLImageElement;
+
+        const dragEvent = new DragEvent('dragstart', {
+          bubbles: true,
+          cancelable: true,
+          dataTransfer: new DataTransfer()
+        });
+        img.dispatchEvent(dragEvent);
+
+        const downloadURL = dragEvent.dataTransfer!.getData('DownloadURL');
+        expect(downloadURL).toMatch(/^image\/png:Bild-\d{8}-\d{6}\.png:data:/);
+      });
+
       it('should not make elements draggable without data URIs', async () => {
         const source =
           '<audio src="https://example.com/audio.mp3"></audio><video src="https://example.com/video.mp4"></video><img src="https://example.com/image.png"></img>';
@@ -1185,6 +1227,32 @@ describe('rendermime/factories', () => {
 
         const downloadURL = dataTransfer.getData('DownloadURL');
         expect(downloadURL).toMatch(/^image\/png:image-\d{8}-\d{6}\.png:data:/);
+      });
+
+      it('should translate the file name in drag data for images', async () => {
+        const source =
+          'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+        const f = imageRendererFactory;
+        const mimeType = 'image/png';
+        const model = createModel(mimeType, source);
+        const w = f.createRenderer({
+          mimeType,
+          ...defaultOptions,
+          translator: createGermanTranslator()
+        });
+
+        await w.renderModel(model);
+        const el = w.node.firstChild as HTMLImageElement;
+
+        const dragEvent = new DragEvent('dragstart', {
+          bubbles: true,
+          cancelable: true,
+          dataTransfer: new DataTransfer()
+        });
+        el.dispatchEvent(dragEvent);
+
+        const downloadURL = dragEvent.dataTransfer!.getData('DownloadURL');
+        expect(downloadURL).toMatch(/^image\/png:Bild-\d{8}-\d{6}\.png:data:/);
       });
     });
   });
