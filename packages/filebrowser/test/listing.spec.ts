@@ -228,6 +228,25 @@ describe('filebrowser/listing', () => {
         expect(topLevel[0]).toMatch(/^Bild-\d{8}-\d{6}\.png$/);
       });
 
+      it('should upload an svg image from a percent-encoded data URI', async () => {
+        const dt = new DataTransfer();
+        const dataUri = `data:image/svg+xml,${encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg"></svg>'
+        )}`;
+        dt.setData('url', dataUri);
+        const event = new DragEvent('drop', { dataTransfer: dt });
+        const options = createOptionsForConstructor();
+        const dirListing = new TestDirListing(options);
+        Widget.attach(dirListing, document.body);
+        dirListing.handleEvent(event);
+        await signalToPromise(dirListing.allUploaded);
+        await dirListing.model.refresh();
+
+        const items = getItemTitles(dirListing);
+        expect(items.length).toBe(1);
+        expect(items[0]).toMatch(/^image-\d{8}-\d{6}\.svg$/);
+      });
+
       it('should upload an audio file from data URI on drag', async () => {
         const dt = new DataTransfer();
         // Create a minimal data URI for audio

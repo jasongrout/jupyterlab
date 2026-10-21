@@ -439,6 +439,29 @@ describe('rendermime/factories', () => {
         expect(imgEl).toBeTruthy();
         expect(imgEl.src).toContain(encodeURIComponent(displaySource));
       });
+
+      it('should set drag data for the svg image', async () => {
+        const source = '<svg xmlns="http://www.w3.org/2000/svg"></svg>';
+        const f = svgRendererFactory;
+        const mimeType = 'image/svg+xml';
+        const model = createModel(mimeType, source, true);
+        const w = f.createRenderer({ mimeType, ...defaultOptions });
+        await w.renderModel(model);
+        const imgEl = w.node.getElementsByTagName('img')[0];
+        expect(imgEl.getAttribute('draggable')).toBe('true');
+
+        const dragEvent = new DragEvent('dragstart', {
+          bubbles: true,
+          cancelable: true,
+          dataTransfer: new DataTransfer()
+        });
+        imgEl.dispatchEvent(dragEvent);
+
+        const downloadURL = dragEvent.dataTransfer!.getData('DownloadURL');
+        expect(downloadURL).toMatch(
+          /^image\/svg\+xml:image-\d{8}-\d{6}\.svg:data:image\/svg\+xml,%3Csvg/
+        );
+      });
     });
   });
 
