@@ -3,13 +3,9 @@
 | Distributed under the terms of the Modified BSD License.
 |----------------------------------------------------------------------------*/
 
-import {
-  getBaseNameFromMimeType,
-  getExtensionFromMimeType,
-  URLExt
-} from '@jupyterlab/coreutils';
+import { getExtensionFromMimeType, URLExt } from '@jupyterlab/coreutils';
 import type { IRenderMime } from '@jupyterlab/rendermime-interfaces';
-import type { ITranslator, TranslationBundle } from '@jupyterlab/translation';
+import type { ITranslator } from '@jupyterlab/translation';
 import { nullTranslator } from '@jupyterlab/translation';
 import escape from 'lodash.escape';
 import { LiveText, mergeNodes } from './livetext';
@@ -84,7 +80,7 @@ export async function renderHTML(options: renderHTML.IOptions): Promise<void> {
   }
 
   // Handle default behavior of nodes.
-  Private.handleDefaults(host, trans);
+  Private.handleDefaults(host, translator);
 
   if (shouldTypeset && latexTypesetter) {
     const maybePromise = latexTypesetter.typeset(host);
@@ -172,8 +168,16 @@ export async function renderImage(
   options: renderImage.IRenderOptions
 ): Promise<void> {
   // Unpack the options.
-  const { host, mimeType, source, width, height, needsBackground, unconfined } =
-    options;
+  const {
+    host,
+    mimeType,
+    source,
+    width,
+    height,
+    needsBackground,
+    unconfined,
+    translator
+  } = options;
 
   // Clear the content in the host.
   host.textContent = '';
@@ -202,7 +206,7 @@ export async function renderImage(
     img.classList.add('jp-mod-unconfined');
   }
 
-  Private.makeMediaElementDraggable(img);
+  Private.makeMediaElementDraggable(img, translator);
 
   // Add the image to the host.
   host.appendChild(img);
@@ -250,6 +254,11 @@ export namespace renderImage {
      * Whether the image should be unconfined.
      */
     unconfined?: boolean;
+
+    /**
+     * The application language translator.
+     */
+    translator?: ITranslator;
   }
 }
 
@@ -1575,6 +1584,45 @@ export function hardenAnchorLinks(
 }
 
 /**
+ * Get a timestamped file name for media saved from an output.
+ *
+ * Both dragging an output out of the page and dropping media on the file
+ * browser use it, so a file gets the same kind of name wherever it is dropped.
+ *
+ * @param mimeType - The MIME type of the media
+ * @param translator - The application language translator
+ * @param date - The time to include in the name
+ * @returns A name such as `image-20251105-130523.png`
+ */
+export function getMediaFilename(
+  mimeType: string,
+  translator?: ITranslator,
+  date: Date = new Date()
+): string {
+  const trans = (translator ?? nullTranslator).load('jupyterlab');
+  const type = mimeType.trim().toLowerCase();
+  let baseName: string;
+  if (type.startsWith('image/')) {
+    baseName = trans._p('filename', 'image');
+  } else if (type.startsWith('audio/')) {
+    baseName = trans._p('filename', 'audio');
+  } else if (type.startsWith('video/')) {
+    baseName = trans._p('filename', 'video');
+  } else {
+    baseName = trans._p('filename', 'file');
+  }
+  // `DownloadURL` drag data is `type:name:url`, and Windows rejects the
+  // other characters in file names.
+  baseName = baseName.replace(/[\\/:*?"<>|]/g, '-');
+
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  const timestamp =
+    `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}` +
+    `-${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}`;
+  return `${baseName}-${timestamp}.${getExtensionFromMimeType(mimeType)}`;
+}
+
+/**
  * The namespace for module implementation details.
  */
 namespace Private {
@@ -2094,11 +2142,12 @@ namespace Private {
    */
   export function handleDefaults(
     node: HTMLElement,
-    trans: TranslationBundle
+    translator: ITranslator
   ): void {
+    const trans = translator.load('jupyterlab');
     // Handle image elements.
     for (const img of node.getElementsByTagName('img')) {
-      Private.makeMediaElementDraggable(img);
+      Private.makeMediaElementDraggable(img, translator);
       if (!img.alt) {
         img.alt = trans.__('Image');
       }
@@ -2106,12 +2155,12 @@ namespace Private {
 
     // Make audio elements draggable
     for (const audio of node.getElementsByTagName('audio')) {
-      Private.makeMediaElementDraggable(audio);
+      Private.makeMediaElementDraggable(audio, translator);
     }
 
     // Make video elements draggable
     for (const video of node.getElementsByTagName('video')) {
-      Private.makeMediaElementDraggable(video);
+      Private.makeMediaElementDraggable(video, translator);
     }
   }
 
@@ -2645,7 +2694,8 @@ namespace Private {
    * This allows users to drag media elements (with data URIs) into the file browser.
    */
   export function makeMediaElementDraggable(
-    element: HTMLImageElement | HTMLAudioElement | HTMLVideoElement
+    element: HTMLImageElement | HTMLAudioElement | HTMLVideoElement,
+    translator?: ITranslator
   ): void {
     // Helper to get the source URL, checking both the element and child <source> elements
     const getSourceUrl = (): string | null => {
@@ -2695,20 +2745,7 @@ namespace Private {
         // Parse the data URI to get MIME type
         const parsed = URLExt.parseDataURI(source);
         if (parsed) {
-          // Generate a timestamped filename
-          const extension = getExtensionFromMimeType(parsed.mimeType);
-          const baseName = getBaseNameFromMimeType(parsed.mimeType);
-
-          const now = new Date();
-          const pad = (n: number) => n.toString().padStart(2, '0');
-          const timestamp = `${now.getFullYear()}${pad(
-            now.getMonth() + 1
-          )}${pad(now.getDate())}-${pad(now.getHours())}${pad(
-            now.getMinutes()
-          )}${pad(now.getSeconds())}`;
-
-          const filename = `${baseName}-${timestamp}.${extension}`;
-
+          const filename = getMediaFilename(parsed.mimeType, translator);
           event.dataTransfer.setData(
             'DownloadURL',
             `${parsed.mimeType}:${filename}:${source}`

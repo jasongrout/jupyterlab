@@ -7,17 +7,11 @@ import {
   showDialog,
   showErrorMessage
 } from '@jupyterlab/apputils';
-import {
-  getBaseNameFromMimeType,
-  getExtensionFromMimeType,
-  PageConfig,
-  PathExt,
-  Time,
-  URLExt
-} from '@jupyterlab/coreutils';
+import { PageConfig, PathExt, Time, URLExt } from '@jupyterlab/coreutils';
 import type { IDocumentManager } from '@jupyterlab/docmanager';
 import { isValidFileName, renameFile } from '@jupyterlab/docmanager';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
+import { getMediaFilename } from '@jupyterlab/rendermime';
 import type { Contents } from '@jupyterlab/services';
 import type { IStateDB } from '@jupyterlab/statedb';
 import type { ITranslator, TranslationBundle } from '@jupyterlab/translation';
@@ -2201,7 +2195,7 @@ export class DirListing extends Widget {
           );
         }
 
-        filename = filename ?? Private.getFilenameFromMimeType(blob.type);
+        filename = filename ?? getMediaFilename(blob.type, this.translator);
         const file = new File([blob], filename, { type: blob.type });
         return this._model.upload(file);
       };
@@ -4336,27 +4330,6 @@ namespace Private {
       }
     }
     return allEntries;
-  }
-
-  /**
-   * Get a generic filename for media (image/audio/video) based on its MIME type.
-   * Returns a filename like "image-20250112-143052.png" or "audio-20250112-143052.mp3".
-   */
-  export function getFilenameFromMimeType(mimeType: string): string {
-    // Get base name and extension from MIME type using shared utilities
-    const baseName = getBaseNameFromMimeType(mimeType);
-    const extension = getExtensionFromMimeType(mimeType);
-
-    // Add "YYYYMMDD-HHMMSS" timestamp to make the filename probably unique. We
-    // want this in local time for readability, so we can't just use
-    // toISOString().
-    const now = new Date();
-    const pad = (n: number) => n.toString().padStart(2, '0');
-    const timestamp = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(
-      now.getDate()
-    )}-${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
-
-    return `${baseName}-${timestamp}.${extension}`;
   }
 }
 

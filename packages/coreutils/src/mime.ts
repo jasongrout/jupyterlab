@@ -61,20 +61,3 @@ export function getExtensionFromMimeType(mimeType: string): string {
   const match = /^(?:image|audio|video)\/([\da-z]+)$/.exec(essence);
   return match ? match[1] : 'bin';
 }
-
-/**
- * Get a base filename for a given MIME type.
- *
- * @param mimeType - The MIME type (e.g., 'image/png', 'audio/mpeg')
- * @returns A base name like 'image', 'audio', 'video', or 'file'
- */
-export function getBaseNameFromMimeType(mimeType: string): string {
-  if (mimeType.startsWith('image/')) {
-    return 'image';
-  } else if (mimeType.startsWith('audio/')) {
-    return 'audio';
-  } else if (mimeType.startsWith('video/')) {
-    return 'video';
-  }
-  return 'file';
-}
