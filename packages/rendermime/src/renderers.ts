@@ -481,6 +481,7 @@ export async function renderSVG(
   // Render in img so that user can save it easily
   const img = new Image();
   img.src = `data:image/svg+xml,${encodeURIComponent(source)}`;
+  Private.makeMediaElementDraggable(img, options.translator);
   host.appendChild(img);
 
   if (unconfined === true) {
