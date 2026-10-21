@@ -362,6 +362,49 @@ describe('filebrowser/listing', () => {
         expect(items[0]).toBe('priority-test.png');
       });
 
+      it.each([
+        ['utils.py', 'image/png', 'utils.py.png'],
+        ['photo', 'image/jpeg', 'photo.jpg'],
+        ['photo.JPEG', 'image/jpeg', 'photo.JPEG'],
+        ['clip.mp4', 'image/png', 'clip.mp4.png']
+      ])(
+        'should save the DownloadURL name %s for %s as %s',
+        async (name, mimeType, expected) => {
+          const dt = new DataTransfer();
+          const dataUri = `data:${mimeType};base64,iVBORw0KGgo=`;
+          dt.setData('DownloadURL', `${mimeType}:${name}:${dataUri}`);
+          const event = new DragEvent('drop', { dataTransfer: dt });
+          const options = createOptionsForConstructor();
+          const dirListing = new TestDirListing(options);
+          Widget.attach(dirListing, document.body);
+          dirListing.handleEvent(event);
+          await signalToPromise(dirListing.allUploaded);
+          await dirListing.model.refresh();
+
+          expect(getItemTitles(dirListing)).toEqual([expected]);
+        }
+      );
+
+      it.each(['../evil.png', 'sub/evil.png', 'sub\\evil.png', '..'])(
+        'should not use the DownloadURL name %s',
+        async name => {
+          const dt = new DataTransfer();
+          const dataUri = 'data:image/png;base64,iVBORw0KGgo=';
+          dt.setData('DownloadURL', `image/png:${name}:${dataUri}`);
+          const event = new DragEvent('drop', { dataTransfer: dt });
+          const options = createOptionsForConstructor();
+          const dirListing = new TestDirListing(options);
+          Widget.attach(dirListing, document.body);
+          dirListing.handleEvent(event);
+          await signalToPromise(dirListing.allUploaded);
+          await dirListing.model.refresh();
+
+          const items = getItemTitles(dirListing);
+          expect(items.length).toBe(1);
+          expect(items[0]).toMatch(/^image-\d{8}-\d{6}\.png$/);
+        }
+      );
+
       it('should fallback to url when DownloadURL is not available', async () => {
         const dt = new DataTransfer();
         const dataUri =
