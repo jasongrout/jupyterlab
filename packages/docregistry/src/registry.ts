@@ -1416,6 +1416,10 @@ export namespace DocumentRegistry {
    * @param translator - The application language translator.
    *
    * @returns The default directory file types.
+   *
+   * #### Notes
+   * `getExtensionFromMimeType` in `@jupyterlab/coreutils` mirrors the image,
+   * audio and video types listed here.
    */
   export function getDefaultFileTypes(
     translator?: ITranslator
