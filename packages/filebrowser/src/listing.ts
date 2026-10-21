@@ -7,7 +7,13 @@ import {
   showDialog,
   showErrorMessage
 } from '@jupyterlab/apputils';
-import { PageConfig, PathExt, Time, URLExt } from '@jupyterlab/coreutils';
+import {
+  getExtensionFromMimeType,
+  PageConfig,
+  PathExt,
+  Time,
+  URLExt
+} from '@jupyterlab/coreutils';
 import type { IDocumentManager } from '@jupyterlab/docmanager';
 import { isValidFileName, renameFile } from '@jupyterlab/docmanager';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
@@ -2195,7 +2201,12 @@ export class DirListing extends Widget {
           );
         }
 
-        filename = filename ?? getMediaFilename(blob.type, this.translator);
+        filename = Private.getDroppedMediaName(
+          filename,
+          blob.type,
+          this._manager.registry,
+          this.translator
+        );
         const file = new File([blob], filename, { type: blob.type });
         return this._model.upload(file);
       };
@@ -4303,6 +4314,38 @@ namespace Private {
     entry: FileSystemEntry
   ): entry is FileSystemFileEntry {
     return entry.isFile;
+  }
+
+  /**
+   * Get the name to save dropped media under.
+   *
+   * A suggested name comes from drag data that any page can set, so it must
+   * be a single path segment and end with an extension for the media type.
+   */
+  export function getDroppedMediaName(
+    suggested: string | undefined,
+    mimeType: string,
+    registry: DocumentRegistry,
+    translator: ITranslator
+  ): string {
+    if (
+      !suggested ||
+      !isValidFileName(suggested) ||
+      suggested === '.' ||
+      suggested === '..'
+    ) {
+      return getMediaFilename(mimeType, translator);
+    }
+    const essence = mimeType.split(';')[0].trim().toLowerCase();
+    const extension = getExtensionFromMimeType(essence);
+    const hasMediaExtension =
+      PathExt.extname(suggested).toLowerCase() === `.${extension}` ||
+      registry
+        .getFileTypesForPath(suggested)
+        .some(fileType =>
+          fileType.mimeTypes.some(type => type.toLowerCase() === essence)
+        );
+    return hasMediaExtension ? suggested : `${suggested}.${extension}`;
   }
 
   function readEntries(reader: FileSystemDirectoryReader) {
