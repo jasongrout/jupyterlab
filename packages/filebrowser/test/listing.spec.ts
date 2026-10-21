@@ -247,6 +247,22 @@ describe('filebrowser/listing', () => {
         expect(items[0]).toMatch(/^image-\d{8}-\d{6}\.svg$/);
       });
 
+      it('should use bin for a data URI media type without a known extension', async () => {
+        const dt = new DataTransfer();
+        dt.setData('url', 'data:image/html,%3Cscript%3E%3C%2Fscript%3E');
+        const event = new DragEvent('drop', { dataTransfer: dt });
+        const options = createOptionsForConstructor();
+        const dirListing = new TestDirListing(options);
+        Widget.attach(dirListing, document.body);
+        dirListing.handleEvent(event);
+        await signalToPromise(dirListing.allUploaded);
+        await dirListing.model.refresh();
+
+        const items = getItemTitles(dirListing);
+        expect(items.length).toBe(1);
+        expect(items[0]).toMatch(/^image-\d{8}-\d{6}\.bin$/);
+      });
+
       it('should upload an audio file from data URI on drag', async () => {
         const dt = new DataTransfer();
         // Create a minimal data URI for audio
@@ -385,7 +401,8 @@ describe('filebrowser/listing', () => {
         ['utils.py', 'image/png', 'utils.py.png'],
         ['photo', 'image/jpeg', 'photo.jpg'],
         ['photo.JPEG', 'image/jpeg', 'photo.JPEG'],
-        ['clip.mp4', 'image/png', 'clip.mp4.png']
+        ['clip.mp4', 'image/png', 'clip.mp4.png'],
+        ['conftest.py', 'video/py', 'conftest.py.bin']
       ])(
         'should save the DownloadURL name %s for %s as %s',
         async (name, mimeType, expected) => {

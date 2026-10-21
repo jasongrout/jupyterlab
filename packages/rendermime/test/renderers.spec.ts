@@ -1124,6 +1124,12 @@ describe('@jupyterlab/rendermime', () => {
       ).toBe('file-20261021-090507.bin');
     });
 
+    it('should use bin for media types without a known extension', () => {
+      expect(getMediaFilename('image/hta', undefined, date)).toBe(
+        'image-20261021-090507.bin'
+      );
+    });
+
     it('should translate the base name', () => {
       expect(
         getMediaFilename('image/png', createTranslator('Bild'), date)

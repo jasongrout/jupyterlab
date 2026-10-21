@@ -33,9 +33,15 @@ describe('@jupyterlab/coreutils', () => {
       expect(getExtensionFromMimeType('Image/PNG')).toBe('png');
     });
 
-    it('should fall back to a single-word subtype for other media types', () => {
+    it('should know common media types missing from the document registry', () => {
       expect(getExtensionFromMimeType('image/avif')).toBe('avif');
       expect(getExtensionFromMimeType('audio/webm')).toBe('webm');
+      expect(getExtensionFromMimeType('audio/mp3')).toBe('mp3');
+    });
+
+    it('should return bin for other media types', () => {
+      expect(getExtensionFromMimeType('image/html')).toBe('bin');
+      expect(getExtensionFromMimeType('video/py')).toBe('bin');
       expect(getExtensionFromMimeType('image/x-unknown')).toBe('bin');
       expect(getExtensionFromMimeType('text/plain')).toBe('bin');
     });
