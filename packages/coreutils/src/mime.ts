@@ -11,9 +11,11 @@
  * Preferred file extensions for media MIME types.
  *
  * Mirrors the image, audio and video types of
- * `DocumentRegistry.getDefaultFileTypes()` in `@jupyterlab/docregistry`.
+ * `DocumentRegistry.getDefaultFileTypes()` in `@jupyterlab/docregistry`, plus
+ * a few common types the registry does not list.
  */
 const MEDIA_EXTENSIONS = new Map<string, string>([
+  ['image/avif', 'avif'],
   ['image/bmp', 'bmp'],
   ['image/gif', 'gif'],
   ['image/jpeg', 'jpg'],
@@ -24,11 +26,13 @@ const MEDIA_EXTENSIONS = new Map<string, string>([
   ['audio/aac', 'aac'],
   ['audio/flac', 'flac'],
   ['audio/midi', 'midi'],
+  ['audio/mp3', 'mp3'],
   ['audio/mp4', 'm4a'],
   ['audio/mpeg', 'mp3'],
   ['audio/ogg', 'ogg'],
   ['audio/opus', 'opus'],
   ['audio/wav', 'wav'],
+  ['audio/webm', 'webm'],
   ['audio/x-midi', 'midi'],
   ['audio/x-wav', 'wav'],
   ['video/3gpp', '3gp'],
@@ -49,15 +53,11 @@ const MEDIA_EXTENSIONS = new Map<string, string>([
  * @returns The file extension without a dot (e.g., 'mp3'), or 'bin' if unknown
  *
  * #### Notes
- * Other image, audio and video types fall back to a single-word subtype.
+ * Unlisted types get 'bin' rather than a guess from the subtype, since the
+ * source of dragged media chooses its MIME type.
  * Editor languages are registered in `IEditorLanguageRegistry` from `@jupyterlab/codemirror`.
  */
 export function getExtensionFromMimeType(mimeType: string): string {
   const essence = mimeType.split(';')[0].trim().toLowerCase();
-  const extension = MEDIA_EXTENSIONS.get(essence);
-  if (extension) {
-    return extension;
-  }
-  const match = /^(?:image|audio|video)\/([\da-z]+)$/.exec(essence);
-  return match ? match[1] : 'bin';
+  return MEDIA_EXTENSIONS.get(essence) ?? 'bin';
 }
