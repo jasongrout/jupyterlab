@@ -15,6 +15,9 @@
       "path": "../docregistry"
     },
     {
+      "path": "../rendermime"
+    },
+    {
       "path": "../services"
     },
     {

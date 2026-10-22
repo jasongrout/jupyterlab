@@ -12,6 +12,7 @@ import type {
   IFileSystemFileEntryOptions
 } from '@jupyterlab/testing';
 import { framePromise, signalToPromise, sleep } from '@jupyterlab/testing';
+import { Gettext, NullTranslator } from '@jupyterlab/translation';
 import { Signal } from '@lumino/signaling';
 import { Widget } from '@lumino/widgets';
 import expect from 'expect';
@@ -19,6 +20,22 @@ import { simulate } from 'simulate-event';
 import { DirListing, FilterFileBrowserModel } from '../src';
 
 const ITEM_TEXT_CLASS = 'jp-DirListing-itemText';
+
+function createGermanTranslator(): NullTranslator {
+  const bundle = new Gettext({ domain: 'jupyterlab', locale: 'de' });
+  bundle.loadJSON(
+    {
+      '': {
+        domain: 'jupyterlab',
+        language: 'de',
+        pluralForms: 'nplurals=2; plural=n>1;'
+      },
+      'filename\u0004image': ['Bild']
+    },
+    'jupyterlab'
+  );
+  return new NullTranslator(bundle);
+}
 
 // Returns the minimal args needed to create a new DirListing instance
 const createOptionsForConstructor: () => DirListing.IOptions = () => ({
@@ -190,6 +207,62 @@ describe('filebrowser/listing', () => {
         expect(topLevel[0]).toMatch(/^image-\d{8}-\d{6}\.png$/);
       });
 
+      it('should translate the file name of a data URI upload', async () => {
+        const dt = new DataTransfer();
+        const dataUri =
+          'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+        dt.setData('url', dataUri);
+        const event = new DragEvent('drop', { dataTransfer: dt });
+        const options = {
+          ...createOptionsForConstructor(),
+          translator: createGermanTranslator()
+        };
+        const dirListing = new TestDirListing(options);
+        Widget.attach(dirListing, document.body);
+        dirListing.handleEvent(event);
+        await signalToPromise(dirListing.allUploaded);
+        await dirListing.model.refresh();
+
+        const topLevel = getItemTitles(dirListing);
+        expect(topLevel.length).toBe(1);
+        expect(topLevel[0]).toMatch(/^Bild-\d{8}-\d{6}\.png$/);
+      });
+
+      it('should upload an svg image from a percent-encoded data URI', async () => {
+        const dt = new DataTransfer();
+        const dataUri = `data:image/svg+xml,${encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg"></svg>'
+        )}`;
+        dt.setData('url', dataUri);
+        const event = new DragEvent('drop', { dataTransfer: dt });
+        const options = createOptionsForConstructor();
+        const dirListing = new TestDirListing(options);
+        Widget.attach(dirListing, document.body);
+        dirListing.handleEvent(event);
+        await signalToPromise(dirListing.allUploaded);
+        await dirListing.model.refresh();
+
+        const items = getItemTitles(dirListing);
+        expect(items.length).toBe(1);
+        expect(items[0]).toMatch(/^image-\d{8}-\d{6}\.svg$/);
+      });
+
+      it('should use bin for a data URI media type without a known extension', async () => {
+        const dt = new DataTransfer();
+        dt.setData('url', 'data:image/html,%3Cscript%3E%3C%2Fscript%3E');
+        const event = new DragEvent('drop', { dataTransfer: dt });
+        const options = createOptionsForConstructor();
+        const dirListing = new TestDirListing(options);
+        Widget.attach(dirListing, document.body);
+        dirListing.handleEvent(event);
+        await signalToPromise(dirListing.allUploaded);
+        await dirListing.model.refresh();
+
+        const items = getItemTitles(dirListing);
+        expect(items.length).toBe(1);
+        expect(items[0]).toMatch(/^image-\d{8}-\d{6}\.bin$/);
+      });
+
       it('should upload an audio file from data URI on drag', async () => {
         const dt = new DataTransfer();
         // Create a minimal data URI for audio
@@ -239,7 +312,7 @@ describe('filebrowser/listing', () => {
           .spyOn(global, 'fetch')
           .mockImplementation(async url => {
             if (url === blobUri) {
-              return { blob: async () => blob } as Response;
+              return { ok: true, blob: async () => blob } as Response;
             }
             throw new Error(`Unexpected fetch call to ${url}`);
           });
@@ -260,6 +333,49 @@ describe('filebrowser/listing', () => {
         fetchSpy.mockRestore();
       });
 
+      it('should not upload when the dropped URI cannot be read', async () => {
+        const dt = new DataTransfer();
+        const blobUri = 'blob:http://localhost/mock-blob-uuid';
+        dt.setData('url', blobUri);
+
+        const blob = new Blob(['test content'], { type: 'image/png' });
+        const fetchSpy = jest
+          .spyOn(global, 'fetch')
+          .mockImplementation(async url => {
+            if (url === blobUri) {
+              return {
+                ok: false,
+                status: 404,
+                statusText: 'Not Found',
+                blob: async () => blob
+              } as Response;
+            }
+            throw new Error(`Unexpected fetch call to ${url}`);
+          });
+        let logged: () => void = () => undefined;
+        const errorLogged = new Promise<void>(resolve => (logged = resolve));
+        const consoleError = jest
+          .spyOn(console, 'error')
+          .mockImplementation(() => logged());
+
+        const event = new DragEvent('drop', { dataTransfer: dt });
+        const options = createOptionsForConstructor();
+        const dirListing = new TestDirListing(options);
+        Widget.attach(dirListing, document.body);
+        dirListing.handleEvent(event);
+        await Promise.race([
+          signalToPromise(dirListing.allUploaded),
+          errorLogged
+        ]);
+        await dirListing.model.refresh();
+
+        expect(getItemTitles(dirListing)).toEqual([]);
+        expect(consoleError).toHaveBeenCalled();
+
+        consoleError.mockRestore();
+        fetchSpy.mockRestore();
+      });
+
       it('should not upload a blob that is not image/audio/video', async () => {
         const dt = new DataTransfer();
         // Use a blob URI (format generated by URL.createObjectURL)
@@ -272,7 +388,7 @@ describe('filebrowser/listing', () => {
           .spyOn(global, 'fetch')
           .mockImplementation(async url => {
             if (url === blobUri) {
-              return { blob: async () => blob } as Response;
+              return { ok: true, blob: async () => blob } as Response;
             }
             throw new Error(`Unexpected fetch call to ${url}`);
           });
@@ -323,6 +439,50 @@ describe('filebrowser/listing', () => {
         expect(items.length).toBe(1);
         expect(items[0]).toBe('priority-test.png');
       });
+
+      it.each([
+        ['utils.py', 'image/png', 'utils.py.png'],
+        ['photo', 'image/jpeg', 'photo.jpg'],
+        ['photo.JPEG', 'image/jpeg', 'photo.JPEG'],
+        ['clip.mp4', 'image/png', 'clip.mp4.png'],
+        ['conftest.py', 'video/py', 'conftest.py.bin']
+      ])(
+        'should save the DownloadURL name %s for %s as %s',
+        async (name, mimeType, expected) => {
+          const dt = new DataTransfer();
+          const dataUri = `data:${mimeType};base64,iVBORw0KGgo=`;
+          dt.setData('DownloadURL', `${mimeType}:${name}:${dataUri}`);
+          const event = new DragEvent('drop', { dataTransfer: dt });
+          const options = createOptionsForConstructor();
+          const dirListing = new TestDirListing(options);
+          Widget.attach(dirListing, document.body);
+          dirListing.handleEvent(event);
+          await signalToPromise(dirListing.allUploaded);
+          await dirListing.model.refresh();
+
+          expect(getItemTitles(dirListing)).toEqual([expected]);
+        }
+      );
+
+      it.each(['../evil.png', 'sub/evil.png', 'sub\\evil.png', '..'])(
+        'should not use the DownloadURL name %s',
+        async name => {
+          const dt = new DataTransfer();
+          const dataUri = 'data:image/png;base64,iVBORw0KGgo=';
+          dt.setData('DownloadURL', `image/png:${name}:${dataUri}`);
+          const event = new DragEvent('drop', { dataTransfer: dt });
+          const options = createOptionsForConstructor();
+          const dirListing = new TestDirListing(options);
+          Widget.attach(dirListing, document.body);
+          dirListing.handleEvent(event);
+          await signalToPromise(dirListing.allUploaded);
+          await dirListing.model.refresh();
+
+          const items = getItemTitles(dirListing);
+          expect(items.length).toBe(1);
+          expect(items[0]).toMatch(/^image-\d{8}-\d{6}\.png$/);
+        }
+      );
 
       it('should fallback to url when DownloadURL is not available', async () => {
         const dt = new DataTransfer();

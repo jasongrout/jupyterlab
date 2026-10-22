@@ -8,7 +8,6 @@ import {
   showErrorMessage
 } from '@jupyterlab/apputils';
 import {
-  getBaseNameFromMimeType,
   getExtensionFromMimeType,
   PageConfig,
   PathExt,
@@ -18,6 +17,7 @@ import {
 import type { IDocumentManager } from '@jupyterlab/docmanager';
 import { isValidFileName, renameFile } from '@jupyterlab/docmanager';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
+import { getMediaFilename } from '@jupyterlab/rendermime';
 import type { Contents } from '@jupyterlab/services';
 import type { IStateDB } from '@jupyterlab/statedb';
 import type { ITranslator, TranslationBundle } from '@jupyterlab/translation';
@@ -2185,6 +2185,11 @@ export class DirListing extends Widget {
           );
         }
         const response = await fetch(uri);
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch local resource (${response.status} ${response.statusText})`
+          );
+        }
         const blob = await response.blob();
 
         // Even though we check the mimetype above, a blob may come back as a
@@ -2201,7 +2206,12 @@ export class DirListing extends Widget {
           );
         }
 
-        filename = filename ?? Private.getFilenameFromMimeType(blob.type);
+        filename = Private.getDroppedMediaName(
+          filename,
+          blob.type,
+          this._manager.registry,
+          this.translator
+        );
         const file = new File([blob], filename, { type: blob.type });
         return this._model.upload(file);
       };
@@ -4311,6 +4321,38 @@ namespace Private {
     return entry.isFile;
   }
 
+  /**
+   * Get the name to save dropped media under.
+   *
+   * A suggested name comes from drag data that any page can set, so it must
+   * be a single path segment and end with an extension for the media type.
+   */
+  export function getDroppedMediaName(
+    suggested: string | undefined,
+    mimeType: string,
+    registry: DocumentRegistry,
+    translator: ITranslator
+  ): string {
+    if (
+      !suggested ||
+      !isValidFileName(suggested) ||
+      suggested === '.' ||
+      suggested === '..'
+    ) {
+      return getMediaFilename(mimeType, translator);
+    }
+    const essence = mimeType.split(';')[0].trim().toLowerCase();
+    const extension = getExtensionFromMimeType(essence);
+    const hasMediaExtension =
+      PathExt.extname(suggested).toLowerCase() === `.${extension}` ||
+      registry
+        .getFileTypesForPath(suggested)
+        .some(fileType =>
+          fileType.mimeTypes.some(type => type.toLowerCase() === essence)
+        );
+    return hasMediaExtension ? suggested : `${suggested}.${extension}`;
+  }
+
   function readEntries(reader: FileSystemDirectoryReader) {
     return new Promise<FileSystemEntry[]>((resolve, reject) =>
       reader.readEntries(resolve, reject)
@@ -4336,27 +4378,6 @@ namespace Private {
       }
     }
     return allEntries;
-  }
-
-  /**
-   * Get a generic filename for media (image/audio/video) based on its MIME type.
-   * Returns a filename like "image-20250112-143052.png" or "audio-20250112-143052.mp3".
-   */
-  export function getFilenameFromMimeType(mimeType: string): string {
-    // Get base name and extension from MIME type using shared utilities
-    const baseName = getBaseNameFromMimeType(mimeType);
-    const extension = getExtensionFromMimeType(mimeType);
-
-    // Add "YYYYMMDD-HHMMSS" timestamp to make the filename probably unique. We
-    // want this in local time for readability, so we can't just use
-    // toISOString().
-    const now = new Date();
-    const pad = (n: number) => n.toString().padStart(2, '0');
-    const timestamp = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(
-      now.getDate()
-    )}-${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
-
-    return `${baseName}-${timestamp}.${extension}`;
   }
 }
 

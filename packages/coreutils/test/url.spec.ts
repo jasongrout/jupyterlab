@@ -244,6 +244,25 @@ describe('@jupyterlab/coreutils', () => {
         expect(result).toBeNull();
       });
 
+      it('should skip blank lines', () => {
+        const result = URLExt.parseUriListFirst(
+          '\r\n\r\nhttps://example.com\r\n'
+        );
+        expect(result).toBe('https://example.com');
+      });
+
+      it('should accept LF line endings', () => {
+        const result = URLExt.parseUriListFirst(
+          '# comment\nhttps://example.com\n'
+        );
+        expect(result).toBe('https://example.com');
+      });
+
+      it('should trim whitespace around a URI', () => {
+        const result = URLExt.parseUriListFirst('  https://example.com  \r\n');
+        expect(result).toBe('https://example.com');
+      });
+
       it('should return null for only comments', () => {
         const result = URLExt.parseUriListFirst('# comment1\r\n# comment2\r\n');
         expect(result).toBeNull();

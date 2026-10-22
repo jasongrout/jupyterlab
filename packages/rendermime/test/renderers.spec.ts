@@ -2,13 +2,30 @@
 // Distributed under the terms of the Modified BSD License.
 
 import { Sanitizer } from '@jupyterlab/apputils';
-import { renderText } from '@jupyterlab/rendermime';
+import { getMediaFilename, renderText } from '@jupyterlab/rendermime';
+import { Gettext, NullTranslator } from '@jupyterlab/translation';
 
 // Keep in sync with `AUTO_LINK_STRIDE` in `src/renderers.ts`: each incremental
 // auto-linking step advances to the first whitespace at or after this offset.
 // Tests that need a render to span several steps/frames pad their sources
 // beyond the stride.
 const STRIDE = 8192;
+
+function createTranslator(image: string): NullTranslator {
+  const bundle = new Gettext({ domain: 'jupyterlab', locale: 'de' });
+  bundle.loadJSON(
+    {
+      '': {
+        domain: 'jupyterlab',
+        language: 'de',
+        pluralForms: 'nplurals=2; plural=n>1;'
+      },
+      'filename\u0004image': [image]
+    },
+    'jupyterlab'
+  );
+  return new NullTranslator(bundle);
+}
 
 describe('@jupyterlab/rendermime', () => {
   describe('renderText()', () => {
@@ -1086,6 +1103,43 @@ describe('@jupyterlab/rendermime', () => {
       jest.runAllTimers();
 
       expect(window.getSelection()!.toString()).toBe('post');
+    });
+  });
+
+  describe('getMediaFilename()', () => {
+    const date = new Date(2026, 9, 21, 9, 5, 7);
+
+    it('should name media by type, local time and extension', () => {
+      expect(getMediaFilename('image/png', undefined, date)).toBe(
+        'image-20261021-090507.png'
+      );
+      expect(getMediaFilename('audio/mpeg', undefined, date)).toBe(
+        'audio-20261021-090507.mp3'
+      );
+      expect(getMediaFilename('video/mp4', undefined, date)).toBe(
+        'video-20261021-090507.mp4'
+      );
+      expect(
+        getMediaFilename('application/octet-stream', undefined, date)
+      ).toBe('file-20261021-090507.bin');
+    });
+
+    it('should use bin for media types without a known extension', () => {
+      expect(getMediaFilename('image/hta', undefined, date)).toBe(
+        'image-20261021-090507.bin'
+      );
+    });
+
+    it('should translate the base name', () => {
+      expect(
+        getMediaFilename('image/png', createTranslator('Bild'), date)
+      ).toBe('Bild-20261021-090507.png');
+    });
+
+    it('should replace characters not allowed in file names', () => {
+      expect(
+        getMediaFilename('image/png', createTranslator('a:b/c'), date)
+      ).toBe('a-b-c-20261021-090507.png');
     });
   });
 });

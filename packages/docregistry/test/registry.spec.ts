@@ -1,6 +1,7 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
+import { getExtensionFromMimeType } from '@jupyterlab/coreutils';
 import type { IDocumentWidget } from '@jupyterlab/docregistry';
 import {
   ABCWidgetFactory,
@@ -865,6 +866,31 @@ describe('docregistry/registry', () => {
         expect(ft.length).toBeGreaterThanOrEqual(2);
         expect(ft.map(f => f.name)).toContain('test');
       });
+    });
+  });
+
+  describe('DocumentRegistry.getDefaultFileTypes()', () => {
+    it('should agree with getExtensionFromMimeType for media types', () => {
+      const extensions = new Map<string, string[]>();
+      for (const fileType of DocumentRegistry.getDefaultFileTypes()) {
+        for (const mimeType of fileType.mimeTypes ?? []) {
+          if (/^(?:image|audio|video)\//.test(mimeType)) {
+            extensions.set(mimeType, [
+              ...(extensions.get(mimeType) ?? []),
+              ...(fileType.extensions ?? [])
+            ]);
+          }
+        }
+      }
+      const mismatches = [...extensions]
+        .filter(
+          ([mimeType, exts]) =>
+            !exts.includes(`.${getExtensionFromMimeType(mimeType)}`)
+        )
+        .map(([mimeType]) => mimeType);
+
+      expect(extensions.size).toBeGreaterThan(0);
+      expect(mismatches).toEqual([]);
     });
   });
 });
