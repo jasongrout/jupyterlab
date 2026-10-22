@@ -215,10 +215,8 @@ export namespace URLExt {
    * @returns The first URI found, or null if none
    *
    * #### Notes
-   * Parses text/uri-list format per RFC 2483.
-   * - Lines are terminated with CRLF pairs
-   * - Lines starting with '#' are comments and are ignored
-   * - Returns the first valid URI found without parsing the entire list
+   * Parses text/uri-list format per RFC 2483, where lines starting with '#'
+   * are comments. Lines may also end with LF, and blank lines are skipped.
    *
    * See https://www.iana.org/assignments/media-types/text/uri-list
    */
@@ -227,24 +225,12 @@ export namespace URLExt {
       return null;
     }
 
-    let start = 0;
-    while (start < uriList.length) {
-      // Find the next CRLF
-      let end = uriList.indexOf('\r\n', start);
-      if (end === -1) {
-        // No more CRLF, take the rest of the string
-        end = uriList.length;
+    for (const line of uriList.split(/\r?\n/)) {
+      const uri = line.trim();
+      if (uri && !uri.startsWith('#')) {
+        return uri;
       }
-
-      // Skip comments (lines starting with #)
-      if (uriList[start] !== '#') {
-        return uriList.slice(start, end);
-      }
-
-      // Move past the CRLF for next iteration
-      start = end + 2;
     }
-
     return null;
   }
 
