@@ -2185,6 +2185,11 @@ export class DirListing extends Widget {
           );
         }
         const response = await fetch(uri);
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch local resource (${response.status} ${response.statusText})`
+          );
+        }
         const blob = await response.blob();
 
         // Even though we check the mimetype above, a blob may come back as a
