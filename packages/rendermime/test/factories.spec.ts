@@ -1112,6 +1112,51 @@ describe('rendermime/factories', () => {
         expect(downloadURL).toMatch(/^image\/png:image-\d{8}-\d{6}\.png:data:/);
       });
 
+      it('should not set DownloadURL when the data URI type contains a colon', async () => {
+        const src =
+          'data:image/png:evil.exe:data:x;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+        const f = htmlRendererFactory;
+        const mimeType = 'text/html';
+        const model = createModel(mimeType, `<img src="${src}">`);
+        const w = f.createRenderer({ mimeType, ...defaultOptions });
+        await w.renderModel(model);
+        const img = w.node.querySelector('img') as HTMLImageElement;
+
+        const dragEvent = new DragEvent('dragstart', {
+          bubbles: true,
+          cancelable: true,
+          dataTransfer: new DataTransfer()
+        });
+        img.dispatchEvent(dragEvent);
+
+        const dataTransfer = dragEvent.dataTransfer!;
+        expect(dataTransfer.getData('text/uri-list')).toBe(src);
+        expect(dataTransfer.getData('DownloadURL')).toBe('');
+      });
+
+      it('should use the MIME type without parameters in DownloadURL', async () => {
+        const source =
+          '<img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E">';
+        const f = htmlRendererFactory;
+        const mimeType = 'text/html';
+        const model = createModel(mimeType, source);
+        const w = f.createRenderer({ mimeType, ...defaultOptions });
+        await w.renderModel(model);
+        const img = w.node.querySelector('img') as HTMLImageElement;
+
+        const dragEvent = new DragEvent('dragstart', {
+          bubbles: true,
+          cancelable: true,
+          dataTransfer: new DataTransfer()
+        });
+        img.dispatchEvent(dragEvent);
+
+        const downloadURL = dragEvent.dataTransfer!.getData('DownloadURL');
+        expect(downloadURL).toMatch(
+          /^image\/svg\+xml:image-\d{8}-\d{6}\.svg:data:image\/svg\+xml;charset=utf-8,/
+        );
+      });
+
       it('should translate the file name in drag data for img elements', async () => {
         const source =
           '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=">';
