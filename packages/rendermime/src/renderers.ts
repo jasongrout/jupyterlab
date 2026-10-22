@@ -2743,13 +2743,17 @@ namespace Private {
 
         // Set DownloadURL for Chrome:
         // https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/Drag_data_store#dragging_files_to_an_operating_system_file_explorer
-        // Parse the data URI to get MIME type
-        const parsed = URLExt.parseDataURI(source);
-        if (parsed) {
-          const filename = getMediaFilename(parsed.mimeType, translator);
+        // It is `type:name:url`, so a colon in the type would let the data URI
+        // choose the file name.
+        const type = URLExt.parseDataURI(source)
+          ?.mimeType.split(';')[0]
+          .trim()
+          .toLowerCase();
+        if (type && /^(?:image|audio|video)\/[\w.+-]+$/.test(type)) {
+          const filename = getMediaFilename(type, translator);
           event.dataTransfer.setData(
             'DownloadURL',
-            `${parsed.mimeType}:${filename}:${source}`
+            `${type}:${filename}:${source}`
           );
         }
         event.dataTransfer.effectAllowed = 'copy';
