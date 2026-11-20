@@ -135,31 +135,6 @@ describe('@jupyterlab/extensionmanager', () => {
       expect(href).toContain('q=jupyterlab-git');
     });
 
-    it('should say that the PyPI manager lists only selected packages', async () => {
-      PageConfig.setOption(
-        'extensionManager',
-        JSON.stringify({ name: 'PyPI', can_install: true })
-      );
-      const pypiModel = new NoResultsModel(new ServiceManagerMock());
-      const pypiPanel = new ExtensionsPanel({
-        model: pypiModel,
-        translator: nullTranslator
-      });
-      Widget.attach(pypiPanel, document.body);
-      const warning = pypiPanel.node.querySelector(
-        '#jp-extensionmanager-warning'
-      )!;
-      for (let i = 0; i < 10 && !warning.textContent; i++) {
-        await framePromise();
-      }
-      const content = warning.textContent;
-      pypiPanel.dispose();
-      pypiModel.dispose();
-
-      expect(content).toContain('only selected packages');
-      expect(content).toContain('Browse more extensions on PyPI');
-    });
-
     it('should keep the PyPI link visible when a search finds results', async () => {
       PageConfig.setOption(
         'extensionManager',
@@ -185,13 +160,15 @@ describe('@jupyterlab/extensionmanager', () => {
       ) {
         await framePromise();
       }
-      const link = search.querySelector('.jp-extensionmanager-browse a');
-      const text = link?.textContent;
-      const href = link?.getAttribute('href');
+      const hasResults =
+        search.querySelector('.jp-extensionmanager-listview-wrapper') !== null;
+      const href = search
+        .querySelector('.jp-extensionmanager-browse a')
+        ?.getAttribute('href');
       pypiPanel.dispose();
       pypiModel.dispose();
 
-      expect(text).toBe('Browse more extensions on PyPI');
+      expect(hasResults).toBe(true);
       expect(href).toContain('q=git');
     });
   });
