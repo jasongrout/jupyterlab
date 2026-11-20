@@ -636,7 +636,6 @@ test.describe('Notebook scroll on execution (with windowing)', () => {
   test('should keep the active cell in place while a visible cell above generates output', async ({
     page
   }) => {
-    const notebook = await page.notebook.getNotebookInPanelLocator();
     const secondCell = await page.notebook.getCellLocator(1);
     const thirdCell = await page.notebook.getCellLocator(2);
 
@@ -662,11 +661,17 @@ test.describe('Notebook scroll on execution (with windowing)', () => {
       );
     });
 
-    // Scroll to the end while the initial `sleep` holds the output back, so
-    // that the second cell and the active third cell are both in view
-    const bbox = (await notebook!.boundingBox())!;
-    await page.mouse.move(bbox.x + bbox.width / 2, bbox.y + bbox.height / 2);
-    await page.mouse.wheel(0, 5000);
+    // While the initial `sleep` holds the output back, scroll the top of the
+    // second cell just out of view, keeping the active third cell in view
+    // eslint-disable-next-line playwright/no-wait-for-timeout
+    await page.waitForTimeout(300);
+    await secondCell!.evaluate(cell => {
+      const scroller = cell.closest('.jp-WindowedPanel-outer')!;
+      scroller.scrollTop +=
+        cell.getBoundingClientRect().top -
+        scroller.getBoundingClientRect().top +
+        20;
+    });
 
     // eslint-disable-next-line playwright/no-wait-for-timeout
     await page.waitForTimeout(500);
