@@ -544,6 +544,7 @@ test.describe('Notebook scroll on execution (with windowing)', () => {
     const tops: number[] = await page.evaluate(
       () => (window as any).thirdCellTops
     );
+    expect(tops.length).toBeGreaterThan(0);
     for (const top of tops) {
       expect(Math.abs(top - referenceBox.y)).toBeLessThan(5);
     }
@@ -627,8 +628,80 @@ test.describe('Notebook scroll on execution (with windowing)', () => {
       (window as any).stopThirdCellTops = true;
       return (window as any).thirdCellTops;
     });
+    expect(tops.length).toBeGreaterThan(1);
     const moves = tops.slice(1).map((top, i) => top - tops[i]);
     expect(Math.max(...moves)).toBeLessThan(5);
+  });
+
+  test('should keep the active cell in place while a visible cell above generates output', async ({
+    page
+  }) => {
+    const notebook = await page.notebook.getNotebookInPanelLocator();
+    const secondCell = await page.notebook.getCellLocator(1);
+    const thirdCell = await page.notebook.getCellLocator(2);
+
+    await page.notebook.setCell(
+      1,
+      'code',
+      'from time import sleep\nsleep(2)\nfor i in range(100):\n    print(i)\n    sleep(0.05)\n'
+    );
+    // Clear the outputs so that the second and the third cell fit in the view
+    for (const index of [1, 2]) {
+      await page.notebook.selectCells(index);
+      await page.evaluate(() => {
+        return window.jupyterapp.commands.execute('notebook:clear-cell-output');
+      });
+    }
+    await page.notebook.selectCells(1);
+    await waitForNotebookLayout(page);
+
+    // Start running the second cell with advance, without waiting for it
+    const execution = page.evaluate(() => {
+      return window.jupyterapp.commands.execute(
+        'notebook:run-cell-and-select-next'
+      );
+    });
+
+    // Scroll to the end while the initial `sleep` holds the output back, so
+    // that the second cell and the active third cell are both in view
+    const bbox = (await notebook!.boundingBox())!;
+    await page.mouse.move(bbox.x + bbox.width / 2, bbox.y + bbox.height / 2);
+    await page.mouse.wheel(0, 5000);
+
+    // eslint-disable-next-line playwright/no-wait-for-timeout
+    await page.waitForTimeout(500);
+    await expect(secondCell!).toBeInViewport();
+    await expect(thirdCell!).toBeInViewport();
+    const referenceBox = (await thirdCell!.boundingBox())!;
+
+    // Record the top of the third cell each time the second cell grows. This
+    // observer runs after the observer of the list, just before the paint.
+    await thirdCell!.evaluate(cell => {
+      const tops: number[] = [];
+      (window as any).thirdCellTops = tops;
+      const secondCell = cell.parentElement!.querySelector(
+        '[data-windowed-list-index="1"]'
+      )!;
+      new ResizeObserver(() => {
+        tops.push(cell.getBoundingClientRect().top);
+      }).observe(secondCell);
+    });
+
+    await execution;
+    // eslint-disable-next-line playwright/no-wait-for-timeout
+    await page.waitForTimeout(500);
+
+    // The active cell should stay in place, as the browser-native scroll
+    // anchoring keeps it outside of the full windowing mode
+    const tops: number[] = await page.evaluate(
+      () => (window as any).thirdCellTops
+    );
+    expect(tops.length).toBeGreaterThan(0);
+    for (const top of tops) {
+      expect(Math.abs(top - referenceBox.y)).toBeLessThan(5);
+    }
+    const finalBox = (await thirdCell!.boundingBox())!;
+    expect(Math.abs(finalBox.y - referenceBox.y)).toBeLessThan(5);
   });
 
   test('should not scroll when advancing if top is non-marginally visible', async ({
