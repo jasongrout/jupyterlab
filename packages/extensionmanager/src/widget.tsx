@@ -634,7 +634,7 @@ class SearchResult extends ReactWidget {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {this.trans.__('Browse extensions on PyPI')}
+              {this.trans.__('Browse more extensions on PyPI')}
             </a>
           </div>
         )}
@@ -674,7 +674,7 @@ class SearchResult extends ReactWidget {
 
   update(): void {
     this.title.label = this.model.query
-      ? this.trans.__('Search Results')
+      ? this.trans.__('Selected Search Results')
       : this.trans.__('Discover');
     super.update();
   }

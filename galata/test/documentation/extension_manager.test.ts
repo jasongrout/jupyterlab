@@ -51,11 +51,11 @@ test.describe('Extension Manager', () => {
 
     const discover = page.locator('#jp-extensionmanager-search');
     const browse = discover.getByRole('link', {
-      name: 'Browse extensions on PyPI'
+      name: 'Browse more extensions on PyPI'
     });
     await expect(browse).toBeVisible();
     await expect(discover.getByRole('link').first()).toHaveText(
-      'Browse extensions on PyPI'
+      'Browse more extensions on PyPI'
     );
 
     expect(
