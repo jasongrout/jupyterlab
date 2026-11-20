@@ -28,18 +28,19 @@ async function waitForNotebookLayout(page: Page): Promise<void> {
 }
 
 /**
- * Set the second cell to print 60 lines after `delay` seconds, and clear the
- * outputs of the given cells.
+ * Set the second cell to print `lines` lines after `delay` seconds, and clear
+ * the outputs of the given cells.
  */
 async function prepareStreamingCell(
   page: IJupyterLabPageFixture,
   delay: number,
-  cellsToClear: number[]
+  cellsToClear: number[],
+  lines = 60
 ): Promise<void> {
   await page.notebook.setCell(
     1,
     'code',
-    `from time import sleep\nsleep(${delay})\nfor i in range(60):\n    print(i)\n    sleep(0.05)\n`
+    `from time import sleep\nsleep(${delay})\nfor i in range(${lines}):\n    print(i)\n    sleep(0.05)\n`
   );
   for (const index of cellsToClear) {
     await page.notebook.selectCells(index);
@@ -60,19 +61,17 @@ function executeCommand(
 }
 
 /**
- * Scroll the notebook so that the top of the cell is `distance` pixels above the view.
+ * Scroll the notebook so that the top of the cell is `position` pixels below
+ * the top of the view.
  */
-async function scrollCellTopAboveView(
-  cell: Locator,
-  distance: number
-): Promise<void> {
-  await cell.evaluate((node, distance) => {
+async function scrollCellTopTo(cell: Locator, position: number): Promise<void> {
+  await cell.evaluate((node, position) => {
     const scroller = node.closest('.jp-WindowedPanel-outer')!;
     scroller.scrollTop +=
       node.getBoundingClientRect().top -
-      scroller.getBoundingClientRect().top +
-      distance;
-  }, distance);
+      scroller.getBoundingClientRect().top -
+      position;
+  }, position);
 }
 
 /**
@@ -721,7 +720,7 @@ test.describe('Notebook scroll on execution (with windowing)', () => {
     // second cell just out of view, keeping the active third cell in view
     // eslint-disable-next-line playwright/no-wait-for-timeout
     await page.waitForTimeout(300);
-    await scrollCellTopAboveView(secondCell!, 20);
+    await scrollCellTopTo(secondCell!, -20);
     // eslint-disable-next-line playwright/no-wait-for-timeout
     await page.waitForTimeout(500);
     await expect(secondCell!).toBeInViewport();
@@ -750,7 +749,7 @@ test.describe('Notebook scroll on execution (with windowing)', () => {
     const secondCell = await page.notebook.getCellLocator(1);
     const thirdCell = await page.notebook.getCellLocator(2);
     await prepareStreamingCell(page, 1, [1, 2]);
-    await scrollCellTopAboveView(secondCell!, 20);
+    await scrollCellTopTo(secondCell!, -20);
     await waitForNotebookLayout(page);
 
     // Do not scroll after running, so that the list still has the scroll to
@@ -778,13 +777,16 @@ test.describe('Notebook scroll on execution (with windowing)', () => {
   }) => {
     const secondCell = await page.notebook.getCellLocator(1);
     await prepareStreamingCell(page, 1, [1, 2]);
-    await scrollCellTopAboveView(secondCell!, 20);
-    await waitForNotebookLayout(page);
 
-    // Run the second cell in place, so that it stays active
+    // Run the second cell in place, so that it stays active, and scroll its
+    // top just out of view while the initial `sleep` holds the output back,
+    // which also cancels the scroll back to it
     const execution = executeCommand(page, 'notebook:run-cell');
     // eslint-disable-next-line playwright/no-wait-for-timeout
     await page.waitForTimeout(300);
+    await scrollCellTopTo(secondCell!, -20);
+    // eslint-disable-next-line playwright/no-wait-for-timeout
+    await page.waitForTimeout(500);
     const referenceBox = (await secondCell!.boundingBox())!;
     await recordCellTops(secondCell!, 1);
 
@@ -794,6 +796,38 @@ test.describe('Notebook scroll on execution (with windowing)', () => {
 
     // The output should push the cells below down, rather than scroll the
     // active cell up, even though the next cell has its top in view
+    const tops = await getRecordedCellTops(page);
+    expect(tops.length).toBeGreaterThan(0);
+    for (const top of tops) {
+      expect(Math.abs(top - referenceBox.y)).toBeLessThan(5);
+    }
+  });
+
+  test('should keep a cell activated with a click in place while a cell below it generates output', async ({
+    page
+  }) => {
+    const firstCell = await page.notebook.getCellLocator(0);
+    const secondCell = await page.notebook.getCellLocator(1);
+    // Few enough lines for the third cell to stay in view
+    await prepareStreamingCell(page, 1, [1, 2], 10);
+    await scrollCellTopTo(secondCell!, 200);
+    await waitForNotebookLayout(page);
+
+    // Running with advance leaves the scroll to the third cell pending, which
+    // a click on the first cell does not cancel
+    const execution = executeCommand(page, 'notebook:run-cell-and-select-next');
+    // eslint-disable-next-line playwright/no-wait-for-timeout
+    await page.waitForTimeout(300);
+    const box = (await firstCell!.boundingBox())!;
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height - 20);
+    await expect(firstCell!).toHaveClass(/jp-mod-active/);
+    const referenceBox = (await firstCell!.boundingBox())!;
+    await recordCellTops(firstCell!, 1);
+
+    await execution;
+    // eslint-disable-next-line playwright/no-wait-for-timeout
+    await page.waitForTimeout(500);
+
     const tops = await getRecordedCellTops(page);
     expect(tops.length).toBeGreaterThan(0);
     for (const top of tops) {

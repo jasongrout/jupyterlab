@@ -682,7 +682,7 @@ test('should center on next cell after rendering markdown cell and advancing', a
   tmpPath
 }) => {
   // Short enough for the next cells to be out of view at the top
-  await page.setViewportSize({ width: 1280, height: 660 });
+  await page.setViewportSize({ width: 1024, height: 720 });
   await page.notebook.openByPath(`${tmpPath}/${fileName}`);
   const mdCell = page.locator('.jp-MarkdownCell[data-windowed-list-index="2"]');
   const thirdCell = page.locator('.jp-CodeCell[data-windowed-list-index="3"]');
