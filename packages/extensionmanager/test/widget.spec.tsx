@@ -53,6 +53,12 @@ class NoResultsModel extends TestModel {
   }
 }
 
+class ResultsModel extends NoResultsModel {
+  get searchResult(): ReadonlyArray<IEntry> {
+    return [{ ...INSTALLED[0], installed: false }];
+  }
+}
+
 describe('@jupyterlab/extensionmanager', () => {
   describe('ExtensionsPanel', () => {
     let model: TestModel;
@@ -127,6 +133,66 @@ describe('@jupyterlab/extensionmanager', () => {
       pypiModel.dispose();
 
       expect(href).toContain('q=jupyterlab-git');
+    });
+
+    it('should say that the PyPI manager lists only selected packages', async () => {
+      PageConfig.setOption(
+        'extensionManager',
+        JSON.stringify({ name: 'PyPI', can_install: true })
+      );
+      const pypiModel = new NoResultsModel(new ServiceManagerMock());
+      const pypiPanel = new ExtensionsPanel({
+        model: pypiModel,
+        translator: nullTranslator
+      });
+      Widget.attach(pypiPanel, document.body);
+      const warning = pypiPanel.node.querySelector(
+        '#jp-extensionmanager-warning'
+      )!;
+      for (let i = 0; i < 10 && !warning.textContent; i++) {
+        await framePromise();
+      }
+      const content = warning.textContent;
+      pypiPanel.dispose();
+      pypiModel.dispose();
+
+      expect(content).toContain('only selected packages');
+      expect(content).toContain('Browse more extensions on PyPI');
+    });
+
+    it('should keep the PyPI link visible when a search finds results', async () => {
+      PageConfig.setOption(
+        'extensionManager',
+        JSON.stringify({ name: 'PyPI', can_install: true })
+      );
+      const pypiModel = new ResultsModel(new ServiceManagerMock());
+      pypiModel.isDisclaimed = true;
+      const pypiPanel = new ExtensionsPanel({
+        model: pypiModel,
+        translator: nullTranslator
+      });
+      Widget.attach(pypiPanel, document.body);
+      pypiModel.query = 'git';
+      pypiModel.stateChanged.emit();
+      const search = pypiPanel.node.querySelector(
+        '#jp-extensionmanager-search'
+      )!;
+      for (
+        let i = 0;
+        i < 10 &&
+        !search.querySelector('.jp-extensionmanager-listview-wrapper');
+        i++
+      ) {
+        await framePromise();
+      }
+      const link = search.querySelector('.jp-extensionmanager-browse a');
+      const text = link?.textContent;
+      const href = link?.getAttribute('href');
+      pypiPanel.dispose();
+      pypiModel.dispose();
+
+      expect(text).toBe('Browse more extensions on PyPI');
+      expect(href).toContain('q=git');
     });
   });
 });
