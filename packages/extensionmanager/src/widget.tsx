@@ -449,13 +449,6 @@ from external web services. Do you want to allow these external requests?`)}
             {this.trans.__('Please read the privacy policy.')}
           </a>
         </p>
-        {canInstall && this.model.name === 'PyPI' && (
-          <p>
-            {this.trans.__(
-              'This panel lists extensions from Jupyter projects and language packs. To install another extension, search for its full name or use the "Browse more extensions on PyPI" link.'
-            )}
-          </p>
-        )}
         {this.model.isDisclaimed ? (
           <Button
             className="jp-extensionmanager-disclaimer-disable"
@@ -674,11 +667,9 @@ class SearchResult extends ReactWidget {
   }
 
   update(): void {
-    this.title.label = !this.model.query
-      ? this.trans.__('Discover')
-      : this.model.name === 'PyPI'
-        ? this.trans.__('Limited Search Results')
-        : this.trans.__('Search Results');
+    this.title.label = this.model.query
+      ? this.trans.__('Search Results')
+      : this.trans.__('Discover');
     super.update();
   }
 }

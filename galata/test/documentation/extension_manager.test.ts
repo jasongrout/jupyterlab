@@ -91,7 +91,7 @@ test.describe('Extension Manager', () => {
     await expect(filter).toHaveValue('jupyterlab-language-pack');
     await sidebar.getByRole('button', { name: 'Yes', exact: true }).click();
     await expect(
-      sidebar.getByText('Limited Search Results', { exact: true })
+      sidebar.getByText('Search Results', { exact: true })
     ).toBeVisible();
     const french = sidebar.getByRole('link', {
       name: 'jupyterlab-language-pack-fr-FR'
