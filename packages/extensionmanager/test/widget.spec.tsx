@@ -129,11 +129,11 @@ describe('@jupyterlab/extensionmanager', () => {
       const listed = () =>
         search.querySelector('.jp-extensionmanager-listview') !== null;
 
-      pypiModel.query = 'jupyterlab-git';
+      pypiModel.query = 'no-such-extension';
       pypiModel.stateChanged.emit();
       for (
         let i = 0;
-        i < 10 && !browseHref()?.includes('q=jupyterlab-git');
+        i < 10 && !browseHref()?.includes('q=no-such-extension');
         i++
       ) {
         await framePromise();
@@ -141,8 +141,9 @@ describe('@jupyterlab/extensionmanager', () => {
       const resultsShownWhenEmpty = listed();
       const linkWhenEmpty = browseHref();
 
-      pypiModel.query = 'widgets';
-      pypiModel.results = [{ ...INSTALLED[0], installed: false }];
+      const found = { ...INSTALLED[0], installed: false };
+      pypiModel.query = found.name;
+      pypiModel.results = [found];
       pypiModel.stateChanged.emit();
       for (let i = 0; i < 10 && !listed(); i++) {
         await framePromise();
@@ -153,9 +154,9 @@ describe('@jupyterlab/extensionmanager', () => {
       pypiModel.dispose();
 
       expect(resultsShownWhenEmpty).toBe(false);
-      expect(linkWhenEmpty).toContain('q=jupyterlab-git');
+      expect(linkWhenEmpty).toContain('q=no-such-extension');
       expect(resultsShownWhenFound).toBe(true);
-      expect(linkWhenFound).toContain('q=widgets');
+      expect(linkWhenFound).toContain(`q=${found.name}`);
     });
   });
 });
