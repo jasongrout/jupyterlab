@@ -138,8 +138,8 @@ describe('@jupyterlab/extensionmanager', () => {
       ) {
         await framePromise();
       }
-      const listedWithout = listed();
-      const hrefWithout = browseHref();
+      const resultsShownWhenEmpty = listed();
+      const linkWhenEmpty = browseHref();
 
       pypiModel.query = 'widgets';
       pypiModel.results = [{ ...INSTALLED[0], installed: false }];
@@ -147,15 +147,15 @@ describe('@jupyterlab/extensionmanager', () => {
       for (let i = 0; i < 10 && !listed(); i++) {
         await framePromise();
       }
-      const listedWith = listed();
-      const hrefWith = browseHref();
+      const resultsShownWhenFound = listed();
+      const linkWhenFound = browseHref();
       pypiPanel.dispose();
       pypiModel.dispose();
 
-      expect(listedWithout).toBe(false);
-      expect(hrefWithout).toContain('q=jupyterlab-git');
-      expect(listedWith).toBe(true);
-      expect(hrefWith).toContain('q=widgets');
+      expect(resultsShownWhenEmpty).toBe(false);
+      expect(linkWhenEmpty).toContain('q=jupyterlab-git');
+      expect(resultsShownWhenFound).toBe(true);
+      expect(linkWhenFound).toContain('q=widgets');
     });
   });
 });
