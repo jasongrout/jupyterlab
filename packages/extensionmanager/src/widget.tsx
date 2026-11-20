@@ -452,7 +452,7 @@ from external web services. Do you want to allow these external requests?`)}
         {canInstall && this.model.name === 'PyPI' && (
           <p>
             {this.trans.__(
-              'This panel displays only selected packages. To see more results, use the "Browse more extensions on PyPI" link.'
+              'This panel lists extensions from Jupyter projects and language packs. To install another extension, search for its full name or use the "Browse more extensions on PyPI" link.'
             )}
           </p>
         )}
@@ -620,8 +620,8 @@ class SearchResult extends ReactWidget {
 
   render(): JSX.Element {
     const query = this.model.query;
-    // The PyPI manager lists only selected packages, so the same search on
-    // PyPI may find more.
+    // The PyPI manager lists only a limited set of packages, so the same
+    // search on PyPI may find more.
     return (
       <>
         {this.model.name === 'PyPI' && (
@@ -674,9 +674,11 @@ class SearchResult extends ReactWidget {
   }
 
   update(): void {
-    this.title.label = this.model.query
-      ? this.trans.__('Selected Search Results')
-      : this.trans.__('Discover');
+    this.title.label = !this.model.query
+      ? this.trans.__('Discover')
+      : this.model.name === 'PyPI'
+        ? this.trans.__('Limited Search Results')
+        : this.trans.__('Search Results');
     super.update();
   }
 }
