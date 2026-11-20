@@ -1714,7 +1714,7 @@ export class WindowedList<
    *
    * Like browsers, prefer the first item in view that does not opt out with
    * `overflow-anchor: none`, except at the top of the list. With a scrollback
-   * pending, only the item to scroll back to can be the anchor.
+   * pending, only the item to scroll back to can be the anchor, if it opts in.
    */
   private _findAnchorIndex(scrollOffset: number): number | null {
     const top = scrollOffset - this._viewportPaddingTop;
@@ -1736,14 +1736,18 @@ export class WindowedList<
       if (offset >= bottom || scrollOffset <= 0) {
         break;
       }
+      if (target !== null && index !== target) {
+        continue;
+      }
       if (
-        target === null
-          ? getComputedStyle(widget.node).getPropertyValue(
-              'overflow-anchor'
-            ) !== 'none'
-          : index === target
+        getComputedStyle(widget.node).getPropertyValue('overflow-anchor') !==
+        'none'
       ) {
         return index;
+      }
+      if (target !== null) {
+        // Such as a cell no longer active after a click on another cell
+        return null;
       }
     }
     if (target !== null) {
