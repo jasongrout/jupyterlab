@@ -109,6 +109,50 @@ test('should not update height when hiding', async ({ page, tmpPath }) => {
   expect(innerHeight).toEqual(initialHeight);
 });
 
+test('should keep the size of off-screen code cells when a cell in view resizes', async ({
+  page,
+  tmpPath
+}) => {
+  const notebookName = 'many_code_cells.ipynb';
+  await page.contents.uploadContent(
+    JSON.stringify(
+      galata.Notebook.generateNotebook(200, 'code', ['a = 1\nb = 2\nc = 3'])
+    ),
+    'text',
+    `${tmpPath}/${notebookName}`
+  );
+  await page.notebook.openByPath(`${tmpPath}/${notebookName}`);
+  const notebook = await page.notebook.getNotebookInPanelLocator();
+
+  // Off-screen code cells rendered when the browser is idle are hidden, but
+  // stay in the DOM
+  await page.waitForFunction(() => {
+    const panel = window.jupyterapp.shell.currentWidget as NotebookPanel;
+    return panel.content.widgets.every(cell => !cell.isPlaceholder());
+  });
+  let initialHeight = 0;
+  await expect
+    .poll(
+      async () => {
+        const previousHeight = initialHeight;
+        initialHeight = await getInnerHeight(notebook!);
+        return initialHeight === previousHeight;
+      },
+      { intervals: [600], timeout: 6000 }
+    )
+    .toBe(true);
+
+  // Add a line to the first cell
+  await page.notebook.enterCellEditingMode(0);
+  await page.keyboard.press('Control+End');
+  await page.keyboard.press('Enter');
+  await page.keyboard.type('d = 4');
+
+  await expect
+    .poll(() => getInnerHeight(notebook!))
+    .toBeGreaterThan(initialHeight);
+});
+
 test('should hide first inactive code cell when scrolling down', async ({
   page,
   tmpPath
