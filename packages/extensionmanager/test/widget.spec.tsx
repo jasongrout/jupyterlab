@@ -47,15 +47,15 @@ class TestModel extends ListModel {
   }
 }
 
-class NoResultsModel extends TestModel {
+class SearchModel extends TestModel {
+  results: IEntry[] = [];
+
+  get searchResult(): ReadonlyArray<IEntry> {
+    return this.results;
+  }
+
   protected async search(): Promise<void> {
     this.stateChanged.emit();
-  }
-}
-
-class ResultsModel extends NoResultsModel {
-  get searchResult(): ReadonlyArray<IEntry> {
-    return [{ ...INSTALLED[0], installed: false }];
   }
 }
 
@@ -107,69 +107,55 @@ describe('@jupyterlab/extensionmanager', () => {
       expect(content).not.toContain('jupyterlab-git');
     });
 
-    it('should link to a PyPI search when a search finds nothing', async () => {
+    it('should link to the PyPI search whether or not it finds packages', async () => {
       PageConfig.setOption(
         'extensionManager',
         JSON.stringify({ name: 'PyPI', can_install: true })
       );
-      const pypiModel = new NoResultsModel(new ServiceManagerMock());
+      const pypiModel = new SearchModel(new ServiceManagerMock());
       pypiModel.isDisclaimed = true;
       const pypiPanel = new ExtensionsPanel({
         model: pypiModel,
         translator: nullTranslator
       });
       Widget.attach(pypiPanel, document.body);
-      pypiModel.query = 'jupyterlab-git';
-      pypiModel.stateChanged.emit();
-      let link: HTMLAnchorElement | null = null;
-      for (let i = 0; i < 10 && !link; i++) {
-        await framePromise();
-        link = pypiPanel.node.querySelector(
-          '#jp-extensionmanager-search .jp-extensionmanager-browse a'
-        );
-      }
-      const href = link?.getAttribute('href');
-      pypiPanel.dispose();
-      pypiModel.dispose();
-
-      expect(href).toContain('q=jupyterlab-git');
-    });
-
-    it('should keep the PyPI link visible when a search finds results', async () => {
-      PageConfig.setOption(
-        'extensionManager',
-        JSON.stringify({ name: 'PyPI', can_install: true })
-      );
-      const pypiModel = new ResultsModel(new ServiceManagerMock());
-      pypiModel.isDisclaimed = true;
-      const pypiPanel = new ExtensionsPanel({
-        model: pypiModel,
-        translator: nullTranslator
-      });
-      Widget.attach(pypiPanel, document.body);
-      pypiModel.query = 'git';
-      pypiModel.stateChanged.emit();
       const search = pypiPanel.node.querySelector(
         '#jp-extensionmanager-search'
       )!;
+      const browseHref = () =>
+        search
+          .querySelector('.jp-extensionmanager-browse a')
+          ?.getAttribute('href');
+      const listed = () =>
+        search.querySelector('.jp-extensionmanager-listview') !== null;
+
+      pypiModel.query = 'jupyterlab-git';
+      pypiModel.stateChanged.emit();
       for (
         let i = 0;
-        i < 10 &&
-        !search.querySelector('.jp-extensionmanager-listview-wrapper');
+        i < 10 && !browseHref()?.includes('q=jupyterlab-git');
         i++
       ) {
         await framePromise();
       }
-      const hasResults =
-        search.querySelector('.jp-extensionmanager-listview-wrapper') !== null;
-      const href = search
-        .querySelector('.jp-extensionmanager-browse a')
-        ?.getAttribute('href');
+      const listedWithout = listed();
+      const hrefWithout = browseHref();
+
+      pypiModel.query = 'widgets';
+      pypiModel.results = [{ ...INSTALLED[0], installed: false }];
+      pypiModel.stateChanged.emit();
+      for (let i = 0; i < 10 && !listed(); i++) {
+        await framePromise();
+      }
+      const listedWith = listed();
+      const hrefWith = browseHref();
       pypiPanel.dispose();
       pypiModel.dispose();
 
-      expect(hasResults).toBe(true);
-      expect(href).toContain('q=git');
+      expect(listedWithout).toBe(false);
+      expect(hrefWithout).toContain('q=jupyterlab-git');
+      expect(listedWith).toBe(true);
+      expect(hrefWith).toContain('q=widgets');
     });
   });
 });
