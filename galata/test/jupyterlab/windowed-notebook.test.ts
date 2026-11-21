@@ -109,6 +109,50 @@ test('should not update height when hiding', async ({ page, tmpPath }) => {
   expect(innerHeight).toEqual(initialHeight);
 });
 
+test('should keep the size of off-screen code cells when a cell in view resizes', async ({
+  page,
+  tmpPath
+}) => {
+  const notebookName = 'many_code_cells.ipynb';
+  await page.contents.uploadContent(
+    JSON.stringify(
+      galata.Notebook.generateNotebook(200, 'code', ['a = 1\nb = 2\nc = 3'])
+    ),
+    'text',
+    `${tmpPath}/${notebookName}`
+  );
+  await page.notebook.openByPath(`${tmpPath}/${notebookName}`);
+  const notebook = await page.notebook.getNotebookInPanelLocator();
+
+  // Off-screen code cells rendered when the browser is idle are hidden, but
+  // stay in the DOM
+  await page.waitForFunction(() => {
+    const panel = window.jupyterapp.shell.currentWidget as NotebookPanel;
+    return panel.content.widgets.every(cell => !cell.isPlaceholder());
+  });
+  let initialHeight = 0;
+  await expect
+    .poll(
+      async () => {
+        const previousHeight = initialHeight;
+        initialHeight = await getInnerHeight(notebook!);
+        return initialHeight === previousHeight;
+      },
+      { intervals: [600], timeout: 6000 }
+    )
+    .toBe(true);
+
+  // Add a line to the first cell
+  await page.notebook.enterCellEditingMode(0);
+  await page.keyboard.press('Control+End');
+  await page.keyboard.press('Enter');
+  await page.keyboard.type('d = 4');
+
+  await expect
+    .poll(() => getInnerHeight(notebook!))
+    .toBeGreaterThan(initialHeight);
+});
+
 test('should hide first inactive code cell when scrolling down', async ({
   page,
   tmpPath
@@ -637,6 +681,8 @@ test('should center on next cell after rendering markdown cell and advancing', a
   page,
   tmpPath
 }) => {
+  // Short enough for the next cells to be out of view at the top
+  await page.setViewportSize({ width: 1024, height: 720 });
   await page.notebook.openByPath(`${tmpPath}/${fileName}`);
   const mdCell = page.locator('.jp-MarkdownCell[data-windowed-list-index="2"]');
   const thirdCell = page.locator('.jp-CodeCell[data-windowed-list-index="3"]');
@@ -651,9 +697,19 @@ test('should center on next cell after rendering markdown cell and advancing', a
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('Enter');
 
-  // The next cells should not be (significantly) visible (yet)
-  await expect.soft(thirdCell).not.toBeInViewport({ ratio: 0.1 });
-  await expect.soft(fourthCell).not.toBeInViewport();
+  // Scroll the next cells just out of view, as advancing does not scroll to a
+  // partly visible cell, which stays in place when the cells above resize
+  await thirdCell.evaluate(cell => {
+    const scroller = cell.closest('.jp-WindowedPanel-outer')!;
+    scroller.scrollTop -=
+      scroller.getBoundingClientRect().bottom -
+      cell.getBoundingClientRect().top +
+      5;
+  });
+
+  // The next cells should not be visible (yet)
+  await expect(thirdCell).not.toBeInViewport();
+  await expect(fourthCell).not.toBeInViewport();
 
   // Render current (markdown) cell and advance
   await page.keyboard.press('Shift+Enter');

@@ -1668,22 +1668,23 @@ export class WindowedList<
       }
     }
 
-    // When no scrollback is pending, compensate the scroll offset for size
-    // changes of items lying entirely above the viewport so that the content
-    // the user is looking at does not shift. This is the windowed equivalent
-    // of the browser-native scroll anchoring, which has to be disabled in
-    // full windowing mode. The sizes must be read before `setWidgetSize`.
+    // Compensate the scroll offset for size changes of the items before the
+    // anchor item so that the content the user is looking at does not shift.
+    // This is the windowed equivalent of the browser-native scroll anchoring,
+    // which has to be disabled in full windowing mode. The sizes must be read
+    // before `setWidgetSize`.
     let scrollCompensation = 0;
     let scrollOffset = 0;
-    if (this.viewModel.windowingActive && this._scrollToItem === null) {
+    if (this.viewModel.windowingActive) {
       // The view model offset trails the scroller until its `scroll` event
       // runs, so start from the scroller unless the list has a scroll pending.
       scrollOffset = this._scrollUpdateWasRequested
         ? this.viewModel.scrollOffset
         : this._outerElement.scrollTop;
+      const anchorIndex = this._findAnchorIndex(scrollOffset);
       for (const { index, size } of newSizes) {
-        const [offset, oldSize] = this.viewModel.getSpan(index, index);
-        if (offset + oldSize <= scrollOffset) {
+        if (anchorIndex !== null && index < anchorIndex) {
+          const [, oldSize] = this.viewModel.getSpan(index, index);
           scrollCompensation += size - oldSize;
         }
       }
@@ -1692,7 +1693,10 @@ export class WindowedList<
     // If some sizes changed
     if (this.viewModel.setWidgetSize(newSizes)) {
       if (scrollCompensation !== 0) {
-        this.viewModel.scrollOffset = scrollOffset + scrollCompensation;
+        this.viewModel.scrollOffset = Math.max(
+          0,
+          scrollOffset + scrollCompensation
+        );
         // Scroll before the paint, as `update()` waits for the next frame, and
         // grow the list first, also during a scroll, or the browser clamps the
         // offset at the end.
@@ -1703,6 +1707,53 @@ export class WindowedList<
       // Update the list
       this.update();
     }
+  }
+
+  /**
+   * Find the index of the item to keep in place when the items resize.
+   *
+   * Like browsers, prefer the first item in view that does not opt out with
+   * `overflow-anchor: none`, except at the top of the list. With a scrollback
+   * pending, only the item to scroll back to can be the anchor, if it opts in.
+   */
+  private _findAnchorIndex(scrollOffset: number): number | null {
+    const top = scrollOffset - this._viewportPaddingTop;
+    const bottom = top + this.viewModel.height;
+    const target = this._scrollToItem?.[0] ?? null;
+    let firstNotAbove: number | null = null;
+    // Only the rendered items, in index order: reading the span of a hidden
+    // item would measure it.
+    for (const widget of this.layout.widgets) {
+      const index = parseInt(widget.dataset.windowedListIndex ?? '', 10);
+      if (Number.isNaN(index)) {
+        continue;
+      }
+      const [offset, size] = this.viewModel.getSpan(index, index);
+      if (offset + size <= top) {
+        continue;
+      }
+      firstNotAbove ??= index;
+      if (offset >= bottom || scrollOffset <= 0) {
+        break;
+      }
+      if (target !== null && index !== target) {
+        continue;
+      }
+      if (
+        getComputedStyle(widget.node).getPropertyValue('overflow-anchor') !==
+        'none'
+      ) {
+        return index;
+      }
+      if (target !== null) {
+        // Such as a cell no longer active after a click on another cell
+        return null;
+      }
+    }
+    if (target !== null) {
+      return null;
+    }
+    return firstNotAbove ?? Infinity;
   }
 
   /**
